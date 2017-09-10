@@ -4,7 +4,7 @@ var bodyParser = require('body-parser'),
   mongoose = require('mongoose');
   var mongo = require('mongodb');
 
-  console.log("yipee app : " + process.env.MONGODB_URI);
+  console.log("yipee app man : " + process.env.MONGODB_URI);
   
   mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) console.error(error);
