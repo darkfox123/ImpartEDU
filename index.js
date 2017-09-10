@@ -3,14 +3,20 @@ var app = express();
 var bodyParser = require('body-parser'),
   mongoose = require('mongoose');
   var mongo = require('mongodb');
+  var MongoClient = require('mongodb').MongoClient;
+
 
   console.log("yipee app man : " + process.env.MONGODB_URI);
-  
+  /*
   mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) console.error(error);
     else console.log('mongo connected');
 });
-
+*/
+MongoClient.connect(process.env.MONGODB_URI, function (error) {
+    if (error) console.error(error);
+    else console.log('mongo connected');
+});
 
 /*
 mongo.Db.connect(process.env.MONGODB_URI, function (err, db) {
