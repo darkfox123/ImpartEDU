@@ -11,11 +11,11 @@
     "test": "node test.js"
   },
   "dependencies": {
+    "body-parser": "*",
     "ejs": "2.5.6",
     "express": "4.15.2",
-	  "mongoose": "4.10.8",
-	  "body-parser":"*",
-	  "mongodb":"*"
+    "mongodb": "*",
+    "mongoose": "*"
   },
   "devDependencies": {
     "request": "^2.81.0",
