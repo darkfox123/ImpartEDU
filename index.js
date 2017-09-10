@@ -2,10 +2,23 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser'),
   mongoose = require('mongoose');
+  var mongo = require('mongodb');
 
-mongoose.connect(process.env.MONGOLAB_URI, function (error) {
+  console.log("yipee app : " + process.env.MONGODB_URI);
+  
+/*
+  mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) console.error(error);
     else console.log('mongo connected');
+});
+*/
+
+
+mongo.Db.connect(mongoUri, function (err, db) {
+  db.collection('mydocs', function(er, collection) {
+    collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
+    });
+  });
 });
 
 express()
