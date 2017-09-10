@@ -6,21 +6,20 @@ var bodyParser = require('body-parser'),
 
   console.log("yipee app : " + process.env.MONGODB_URI);
   
-/*
   mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) console.error(error);
     else console.log('mongo connected');
 });
-*/
 
 
+/*
 mongo.Db.connect(process.env.MONGODB_URI, function (err, db) {
   db.collection('mydocs', function(er, collection) {
     collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
     });
   });
 });
-
+*/
 express()
   // https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
   .use(bodyParser.json()) // support json encoded bodies
