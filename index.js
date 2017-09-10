@@ -14,7 +14,7 @@ var bodyParser = require('body-parser'),
 */
 
 
-mongo.Db.connect(mongoUri, function (err, db) {
+mongo.Db.connect(process.env.MONGODB_URI, function (err, db) {
   db.collection('mydocs', function(er, collection) {
     collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
     });
