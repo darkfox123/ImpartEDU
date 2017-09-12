@@ -10,7 +10,7 @@ var bodyParser = require('body-parser'),
   console.log("yipee app man uri: " + mongo + " : " + MongoClient);
 var db
 
-
+/*
 MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
   if (err) return console.log(err)
   db = database
@@ -18,7 +18,7 @@ MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
     console.log('listening on 3000')
   })
 })
-
+*/
   
 /*
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
