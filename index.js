@@ -7,10 +7,11 @@ var bodyParser = require('body-parser'),
 
   const MongoClient = require('mongodb').MongoClient
  
-  console.log("yipee app man now: " + mongo + " : " + MongoClient);
+  console.log("yipee app man uri: " + mongo + " : " + MongoClient);
 var db
 
-MongoClient.connect('mongodb://ShivamP123:darkfox123@ds153709.mlab.com:53709/digitalhomaelandtest', (err, database) => {
+
+MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000, () => {
