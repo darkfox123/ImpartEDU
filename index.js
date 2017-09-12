@@ -3,9 +3,21 @@ var app = express();
 var bodyParser = require('body-parser'),
   mongoose = require('mongoose');
   var mongo = require('mongodb');
-  var MongoClient = mongo.MongoClient
+  //const MongoClient = mongo.MongoClient;
 
+  const MongoClient = require('mongodb').MongoClient
+ 
   console.log("yipee app man now: " + mongo + " : " + MongoClient);
+var db
+
+MongoClient.connect('mongodb://ShivamP123:darkfox123@ds153709.mlab.com:53709/digitalhomaelandtest', (err, database) => {
+  if (err) return console.log(err)
+  db = database
+  app.listen(process.env.PORT || 3000, () => {
+    console.log('listening on 3000')
+  })
+})
+
   
 MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   console.log("Connected correctly to server");
