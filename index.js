@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser'),
   mongoose = require('mongoose');
   var mongo = require('mongodb');
-  var MongoClient = require('mongodb').MongoClient
+  var MongoClient = mongo.MongoClient
 
   console.log("yipee app man now: " + mongo + " : " + MongoClient);
   
