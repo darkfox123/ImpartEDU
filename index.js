@@ -5,7 +5,7 @@ var bodyParser = require('body-parser'),
   var mongo = require('mongodb');
   var MongoClient = require('mongodb').MongoClient
 
-  console.log("yipee app man : " + mongo + " : " + MongoClient);
+  console.log("yipee app man now: " + mongo + " : " + MongoClient);
   
 MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   console.log("Connected correctly to server");
