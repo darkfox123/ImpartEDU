@@ -19,12 +19,13 @@ MongoClient.connect('mongodb://ShivamP123:darkfox123@ds153709.mlab.com:53709/dig
 })
 
   
-MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
+/*
+  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   console.log("Connected correctly to server");
 
   db.close();
 });
-  
+  */
   /* 
  mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) console.error(error);
