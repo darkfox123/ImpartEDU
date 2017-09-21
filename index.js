@@ -1,3 +1,6 @@
+Author = require('./models/author');
+Book = require('./models/book');
+
 /*
 var express = require('express');
 var app = express();
@@ -67,8 +70,15 @@ app.listen(app.get('port'), function() {
 
 var mongoose = require('mongoose');
 var mongodbUri = require('mongodb-uri');
+var bodyParser = require('body-parser');
+var async = require("async");
 var express = require('express');
 var app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: false
+})); 
 
 // A MongoDB URI, not compatible with Mongoose because it lists multiple hosts in the address
 // Could be pulled from an environment variable or config file
@@ -103,4 +113,15 @@ app.listen(app.get('port'), function() {
 // setup route for lANDING PAGE
 app.get('/api', function(req,res){
     res.send("Hello World!");
+});
+
+/Add city manually
+var authOrigin = new Author({
+	first_name:"Shivam",
+	family_name:"Pathak"
+});
+
+authOrigin.save(function(err){
+  if ( err ) throw err;
+  console.log("Shivam name Saved Successfully");
 });
