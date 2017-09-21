@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser'),
-  mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
   var mongo = require('mongodb');
   //const MongoClient = mongo.MongoClient;
 
