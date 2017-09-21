@@ -67,10 +67,14 @@ app.listen(app.get('port'), function() {
 
 var mongoose = require('mongoose');
 var mongodbUri = require('mongodb-uri');
+var express = require('express');
+var app = express();
 
 // A MongoDB URI, not compatible with Mongoose because it lists multiple hosts in the address
 // Could be pulled from an environment variable or config file
 var uri = 'mongodb://ShivamP123:darkfox123@ds153709.mlab.com:53709/digitalhomaelandtest';
+
+app.set('port', (process.env.PORT || 5000));
 
 // Reformat to a Mongoose connect string and connect()
 var mongooseConnectString = mongodbUri.formatMongoose(uri);
@@ -81,4 +85,17 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error: '));
 db.once('open', function callback () {
     console.log('Successfully connected to MongoDB ');
+});
+app.use(express.static(__dirname + '/public'));
+
+// views is directory for all template files
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+app.get('/', function(request, response) {
+  response.render('pages/index');
+});
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
