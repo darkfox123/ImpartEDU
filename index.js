@@ -1,3 +1,4 @@
+/*
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -19,29 +20,24 @@ MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
   })
 })
 
-  
-/*
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   console.log("Connected correctly to server");
 
   db.close();
 });
-  */
-  /* 
+   
  mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) console.error(error);
     else console.log('mongo connected');
 });
-*/
 
-/*
 mongo.Db.connect(process.env.MONGODB_URI, function (err, db) {
   db.collection('mydocs', function(er, collection) {
     collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
     });
   });
 });
-*/
+
 express()
   // https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
   .use(bodyParser.json()) // support json encoded bodies
@@ -66,4 +62,23 @@ app.get('/', function(request, response) {
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
+});
+*/
+
+var mongoose = require('mongoose');
+var mongodbUri = require('mongodb-uri');
+
+// A MongoDB URI, not compatible with Mongoose because it lists multiple hosts in the address
+// Could be pulled from an environment variable or config file
+var uri = 'mongodb://ShivamP123:darkfox123@ds153709.mlab.com:53709/digitalhomaelandtest';
+
+// Reformat to a Mongoose connect string and connect()
+var mongooseConnectString = mongodbUri.formatMongoose(uri);
+mongoose.connect(mongooseConnectString);
+
+// Test for connection success
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection error: '));
+db.once('open', function callback () {
+    console.log('Successfully connected to MongoDB');
 });
