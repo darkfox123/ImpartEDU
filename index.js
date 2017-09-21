@@ -115,7 +115,7 @@ app.get('/api', function(req,res){
     res.send("Hello World!");
 });
 
-/Add city manually
+//Add city manually
 var authOrigin = new Author({
 	first_name:"Shivam",
 	family_name:"Pathak"
