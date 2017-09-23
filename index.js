@@ -1,5 +1,17 @@
 Author = require('./models/author');
 Book = require('./models/book');
+City = require('./models/city');
+School = require('./models/school');
+Class = require('./models/class');
+Teacher = require('./models/teacher');
+Student = require('./models/student');
+Parent = require('./models/parent');
+Notification = require('./models/notification');
+Attendance = require('./models/attendance');
+Resource = require('./models/resource');
+Application = require('./models/application');
+Notifmap = require('./models/notifmap');
+
 
 /*
 var express = require('express');
@@ -125,3 +137,13 @@ authOrigin.save(function(err){
   if ( err ) throw err;
   console.log("Shivam name Saved Successfully");
 });
+
+var cityOrigin = new City({
+	name:"Bareilly"
+});
+
+cityOrigin.save(function(err){
+  if ( err ) throw err;
+  console.log("BAREILLY name Saved Successfully");
+});
+
