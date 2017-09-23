@@ -127,6 +127,21 @@ app.get('/api', function(req,res){
     res.send("Hello World!");
 });
 
+app.get('/api/cities', function(req, res){
+    var result = "{\"cities\":["
+    City.getCities(function(err, cities){
+       if(err){
+           throw err;
+       } 
+        cities.forEach(function(city){
+            result += "{\"name\":\"" + city.name + "\"," + "\"schools\":\"" + city.schools + "\"},"; 
+        })
+        result = result.substr(0, result.length-1);
+        result +="]}";
+        res.json(JSON.parse(result));
+    });
+});
+
 //Add city manually
 var authOrigin = new Author({
 	first_name:"Shivam",
@@ -144,6 +159,6 @@ var cityOrigin = new City({
 
 cityOrigin.save(function(err){
   if ( err ) throw err;
-  console.log("BAREILLY name Saved Successfully");
+  console.log("Lucknow name Saved Successfully");
 });
 
