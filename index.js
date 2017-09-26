@@ -12,74 +12,6 @@ Resource = require('./models/resource');
 Application = require('./models/application');
 Notifmap = require('./models/notifmap');
 
-
-/*
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-  var mongo = require('mongodb');
-  //const MongoClient = mongo.MongoClient;
-
-  const MongoClient = require('mongodb').MongoClient
- 
-  console.log("yipee app man uri: ");
-var db
-
-
-MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
-  if (err) return console.log(err)
-  db = database
-  app.listen(process.env.PORT || 3000, () => {
-    console.log('listening on 3000')
-  })
-})
-
-  MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-  console.log("Connected correctly to server");
-
-  db.close();
-});
-   
- mongoose.connect(process.env.MONGODB_URI, function (error) {
-    if (error) console.error(error);
-    else console.log('mongo connected');
-});
-
-mongo.Db.connect(process.env.MONGODB_URI, function (err, db) {
-  db.collection('mydocs', function(er, collection) {
-    collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
-    });
-  });
-});
-
-express()
-  // https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
-  .use(bodyParser.json()) // support json encoded bodies
-  .use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
-
-  .get('/api', function (req, res) {
-    res.json(200, {msg: 'OK' });
-  })
-
-  
-app.set('port', (process.env.PORT || 5000));
-
-app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-app.get('/', function(request, response) {
-  response.render('pages/index');
-});
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
-*/
-
 var mongoose = require('mongoose');
 var mongodbUri = require('mongodb-uri');
 var bodyParser = require('body-parser');
@@ -130,6 +62,8 @@ app.get('/api', function(req,res){
     res.send("Hello World!");
 });
 
+// Object - City
+// Get Cities
 app.get('/api/cities', function(req, res){
     var result = "{\"cities\":["
     City.getCities(function(err, cities){
@@ -159,6 +93,54 @@ app.post('/api/cities', function(req, res){
     });
 });
 
+//Object - School
+//get schools
+app.get('/api/schools', function(req, res){
+    var response = "{ \"Schools\":[";
+    //var response = "{\"StudentId\":\"1\",\"StudentName\":\"Rahul\",\"StudentMarks\":\"83\"}";
+    //console.log("resp._headers >>>>>>>" + JSON.stringify(res._headers))
+    //res.json(JSON.parse(response));
+    
+    School.getSchools(function(err, schools){
+       if(err){
+           throw err;
+       } 
+        schools.forEach(function(school){
+            console.log("school : " + school);
+            response += "{\"name\":\"" + school.name + "\"," + "\"city\":\"" + school.city + "\"," + "\"schoolId\":\"" + school.schoolId + "\"},"; 
+        });
+        response = response.substr(0, response.length-1);
+        response +=  "]}";
+        //console.log(response);
+        res.json(JSON.parse(response));
+    });
+    
+});
+
+
+//Add schools
+//{"function":"add", "params":{"city":"Bareilly", "school": {"name" : "RDBMS", "schoolId":"pihu9927", "city":"Bareilly"}}}
+app.post('/api/schools', function(req, res){
+    console.log("request : " + req.body.toString);
+    var functionVal = req.body.function;
+    var params = req.body.params;
+    console.log("fnval : " + functionVal + " params : " + params);
+    if(functionVal == "add"){
+     var school = params.school;
+    var cityName = params.city;
+    var schoolId = "#";
+    School.addSchools(school, schoolId, function( school){
+       console.log("returned : " + school);
+        City.addSchool(cityName, school._id, function(city){
+        console.log("final callback got: " + city);
+            res.json(city);
+    });
+    });   
+    }
+});
+
+
+
 /*
 //Add city manually
 var authOrigin = new Author({
@@ -185,7 +167,7 @@ cityOrigin.save(function(err){
 */
 
 // clean up code - working
-
+/*
 City.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -194,3 +176,4 @@ City.remove({}, function(err) {
             }
         }
     );
+*/
