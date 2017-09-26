@@ -108,6 +108,9 @@ db.on('error', console.error.bind(console, 'Connection error: '));
 db.once('open', function callback () {
     console.log('Successfully connected to MongoDB ');
 });
+
+
+
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
@@ -142,6 +145,18 @@ app.get('/api/cities', function(req, res){
     });
 });
 
+//Add city
+app.post('/api/cities', function(req, res){
+    var city = req.body.city;
+    City.addCity(city, function(err, city){
+       if(err){
+           throw err;
+       } 
+        res.json(city);
+    });
+});
+
+
 //Add city manually
 var authOrigin = new Author({
 	first_name:"Shivam",
@@ -153,6 +168,7 @@ authOrigin.save(function(err){
   console.log("Shivam name Saved Successfully");
 });
 
+/*
 var cityOrigin = new City({
 	name:"Bareilly"
 });
@@ -161,4 +177,14 @@ cityOrigin.save(function(err){
   if ( err ) throw err;
   console.log("Lucknow name Saved Successfully");
 });
+*/
 
+// clean up code 
+City.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
