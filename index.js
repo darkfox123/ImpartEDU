@@ -159,7 +159,7 @@ app.post('/api/cities', function(req, res){
     });
 });
 
-
+/*
 //Add city manually
 var authOrigin = new Author({
 	first_name:"Shivam",
@@ -170,7 +170,9 @@ authOrigin.save(function(err){
   if ( err ) throw err;
   console.log("Shivam name Saved Successfully");
 });
+*/
 
+// manual add - working
 /*
 var cityOrigin = new City({
 	name:"Bareilly"
@@ -182,8 +184,8 @@ cityOrigin.save(function(err){
 });
 */
 
-// clean up code 
-/*
+// clean up code - working
+
 City.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -192,4 +194,3 @@ City.remove({}, function(err) {
             }
         }
     );
-*/
