@@ -180,6 +180,7 @@ cityOrigin.save(function(err){
 */
 
 // clean up code 
+/*
 City.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -188,3 +189,4 @@ City.remove({}, function(err) {
             }
         }
     );
+*/
