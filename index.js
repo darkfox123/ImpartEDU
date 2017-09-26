@@ -136,12 +136,15 @@ app.get('/api/cities', function(req, res){
        if(err){
            throw err;
        } 
-        cities.forEach(function(city){
+        /*
+		cities.forEach(function(city){
             result += "{\"name\":\"" + city.name + "\"," + "\"schools\":\"" + city.schools + "\"},"; 
         })
         result = result.substr(0, result.length-1);
         result +="]}";
         res.json(JSON.parse(result));
+		*/
+		res.json(cities);
     });
 });
 
