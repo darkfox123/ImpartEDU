@@ -139,6 +139,72 @@ app.post('/api/schools', function(req, res){
     }
 });
 
+// Get class
+app.get('/api/classes', function(req, res){
+   /*
+    var response = "[{\"StudentId\":\"1\",\"StudentName\":\"Rahul\",\"StudentMarks\":\"83\"},{\"StudentId\":\"2\",\"StudentName\":\"Rohit\",\"StudentMarks\":\"91\"}]";
+    console.log("city : " + req.query.city + " : " + req.query.school);
+    var returnJson = "";
+    var count = 1;
+    if(req.query.city != null && req.query.school != null){   
+    Class.getClasseBySchool(req.query.school, req.query.city, function(err, classes){
+     returnJson += "{\"classes\":["
+       // console.log("classes : " + classes);
+        classes.forEach(function(classInst){
+           if(count != classes.length){
+            returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"},";
+                console.log("returnjson incomplete : " + returnJson);
+           } else {
+               returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"}]}";
+               console.log("returnjson : " + returnJson);
+               res.json(JSON.parse(returnJson));
+           }
+            count++;
+        });     
+      });
+    }
+*/
+    
+    Class.getClasses(function(err, classes){
+       if(err){
+           throw err;
+       } 
+        res.json(classes);
+    });
+    
+});
+
+//Add classes (add school prerequisite)
+// Test: {"city":"Moradabad" , "schoolId": "school9927", "classes" : [{"name":"XI", "section":"E", "schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"VI", "section":"A","schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"IV", "section":"B","schoolId": "school9927" , "schoolName":"RDBMS", "city":"Moradabad"}]}
+app.post('/api/classes', function(req, res){
+    var classes = req.body.classes;
+    var schoolId = req.body.schoolId;
+    var city = req.body.city;
+    var classId = "#";
+    var returnjson = "{ \"classid\":[\"";
+    var count = 1;
+    classes.forEach(function(classInst){
+        Class.addClass(classInst, classId, function( classId){
+            console.log("count outer : " + count + " : " + " classes len :" + classes.length);
+            if(count == classes.length ){
+                returnjson += classId + "\"]}";
+            }
+            else
+           { returnjson += classId + "\",\"";}
+           count++;
+            console.log("return json : " + returnjson);
+            School.addClass(schoolId, classId, function( school){
+              // console.log("count inner : " + count + " : " + " classes len :" + classes.length);
+                if(count == (3 + classes.length)){
+              //  console.log("final return : " + school);
+                   var jsonObj = JSON.parse(returnjson);
+             res.json(jsonObj); 
+            }
+                            count++;
+               });   
+    });   
+});  
+});
 
 
 /*
