@@ -14,6 +14,7 @@ var parentSchema = new mongoose.Schema({
     section: String,
     class: String,
     schoolId:String,
+	//role:String,
     subscribedStudents: [{type: mongoose.Schema.Types.ObjectId, ref: 'Student'}]
 });
 

@@ -107,7 +107,7 @@ app.get('/api/schools', function(req, res){
        } 
         schools.forEach(function(school){
             console.log("school : " + school);
-            response += "{\"name\":\"" + school.name + "\"," + "\"city\":\"" + school.city + "\"," + "\"schoolId\":\"" + school.schoolId + "\"},"; 
+            response += "{\"name\":\"" + school.name + "\"," + "\"city\":\"" + school.city + "\"," + "\"schoolId\":\"" + school.schoolId + "\"," + "\"classes\":\"" + school.classes + "\"},"; 
         });
         response = response.substr(0, response.length-1);
         response +=  "]}";
@@ -141,30 +141,7 @@ app.post('/api/schools', function(req, res){
 
 // Get class
 app.get('/api/classes', function(req, res){
-   /*
-    var response = "[{\"StudentId\":\"1\",\"StudentName\":\"Rahul\",\"StudentMarks\":\"83\"},{\"StudentId\":\"2\",\"StudentName\":\"Rohit\",\"StudentMarks\":\"91\"}]";
-    console.log("city : " + req.query.city + " : " + req.query.school);
-    var returnJson = "";
-    var count = 1;
-    if(req.query.city != null && req.query.school != null){   
-    Class.getClasseBySchool(req.query.school, req.query.city, function(err, classes){
-     returnJson += "{\"classes\":["
-       // console.log("classes : " + classes);
-        classes.forEach(function(classInst){
-           if(count != classes.length){
-            returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"},";
-                console.log("returnjson incomplete : " + returnJson);
-           } else {
-               returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"}]}";
-               console.log("returnjson : " + returnJson);
-               res.json(JSON.parse(returnJson));
-           }
-            count++;
-        });     
-      });
-    }
-*/
-    
+   
     Class.getClasses(function(err, classes){
        if(err){
            throw err;
@@ -177,9 +154,17 @@ app.get('/api/classes', function(req, res){
 //Add classes (add school prerequisite)
 // Test: {"city":"Moradabad" , "schoolId": "school9927", "classes" : [{"name":"XI", "section":"E", "schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"VI", "section":"A","schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"IV", "section":"B","schoolId": "school9927" , "schoolName":"RDBMS", "city":"Moradabad"}]}
 app.post('/api/classes', function(req, res){
-    var classes = req.body.classes;
-    var schoolId = req.body.schoolId;
-    var city = req.body.city;
+    //console.log(JSON.stringify(req.body))
+	var reqBody = req.body;
+	console.log(JSON.stringify(reqBody));
+	var functionVal = reqBody.function;
+    console.log("fnval : " + functionVal + " params : " + JSON.stringify(reqBody.queryparam));
+    if(functionVal == "add"){
+		console.log("inside add");
+	var params = req.body.params;
+	var classes = params.classes;
+    var schoolId = params.schoolId;
+    var city = params.city;
     var classId = "#";
     var returnjson = "{ \"classid\":[\"";
     var count = 1;
@@ -192,20 +177,63 @@ app.post('/api/classes', function(req, res){
             else
            { returnjson += classId + "\",\"";}
            count++;
-            console.log("return json : " + returnjson);
+            console.log("return json : " + returnjson + " with counter : " + count);
             School.addClass(schoolId, classId, function( school){
               // console.log("count inner : " + count + " : " + " classes len :" + classes.length);
-                if(count == (3 + classes.length)){
+                if(count == (1 + classes.length)){
               //  console.log("final return : " + school);
                    var jsonObj = JSON.parse(returnjson);
              res.json(jsonObj); 
             }
-                            count++;
                });   
     });   
 });  
+	}
+	else if (functionVal == "fetch"){
+	var params = reqBody.params;
+	console.log("city : " + params.city + " : ");
+    var returnJson = "";
+    var count = 1;
+    if(params.city != null && params.school != null){   
+    Class.getClasseBySchool(params.city, params.school, function(err, classes){
+     returnJson += "{\"classes\":[";
+        console.log("classes : " + classes.length);
+        classes.forEach(function(classInst){
+           if(count != classes.length){
+            returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"},";
+                console.log("returnjson incomplete : " + returnJson);
+           } else {
+               returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"}]}";
+               console.log("returnjson : " + returnJson);
+               res.json(JSON.parse(returnJson));
+           }
+            count++;
+        });     
+      });
+    }	
+	}
 });
 
+//Add Teacher
+//{"function":"add", "teacher" :{"schoolId":"school9927","password":"pihugolu","aadharId":"fghjklasd","section":"B","city":"Bareilly","email":"oathak.sb@gmail.com","phone":"9004890850","schoolName":"Uttam Public","firstName":"shibu","class":"IV","middleName":"nope","role":"teacher","lastName":"pathak","classId":"59cd50a41e3b90c41fc05fbc"}}
+app.post('/api/teachers', function(req, res){
+    var teacher = req.body.teacher;
+    console.log("request body teacher : " + teacher);
+	var tid= "#";
+    var classId = "#";
+    var returnJson = "{ \"teacherid\":\""; 
+    Teacher.addTeachers(teacher, function( tId){
+       returnJson += tId + "\",\"classid\":\"";
+        tid = tId;
+        console.log("returned tid : " + returnJson );
+         Class.addClassTeacher(tid, teacher.schoolId ,teacher.class, teacher.section, teacher.classId, function(classId){
+            returnJson += classId + "\"}";
+             console.log("never came back : " + returnJson);
+             var jsonObj = JSON.parse(returnJson);
+             res.json(jsonObj);
+    });
+        });
+});
 
 /*
 //Add city manually

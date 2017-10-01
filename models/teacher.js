@@ -1,7 +1,19 @@
 var mongoose =  require('mongoose');
 
 var TeacherSchema = new mongoose.Schema({
-    name: String,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    firstName: String,
+    email: String,
+    phone: String,
+    aadharId: String,
+    password: String,
+    city: String,
+    schoolName: String,
+    section: String,
+    class: String,
+    schoolId:String,
     tId: String,
     role: String,
     classTeacher: {type: mongoose.Schema.Types.ObjectId, ref: 'Class'}
