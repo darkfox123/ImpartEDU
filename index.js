@@ -237,6 +237,16 @@ app.post('/api/teachers', function(req, res){
         });
 });
 
+//Get teacher
+app.get('/api/teachers', function(req, res){
+    Teacher.getTeachers(function(err, teachers){
+       if(err){
+           throw err;
+       } 
+        res.json(teachers);
+    });
+});
+
 /*
 //Add city manually
 var authOrigin = new Author({
