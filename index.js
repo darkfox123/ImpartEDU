@@ -318,12 +318,3 @@ City.remove({}, function(err) {
         }
     );
 */
-
-Teacher.remove({}, function(err) {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log('success');
-            }
-        }
-    );
