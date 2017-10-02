@@ -82,7 +82,7 @@ module.exports.addStudents = (students, callback) => {
   if (err) return handleError(err);
         studentId = student_instance._id;
         if(counter==count) {
-            returnstring = "\"" + studentId +"\"" + "]}";
+            returnstring += "\"" + studentId +"\"" + "]}";
             console.log("for count : " + counter + " : returnstring : " + returnstring);
             console.log("added from callback  " + returnstring);
         callback(returnstring);
