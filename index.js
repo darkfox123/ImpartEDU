@@ -247,6 +247,41 @@ app.get('/api/teachers', function(req, res){
     });
 });
 
+//Get students
+app.get('/api/students', function(req, res){
+    Student.getStudents(function(err, students){
+       if(err){
+           throw err;
+       } 
+        res.json(students);
+    });
+});
+
+//Add classes (add school prerequisite){"classId":"5910bc227803461e804c08f7" , "students" : [{"name":"Shibu", "rollno":"121", "className":"IV", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly", "notifCount":0}, {"name":"Rupa", "rollno":"122","className":"IV", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly", "notifCount":0}, {"name":"Sona", "rollno":"123", "className":"IV", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly", "notifCount":0}]}
+// Test: {"classId":"-----" , "schoolId": "------", "students" : [{"name":"XI", "section":"E", "schoolId": "school9927"}, {"name":"VI", "section":"A","schoolId": "school9927"}, {"name":"IV", "section":"B","schoolId": "school9927"}]}
+app.post('/api/students', function(req, res){
+    var classId = req.body.classId;
+    var students = req.body.students;
+    //var classId = "#";
+    var returnjson = "{ \"studentids\":[";
+    var counter = 1;
+        Student.addStudents(students, function(returnobj){
+                            returnjson += returnobj;
+            console.log("resturnjson without counter : " + returnjson);
+            if(counter == students.length){
+                var resultObj = JSON.parse(returnjson);
+                var studentids = resultObj.studentids;
+                console.log("result length : " + studentids.length);
+                Class.addStudents(classId, studentids, function(){
+                res.json(resultObj);    
+                });
+                
+            }
+            console.log("incrementing counter to : " + counter);
+            counter++;
+        });
+});
+
 /*
 //Add city manually
 var authOrigin = new Author({
@@ -283,3 +318,12 @@ City.remove({}, function(err) {
         }
     );
 */
+
+Teacher.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
