@@ -228,7 +228,7 @@ app.post('/api/teachers', function(req, res){
         tid = tId;
         console.log("returned tid : " + returnJson );
          Class.addClassTeacher(tid, teacher.schoolId ,teacher.class, teacher.section, teacher.classId, function(classId){
-            console.log("returned classid : " + JSON.stringify(classid));
+            console.log("returned classid : " + JSON.stringify(classId));
 			returnJson += classId + "\"}";
              console.log("never came back : " + returnJson);
              var jsonObj = JSON.parse(returnJson);
