@@ -267,7 +267,8 @@ app.post('/api/students', function(req, res){
     var counter = 1;
         Student.addStudents(students, function(returnobj){
                             returnjson += returnobj;
-            console.log("resturnjson without counter : " + returnjson);
+            console.log("student len : " + students.length);
+			console.log("resturnjson without counter : " + returnjson);
             if(counter == students.length){
                 var resultObj = JSON.parse(returnjson);
                 var studentids = resultObj.studentids;
