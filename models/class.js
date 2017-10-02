@@ -49,9 +49,13 @@ module.exports.addClass = function(classInst, schoolId, callback){
 }
 
 // Add classteacher
-module.exports.addClassTeacher = ( teacherId, schoolId ,classname, section, classId, callback) => {
+module.exports.addClassTeacher = function( teacherId, schoolId ,classname, section, classId, callback){
   console.log("got tidin scnd fn : " + teacherId); 
-  Class.findOneAndUpdate({schoolId:schoolId,name:classname,section:section}, {$push: {classTeacher: mongoose.Types.ObjectId(teacherId)}},{new: true},callback);
+  Class.findOneAndUpdate({schoolId:schoolId,name:classname,section:section}, {$push: {classTeacher: mongoose.Types.ObjectId(teacherId)}},{new: true},function(err, updatedClass) {
+    console.log("updated class : " + updatedClass);
+    callback(updatedClass); 
+});
+  //callback);
                         // (err,doc) => {
        //classId = doc._id;
        //console.log("update result doc : " + classId);
