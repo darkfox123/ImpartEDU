@@ -89,7 +89,7 @@ module.exports.addStudents = (students, callback) => {
         }
         else
             {
-                returnstring = "\"" + studentId +"\"" + ",";
+                returnstring += "\"" + studentId +"\"" + ",";
                 console.log("for count : " + counter + " : returnstring : " + returnstring);
                 counter++;
             }
