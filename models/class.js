@@ -78,9 +78,9 @@ module.exports.addStudents = function( classId, studentids, callback) {
   var counter = 1;
   var limit = studentids.length;
   studentids.forEach(function(student) {       
-    var query = {"_id": classId};  Class.findOneAndUpdate(query, {$push: {students: mongoose.Types.ObjectId(student)}},{new: true}, callback) {
+    var query = {"_id": classId};  Class.findOneAndUpdate(query, {$push: {students: mongoose.Types.ObjectId(student)}},{new: true}, callback); //{
        //console.log("update result doc : " + doc);
-    });
+    //});
    });
 }
 
