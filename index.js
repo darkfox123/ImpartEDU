@@ -289,6 +289,103 @@ app.post('/api/students', function(req, res){
 		//}
 });
 
+//Performs following functions:
+// 1). Add parent and return studentlist. 
+// Json: {"function":"add", "params" : {"classid":"5900a6197d29611b78dcf511", "parent":{"name":"Ritik Pathak", "email":"ritikpbhod@gmail.com", "mobile":"9927894488"}}}
+// Edited Json: {"function":"add", "parent" :{"password":"pihugolu","aadharId":"fghjklasd","section":"B","city":"Bareilly","email":"ritikpbhod@gmail.com","phone":"9004890850","schoolName":"St. stephens","firstName":"Ritik","class":"IV","middleName":"nope","role":"parent","lastName":"pathak"}}
+
+// return: "{ \"parentid\":\"5901ad2323fb1016949aee93\",\"students\":[{ \"name\":\"Shibu\",\"rollno\":\"121\",\"studentid\":\"59019066e738b307d887e52c\"},{ \"name\":\"Sona\",\"rollno\":\"123\",\"studentid\":\"59019066e738b307d887e52e\"},{ \"name\":\"Rupa\",\"rollno\":\"122\",\"studentid\":\"59019066e738b307d887e52d\"}]}"
+// 2). Subscribe to a student
+// Json: {"function":"subscribe", "params" : {"parentid":"5901ad2323fb1016949aee93", "studentid":"59019066e738b307d887e52c"}}
+// return: {"_id":"59019066e738b307d887e52c","name":"Pihu","rollno":"1121","classid":"5900a6197d29611b78dcf511","__v":0,"notifications":[],"attendance":[]}
+// 3). Unsubscribe a student (same as 2)
+app.post('/api/parents', function(req, res){
+    console.log("request : " + req.body.function);
+    var functionVal = req.body.function;
+    var params = null;
+    if(functionVal == "add"){
+        params = req.body.parent;
+        console.log("add command recieved");
+        var className = params.class;
+        var section = params.section;
+        var schoolName = params.schoolName;
+        var city = params.city;
+        var schoolId = params.schoolId;
+        var parent = params;
+        var returnVal = "{ \"parentid\":";
+    //console.log("got header id : " + classId);
+    Parent.addParents(parent, function(err, parent){
+        returnVal += "\"" + parent._id + "\"," + "\"students\":[";
+        console.log("class chahiye : " + returnVal);
+        Student.getStudentsByClass(className, section, city, schoolName, function(err, students){
+       if(err){
+           throw err;
+       } 
+         students.forEach(function(student) { 
+         returnVal += "{ \"name\":\"" + student.name + "\"," + "\"rollno\":\"" + student.rollno + "\"," + "\"studentid\":\""+ student._id + "\"},";
+         });
+            returnVal = returnVal.substring(0, returnVal.length-1);
+            returnVal += "]}"
+            console.log("return value : " + returnVal);
+           res.json(returnVal);
+    });
+    });
+    }
+    else if(functionVal == "subscribe"){
+        params= req.body.params;
+        var parentid= params.parentid;
+        var studentid = params.studentid;
+        Parent.subscribeStudent(parentid, studentid, function(parent){
+            console.log("got studentid  : " + studentid);
+           Student.getStudents(function(err, students){
+       if(err){
+           throw err;
+       } 
+               students.forEach(function(student){
+            if(student._id == studentid){ res.json(student);}
+        })
+               res.json({});
+        //res.json(students);
+    });
+            /*
+            Student.getStudentById(studentid, function(student){
+                console.log("student : " + student);
+                 res.json(parent);
+            })
+            */
+        });
+    }
+    else if(functionVal == "unsubscribe"){
+        var parentid= params.parentid;
+        var studentid = params.studentid;
+        Parent.unsubscribeStudent(parentid, studentid, function(parent){
+            res.json(parent);
+        });
+    }
+    /*
+    var classId = req.body.classid;
+    var parent = req.body.parent;
+    console.log("got header id : " + classId);
+    Parent.addParents(parent, function(err, parent){
+        console.log("class chahiye : " + classId);
+        Student.getStudentsByClass(classId, function(err, students){
+       if(err){
+           throw err;
+       } 
+        console.log("return value : " + students.length);
+            res.json(students);
+    });
+    })*/
+    /*
+    Student.getStudentsByClass(classid, function(err, students){
+       if(err){
+           throw err;
+       } 
+        res.json(students);
+    });*/
+});
+
+
 /*
 //Add city manually
 var authOrigin = new Author({
