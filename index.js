@@ -374,27 +374,149 @@ app.post('/api/parents', function(req, res){
             res.json(parent);
         });
     }
-    /*
-    var classId = req.body.classid;
-    var parent = req.body.parent;
-    console.log("got header id : " + classId);
-    Parent.addParents(parent, function(err, parent){
-        console.log("class chahiye : " + classId);
-        Student.getStudentsByClass(classId, function(err, students){
+});
+
+//Get notifications
+app.get('/api/notifications', function(req, res){
+    console.log("getting notifications");
+	Notification.getNotifications(function(err, notifications){
        if(err){
            throw err;
        } 
-        console.log("return value : " + students.length);
-            res.json(students);
+        res.json(notifications);
     });
-    })*/
-    /*
-    Student.getStudentsByClass(classid, function(err, students){
-       if(err){
-           throw err;
-       } 
-        res.json(students);
-    });*/
+});
+
+
+//Add Notif
+//input Class : {"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"18", "notification":{"title":"Sample Notif", "subject":"Hello There!"}}}
+//input Student: {"reciever":"student", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "name":"Shibu","rollno":"121", "notification":{"title":"Sample Notif for student 2", "subject":"Hello There! 2"}}}
+//load Student ip: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e1"}}
+//load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
+app.post('/api/notifications', function(req, res){
+    var reciever = req.body.reciever;
+    var params = req.body.params;
+    var createdNotif = null;
+    if(reciever == "class"){
+        var className = params.class;
+        var section = params.section;
+        var schoolName = params.schoolName;
+        var city = params.city;
+        var notif = params.notification;
+        var count = params.studentcount;
+        var counter = 1;
+        console.log("before adding notuf : " + JSON.stringify(notif));
+    Notification.addNotification(notif, function(err, notif){
+        if(err){throw err;}
+        console.log("notif created : " + notif);
+        createdNotif = notif;
+        Notifmap.addNotifMap(notif._id, function(err, notifmap){
+            if(err){throw err;}
+            console.log("notifmap created : " + notifmap);
+            Student.addNotifToClass(className, section, city, schoolName,notifmap._id, function(err, students){ if(err){throw err;}
+            console.log("updated  : " + students);
+            if(counter == count){console.log("exit here"); res.json(createdNotif);}
+            counter++;                                                                       
+            }); 
+        });
+    }); 
+    }
+    else if(reciever == "student"){
+        var className = params.class;
+        var section = params.section;
+        var schoolName = params.schoolName;
+        var city = params.city;
+        var notif = params.notification;
+        var name = params.name;
+        var rollno = params.rollno;
+        Notification.addNotification(notif, function(err, notif){
+        console.log("notif created : " + notif);
+        createdNotif = notif;
+             Notifmap.addNotifMap(notif._id, function(err, notifmap){
+            if(err){throw err;}
+            console.log("notifmap created : " + notifmap);
+                 Student.addNotifToStudent(name,rollno,className,section,city,schoolName,notifmap._id, function(err, student){ if(err){throw err;}
+                        console.log("updated  : " + student);
+                      res.json(createdNotif);                                                                                                       
+                });
+             });
+          });
+    }
+    else if(reciever == "load"){
+        var studentId = params.studentid;
+        var result = "{\"notifs\":[";
+        
+        Student.getStudentById(studentId, function(err, student){
+            if(err){throw err;}
+            console.log("student : " + student);
+            var studentnotifs = student.notifications;
+            var counter = 1;
+            var notifCount = studentnotifs.length;
+            console.log("notif count : " + notifCount);
+            studentnotifs.forEach(function(notifmapid){
+                Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
+            if(err){throw err;}
+                    //var nm = JSON.parse(notifmap);
+                //var status = nm.readStatus;
+                  //  var nmid = nm._id;
+                    if(!notifmap.readStatus){
+                         console.log("notifmap : " + notifmap);
+                        Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
+                           //console.log("notifreturn : " + notifmapRet);
+                            if( notifmapRet != null){
+                            Notification.getNotificationById(notifmapRet.notification, function(err, notifRet){
+                               result += notifRet + ",";
+                                console.log("result : " + counter + " : " + notifCount);
+                               if(counter == notifCount)
+                                   {
+                                       result = result.substr(0, result.length-1);
+                                       result += "]}";
+                                       res.json(result);
+                                   }
+                                counter++;
+                           }); 
+                            }
+                        });
+                    }
+                });
+            });
+        }
+        );
+        /*
+        Student.getStudentById(studentId, function(err, student){
+            if(err){throw err;}
+            //console.log("student : " + student);
+            var notif = student.notifications;
+            var readStatus = student.notifReadStatus;
+            var unreadIndex = [];
+            var notiflen = notif.length; 
+            var statusCounter = 1;
+            var counter = 1;
+            readStatus.forEach(function(status){
+                if(status == false){
+                    unreadIndex.push(statusCounter);
+                    Student.UpdateReadStatus(statusCounter);
+                }
+                statusCounter++;
+            });
+            
+            notif.forEach(function(notifInst){
+                //console.log("notifInst : " + notifInst);
+                Notification.getNotificationById(notifInst, function(err,notif){
+                    //console.log("notification : " + notif);
+                    if(counter == notiflen){
+                        result += "{" + "\"id\":\""+ notif._id +"\",\"title\":\""+ notif.title + "\",\"subject\":\"" + notif.subject + "\",\"time\":\""+ notif.time + "\"}]}";
+                        console.log("final result : " + result);
+                        res.json(JSON.parse(result));
+                    }else{
+                    result += "{" +"\"id\":\""+ notif._id + "\",\"title\":\""+ notif.title + "\",\"subject\":\"" + notif.subject + "\",\"time\":\""+ notif.time + "\"},";
+                    }
+                    counter++;
+                });
+            });
+        });
+        */
+    }
 });
 
 
