@@ -73,7 +73,7 @@ module.exports.addApplicationToClass = function(classId, applicationId, callback
     Class.findOneAndUpdate({"_id":classId}, {$push: {application: mongoose.Types.ObjectId(applicationId)}},{new: true}, callback);
 }
 
-module.exports.addStudents = ( classId, studentids, callback) {
+module.exports.addStudents = function( classId, studentids, callback) {
   console.log("got classid scnd fn : " + classId); 
   studentids.forEach(function(student) {       
     var query = {"_id": classId};  Class.findOneAndUpdate(query, {$push: {students: mongoose.Types.ObjectId(student)}},{new: true},(arr,doc) => {
