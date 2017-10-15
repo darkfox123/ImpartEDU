@@ -307,7 +307,7 @@ app.get('/api/parents', function(req, res){
 
 // return: "{ \"parentid\":\"5901ad2323fb1016949aee93\",\"students\":[{ \"name\":\"Shibu\",\"rollno\":\"121\",\"studentid\":\"59019066e738b307d887e52c\"},{ \"name\":\"Sona\",\"rollno\":\"123\",\"studentid\":\"59019066e738b307d887e52e\"},{ \"name\":\"Rupa\",\"rollno\":\"122\",\"studentid\":\"59019066e738b307d887e52d\"}]}"
 // 2). Subscribe to a student
-// Json: {"function":"subscribe", "params" : {"parentid":"5901ad2323fb1016949aee93", "studentid":"59019066e738b307d887e52c"}}
+// Json: {"function":"subscribe", "params" : {"parentid":"59e37a4a733594040063f0a5", "studentid":"59e342676057c904003b2e45"}}
 // return: {"_id":"59019066e738b307d887e52c","name":"Pihu","rollno":"1121","classid":"5900a6197d29611b78dcf511","__v":0,"notifications":[],"attendance":[]}
 // 3). Unsubscribe a student (same as 2)
 app.post('/api/parents', function(req, res){
@@ -367,7 +367,8 @@ app.post('/api/parents', function(req, res){
         });
     }
     else if(functionVal == "unsubscribe"){
-        var parentid= params.parentid;
+         params= req.body.params;
+		var parentid= params.parentid;
         var studentid = params.studentid;
         Parent.unsubscribeStudent(parentid, studentid, function(parent){
             res.json(parent);
