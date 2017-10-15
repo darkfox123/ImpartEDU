@@ -278,8 +278,8 @@ app.post('/api/students', function(req, res){
                 //studentids.forEach(function(student) {   
 				console.log("result length : " + studentids.length);
                 Class.addStudents(classId, studentids, function(){
-                console.log("after class.addstudnts" + returnjson);
-				res.json(returnjson);    
+                console.log("after class.addstudnts" + resultObj);
+				res.json(resultObj);    
                 }); 
 				//});				
            // }
