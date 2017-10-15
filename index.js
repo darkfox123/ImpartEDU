@@ -414,7 +414,7 @@ app.post('/api/notifications', function(req, res){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
             Student.addNotifToClass(className, section, city, schoolName,notifmap._id, function(err, students){ if(err){throw err;}
-            console.log("updated  : " + students);
+            console.log("updated  : " + count + " : " + counter);
             if(counter == count){console.log("exit here"); res.json(createdNotif);}
             counter++;                                                                       
             }); 
