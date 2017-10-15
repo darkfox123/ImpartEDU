@@ -249,7 +249,8 @@ app.get('/api/teachers', function(req, res){
 
 //Get students
 app.get('/api/students', function(req, res){
-    Student.getStudents(function(err, students){
+    console.log("getting students");
+	Student.getStudents(function(err, students){
        if(err){
            throw err;
        } 
@@ -257,10 +258,11 @@ app.get('/api/students', function(req, res){
     });
 });
 
-//Add classes (add school prerequisite){"classId":"5910bc227803461e804c08f7" , "students" : [{"name":"Shibu", "rollno":"121", "className":"IV", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly", "notifCount":0}, {"name":"Rupa", "rollno":"122","className":"IV", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly", "notifCount":0}, {"name":"Sona", "rollno":"123", "className":"IV", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly", "notifCount":0}]}
+//Add classes (add school prerequisite){"classId":"59cd50a41e3b90c41fc05fbc" , "students" : [{"name":"Shibu", "rollno":"121", "className":"IV", "section":"B" , "schoolName":"St. stephens", "city":"Bareilly", "schoolId": "school9927"}, {"name":"Rupa", "rollno":"122","className":"IV", "section":"B" , "schoolName":"St. stephens", "city":"Bareilly", "schoolId": "school9927"}, {"name":"Sona", "rollno":"123", "className":"IV", "section":"B" , "schoolName":"St. stephens", "city":"Bareilly", "schoolId": "school9927"}]}
 // Test: {"classId":"-----" , "schoolId": "------", "students" : [{"name":"XI", "section":"E", "schoolId": "school9927"}, {"name":"VI", "section":"A","schoolId": "school9927"}, {"name":"IV", "section":"B","schoolId": "school9927"}]}
 app.post('/api/students', function(req, res){
-    var classId = req.body.classId;
+    console.log("putting students");
+	var classId = req.body.classId;
     var students = req.body.students;
     //var classId = "#";
     var returnjson = "{ \"studentids\":[";
