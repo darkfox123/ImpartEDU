@@ -82,16 +82,18 @@ module.exports.addStudents = (students, callback) => {
   if (err) return handleError(err);
         studentId = student_instance._id;
         if(counter==count) {
-            returnstring += "\"" + studentId +"\"" + "]}";
+            returnstring = "\"" + studentId +"\"" + "]}";
             console.log("for counter : " + counter + " and count : " + count + " : returnstring : " + returnstring);
-            console.log("added from callback  " + returnstring);
-        callback(returnstring);
+			returnjson += returnstring;
+			console.log("added from callback  " + returnjson);
+        callback(returnjson);
         }
         else
             {
-                returnstring += "\"" + studentId +"\"" + ",";
+                returnstring = "\"" + studentId +"\"" + ",";
                 console.log("for counter : " + counter + " and count : " + count + " : returnstring : " + returnstring);                
-            }
+            returnjson += returnstring;
+			}
     counter++;
        });
     });
