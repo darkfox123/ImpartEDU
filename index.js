@@ -272,14 +272,16 @@ app.post('/api/students', function(req, res){
                             returnjson += returnobj;
             console.log("student len : " + students.length);
 			console.log("resturnjson without counter : " + returnjson);
-            if(counter == students.length){
+            //if(counter == students.length){
                 var resultObj = JSON.parse(returnjson);
                 var studentids = resultObj.studentids;
-                console.log("result length : " + studentids.length);
+                //studentids.forEach(function(student) {   
+				console.log("result length : " + studentids.length);
                 Class.addStudents(classId, studentids, function(){
-                res.json(resultObj);    
-                });                
-            }
+                res.json(returnjson);    
+                }); 
+				//});				
+           // }
             console.log("incrementing counter to : " + counter);
             counter++;
         });
