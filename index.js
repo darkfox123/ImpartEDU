@@ -289,6 +289,17 @@ app.post('/api/students', function(req, res){
 		//}
 });
 
+//Get parents
+app.get('/api/parents', function(req, res){
+    console.log("getting parents");
+	Parent.getParents(function(err, parents){
+       if(err){
+           throw err;
+       } 
+        res.json(parents);
+    });
+});
+
 //Performs following functions:
 // 1). Add parent and return studentlist. 
 // Json: {"function":"add", "params" : {"classid":"5900a6197d29611b78dcf511", "parent":{"name":"Ritik Pathak", "email":"ritikpbhod@gmail.com", "mobile":"9927894488"}}}
