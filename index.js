@@ -397,6 +397,7 @@ app.post('/api/notifications', function(req, res){
     var reciever = req.body.reciever;
     var params = req.body.params;
     var createdNotif = null;
+	console.log("getting into notifications");
     if(reciever == "class"){
         var className = params.class;
         var section = params.section;
