@@ -379,7 +379,7 @@ app.post('/api/parents', function(req, res){
 //Get notifications
 app.get('/api/notifications', function(req, res){
     console.log("getting notifications");
-	Notification.getNotifications(function(err, notifications){
+	Notification.getNotification(function(err, notifications){
        if(err){
            throw err;
        } 
@@ -416,7 +416,9 @@ app.post('/api/notifications', function(req, res){
             Student.addNotifToClass(className, section, city, schoolName,notifmap._id, function(err, students){ if(err){throw err;}
             console.log("updated  : " + count + " : " + counter);
             //if(counter == count)
-			{console.log("exit here"); res.json(createdNotif);}
+			//{
+				console.log("exit here"); res.json(createdNotif);
+				//}
             counter++;                                                                       
             }); 
         });
