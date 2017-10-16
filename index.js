@@ -397,7 +397,6 @@ app.post('/api/notifications', function(req, res){
     var reciever = req.body.reciever;
     var params = req.body.params;
     var createdNotif = null;
-	console.log("getting into notifications : " + reciever);
     if(reciever == "class"){
         var className = params.class;
         var section = params.section;
@@ -447,7 +446,6 @@ app.post('/api/notifications', function(req, res){
           });
     }
     else if(reciever == "load"){
-		console.log("got into load");
         var studentId = params.studentid;
         var result = "{\"notifs\":[";
         
@@ -524,6 +522,281 @@ app.post('/api/notifications', function(req, res){
     }
 });
 
+//1) input : {"reciever":"post", "params":{"classid":"5910bc227803461e804c08f7"(IV-B), "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e3","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e2","date":"14/05/2017","attendance":"Absent"}]}
+// 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
+// 3) load: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e3"}}
+app.post('/api/attendance', function(req, res){
+    var reciever = req.body.reciever;
+    var params = req.body.params;
+    if(reciever == "post"){
+        var classId = params.classid;
+        var attendanceArr = params.attendanceArr;
+        var count = attendanceArr.length;
+        var counter = 1;
+        attendanceArr.forEach(function(attendanceInst){
+            var studentId = attendanceInst.studentid;
+            Attendance.addAttendance(attendanceInst, function(err, attendanceRet){
+                var attendanceId = attendanceRet._id;
+                Student.addAttendanceById(studentId, attendanceId, function(student){
+                    if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
+                    counter++;
+                });
+            });
+        });
+    }
+    else if(reciever == "get"){
+        var studentId = params.studentid;
+        var date = params.date;
+        Student.getStudentById(studentId, function(err, studentInst){
+            if(err){throw err;}            
+            var attendancelist = studentInst.attendance;
+            attendancelist.forEach(function(attendanceId){
+                console.log("attendanceid  : " + attendanceId);
+                Attendance.getAttendanceById(attendanceId, function(err, attendance){
+                    if(err){throw err;}
+                    if(attendance.date == date){
+                    var response = "{" + "\"attendance\":\"" + attendance.attendance + "\"}";
+                        res.json(JSON.parse(response));
+                    }
+                })
+            });
+        });
+    }
+    else if(reciever == "load"){
+        var studentId = params.studentid;
+        var result = "{\"attendance\":["
+        Student.getStudentById(studentId, function(err, studentInst){
+            if(err){throw err;}            
+            var attendancelist = studentInst.attendance;
+            var len = attendancelist.length;
+            var counter = 1;
+            attendancelist.forEach(function(attendanceId){
+                console.log("attendanceid  : " + attendanceId);
+                Attendance.getAttendanceById(attendanceId, function(err, attendance){
+                    if(err){throw err;}
+                    if(counter == len){
+                        result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"}]}"
+                        console.log("result : " + result);
+                        res.json(JSON.parse(result));
+                    }else
+                    {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
+                    counter++;
+                });
+            });
+        });
+    }
+});
+
+//1) input : {"reciever":"post", "params":{"classid":"5910bc227803461e804c08f7"(IV-B), "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e3","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e2","date":"14/05/2017","attendance":"Absent"}]}
+// 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
+// 3) load: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e3"}}
+app.post('/api/attendance', function(req, res){
+    var reciever = req.body.reciever;
+    var params = req.body.params;
+    if(reciever == "post"){
+        var classId = params.classid;
+        var attendanceArr = params.attendanceArr;
+        var count = attendanceArr.length;
+        var counter = 1;
+        attendanceArr.forEach(function(attendanceInst){
+            var studentId = attendanceInst.studentid;
+            Attendance.addAttendance(attendanceInst, function(err, attendanceRet){
+                var attendanceId = attendanceRet._id;
+                Student.addAttendanceById(studentId, attendanceId, function(student){
+                    if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
+                    counter++;
+                });
+            });
+        });
+    }
+    else if(reciever == "get"){
+        var studentId = params.studentid;
+        var date = params.date;
+        Student.getStudentById(studentId, function(err, studentInst){
+            if(err){throw err;}            
+            var attendancelist = studentInst.attendance;
+            attendancelist.forEach(function(attendanceId){
+                console.log("attendanceid  : " + attendanceId);
+                Attendance.getAttendanceById(attendanceId, function(err, attendance){
+                    if(err){throw err;}
+                    if(attendance.date == date){
+                    var response = "{" + "\"attendance\":\"" + attendance.attendance + "\"}";
+                        res.json(JSON.parse(response));
+                    }
+                })
+            });
+        });
+    }
+    else if(reciever == "load"){
+        var studentId = params.studentid;
+        var result = "{\"attendance\":["
+        Student.getStudentById(studentId, function(err, studentInst){
+            if(err){throw err;}            
+            var attendancelist = studentInst.attendance;
+            var len = attendancelist.length;
+            var counter = 1;
+            attendancelist.forEach(function(attendanceId){
+                console.log("attendanceid  : " + attendanceId);
+                Attendance.getAttendanceById(attendanceId, function(err, attendance){
+                    if(err){throw err;}
+                    if(counter == len){
+                        result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"}]}"
+                        console.log("result : " + result);
+                        res.json(JSON.parse(result));
+                    }else
+                    {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
+                    counter++;
+                });
+            });
+        });
+    }
+});
+
+//resorce ip: /*{"reciever":"upload","params":{"classid":"5910bc227803461e804c08f7","value":"iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAIAAAD6wG44AAAAA3NCSVQICAjb4U/gAAAEEElEQVR4nO2dzW7bRhSF7x1SgpqFl/4TjaxaIKuijmt75SfIomu/h9+raF/CMqB0n6xaiIic7uoWaFzy3i7kFAWacoYxSdEH59t6eEacTyQtje6MzmYzaeTs7Oz09LS5zb9ZLBY3Nzfp7Znfa35IP5I8RSgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGBwKBoeCwaFgcPL5fN7wZ3cXkbIs0xNVtTmT+UPm69XVVXPr6+vrxWKR3sH5+Xn69Bbz+87Pm1tv3kGqmt5BK5jfdz6fweBQMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBEBLedx9jMfqTD/L7ztbl81N0/Y/4yvTyS+X3n8woGz+czGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGJy87fxGM5vZj24zmf+YfL28vGw+pizL1WqV2IG7Hx0dpRc4M7/v/EiFv4isVqtWFeZtT6Ap33PR+/BV8BdZ5iIi7j4p8rzI0vPXe+9u99aJjTf54UiDh93fD5//Nq+Dff7r/xRdjk9CfqQAfLuo3ldB8i8nk1eZycNtZy23a7ltkbIr2XGL01zL7Tv9NZidWH3wx0HW1910IMb9T5aHYNM6mGvkMuoWdasyE88yG/UFkMKoBVuw4Ja5qw890JmJaZDw58D9ds6oBasH18pFB76CXU0kqNQy+Burc0YtmDweCgaHgsGhYHAoGBwKBoeCwaFgcCgYnI4F9zfTiUHf4/OJ+uCLi4vmY7ZdIWnrb96vX6bO93WCq6mHg+Xe7uv9aONtj08kP1IALtvfH9eWuz8t95fpgY9nI9h+qP76sY423vb4RPL5DAaHgsGhYHAoGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgYnInj4+cunxfjHJ14+Kn1ugJyQb3df3El8WrZ7dnZ2ZvNnKS23Oj6R/MgG0TL4/OV/sOzVZPLdZMhrfTMffLI+Pn5/Em287fGJ5PMZDA4Fg0PB4FAwOBQMDgWDQ8HgjHsNCq3EZvbW7PvKwsPn4KIoDg8P0zPKsmz1RUFRFPP953X2obib1ypPfRmlUQuuZTp1qd5UH94E/bgQ2t75/sss/v3DP1TL+uebXxIbP+R/+3WVWbBpbhZdCG3kjPoWHaSycB9cwsf1qtrWcbTlYa1HlbwOolWd3ffa3QCMWrB6bhpcgoWBB9osSDARnw7bb/eMWrCIbe7M6gO/zqAuriLytO/PMnrB5LFQMDgUDM7464OZz/pg8v9QMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBQMDgUDE7HG0TL5nfFvW2AzPy2+R1vEO3ubU+A+b3md3yLHuZ3y8xPz+czGBwKBoeCwaFgcCgYnL8BuYGEJNco/uMAAAAASUVORK5CYII=","title":"Sample Image"}}*/
+// 2). LOad ip : {"reciever":"load","params":{"classid":"5910bc227803461e804c08f7"}}
+// o/p : {"resource":[{"date":"Tue May 16 2017 19:34:46 GMT+0530 (India Standard Time)","value":"iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAIAAAD6wG44AAAAA3NCSVQICAjb4U/gAAAEEElEQVR4nO2dzW7bRhSF7x1SgpqFl/4TjaxaIKuijmt75SfIomu/h9+raF/CMqB0n6xaiIic7uoWaFzy3i7kFAWacoYxSdEH59t6eEacTyQtje6MzmYzaeTs7Oz09LS5zb9ZLBY3Nzfp7Znfa35IP5I8RSgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGBwKBoeCwaFgcPL5fN7wZ3cXkbIs0xNVtTmT+UPm69XVVXPr6+vrxWKR3sH5+Xn69Bbz+87Pm1tv3kGqmt5BK5jfdz6fweBQMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBEBLedx9jMfqTD/L7ztbl81N0/Y/4yvTyS+X3n8woGz+czGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGJy87fxGM5vZj24zmf+YfL28vGw+pizL1WqV2IG7Hx0dpRc4M7/v/EiFv4isVqtWFeZtT6Ap33PR+/BV8BdZ5iIi7j4p8rzI0vPXe+9u99aJjTf54UiDh93fD5//Nq+Dff7r/xRdjk9CfqQAfLuo3ldB8i8nk1eZycNtZy23a7ltkbIr2XGL01zL7Tv9NZidWH3wx0HW1910IMb9T5aHYNM6mGvkMuoWdasyE88yG/UFkMKoBVuw4Ja5qw890JmJaZDw58D9ds6oBasH18pFB76CXU0kqNQy+Burc0YtmDweCgaHgsGhYHAoGBwKBoeCwaFgcCgYnI4F9zfTiUHf4/OJ+uCLi4vmY7ZdIWnrb96vX6bO93WCq6mHg+Xe7uv9aONtj08kP1IALtvfH9eWuz8t95fpgY9nI9h+qP76sY423vb4RPL5DAaHgsGhYHAoGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgYnInj4+cunxfjHJ14+Kn1ugJyQb3df3El8WrZ7dnZ2ZvNnKS23Oj6R/MgG0TL4/OV/sOzVZPLdZMhrfTMffLI+Pn5/Em287fGJ5PMZDA4Fg0PB4FAwOBQMDgWDQ8HgjHsNCq3EZvbW7PvKwsPn4KIoDg8P0zPKsmz1RUFRFPP953X2obib1ypPfRmlUQuuZTp1qd5UH94E/bgQ2t75/sss/v3DP1TL+uebXxIbP+R/+3WVWbBpbhZdCG3kjPoWHaSycB9cwsf1qtrWcbTlYa1HlbwOolWd3ffa3QCMWrB6bhpcgoWBB9osSDARnw7bb/eMWrCIbe7M6gO/zqAuriLytO/PMnrB5LFQMDgUDM7464OZz/pg8v9QMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBQMDgUDE7HG0TL5nfFvW2AzPy2+R1vEO3ubU+A+b3md3yLHuZ3y8xPz+czGBwKBoeCwaFgcCgYnL8BuYGEJNco/uMAAAAASUVORK5CYII=","title":"Sample Image"}]}
+app.post('/api/resource', function(req, res){
+    var reciever = req.body.reciever;
+    var params = req.body.params;
+    if(reciever == "upload"){
+        var classId = params.classid;
+        Resource.addResource(params, function(err, resource){
+           if(err) throw err;
+            console.log("rsc added : " + resource);
+            var resourceId = resource._id;
+            Class.addResourceToClass(classId, resourceId, function(err, classInst){
+                if(err) throw err;
+                console.log("updated class : " + classInst);
+                var result = "{\"res\":\"" + resourceId + "\"}";
+                res.json(JSON.parse(result));
+            });
+        });
+    }
+     else if(reciever == "load"){
+        var classId = params.classid;
+        var result = "{\"resource\":["
+        Class.getClassByID(classId, function(err, classInst){
+            if(err){throw err;}            
+            var resourcelist = classInst.res;
+            var len = resourcelist.length;
+            counter = 1;
+            resourcelist.forEach(function(resId){
+                console.log("resid  : " + resId);
+                Resource.getResourceByID(resId, function(err, resource){
+                    if(err){throw err;}
+                    if(counter == len){
+                        result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id + "\"," + "\"value\":\"" + resource.value + "\"," + "\"title\":\"" + resource.title + "\"}]}"
+                        console.log("result : " + result);
+                        res.json(JSON.parse(result));
+                    }else
+                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"value\":\"" + resource.value + "\"," + "\"title\":\"" + resource.title  + "\"},";}
+                    counter++;
+                });
+            });
+        });
+    }
+});
+
+// Application recieve : {"reciever":"recieve","params":{"classid":"5910bc227803461e804c08f6","studentid":"59159716307f0e1cf052b990","date":"16-06-2017","title":"For Leave of 3 dayz","subject":"My sample leave application yo"}}
+// Application recieve : {"reciever":"sync","params":{"classid":"5910bc227803461e804c08f6"}}
+// recieve response : {"applications":[{},{}]}
+// Teacher Application response : {"reciever":"teacherResponse","applicationid":"","accepted":"true"}
+//Student sync request : {"reciever":"studentsync","params":{"studentid":"59159716307f0e1cf052b990"}}
+// Student sync response: {"applications":[{"id":"593e47e70353a3095002f97e","title":"For Leave of 4 dayz","accepted":"false","date":"16-06-2017","studentid":"59159716307f0e1cf052b990"},{"id":"593e5367ab63b30aac025868","title":"For Leave of 3 dayz","accepted":"true","date":"16-06-2017","studentid":"59159716307f0e1cf052b990"}]}
+app.post('/api/applications', function(req, res){
+    var reciever = req.body.reciever;
+    var params = req.body.params;
+    if(reciever == "recieve"){
+        var classId = params.classid;
+        var studentId = params.studentid;
+        Application.addApplication(params, function(err, application){
+           if(err) throw err;
+            console.log("application added : " + application);
+            var applicationId = application._id;
+            Class.addApplicationToClass(classId, applicationId, function(err, classInst){
+                if(err) throw err;
+                console.log("updated class : " + classInst);
+                Student.addApplicationToStudent(studentId, applicationId, function(err, studentInst){
+                if(err) throw err;
+                console.log("updated student : " + studentInst);
+                var result = "{\"res\":\"" + applicationId + "\"}";
+                res.json(JSON.parse(result));
+                });
+            });
+        });
+    }
+    else if(reciever == "sync"){
+        var classId = params.classid;
+        var result = "{\"applications\":["
+        Application.getApplicationForTeacher(function(err, applis){
+       if(err){
+           throw err;
+       } 
+            var appliLen = applis.length;
+            var counter = 1;
+            console.log("application array : " + applis);
+            applis.forEach(function(appli){
+                Application.markApplicationTeacherRead(appli._id, function(err, application){
+                if(err) throw err;
+                     if(counter == appliLen){
+                        result += "{" + "\"id\":\""+ application._id +"\",\"title\":\""+ application.title + "\",\"subject\":\"" + application.subject + "\",\"date\":\""+ application.date + "\",\"studentid\":\""+ application.studentid + "\"}]}";
+                        console.log("final result : " + result);
+                        res.json(JSON.parse(result));
+                    }else{
+                    result += "{" +"\"id\":\""+ application._id + "\",\"title\":\""+ application.title + "\",\"subject\":\"" + application.subject + "\",\"date\":\""+ application.date +"\",\"studentid\":\""+ application.studentid + "\"},";
+                    }
+                    counter++;
+                });
+            });
+    });
+    }
+    else if(reciever == "teacherResponse"){
+        var applicationId = req.body.applicationid;
+        var accepted = req.body.accepted;
+        Application.setApplicationTeacherResponse(applicationId,accepted, function(err, application){
+                if(err) throw err;
+            res.json(application);
+        });
+    }
+    else if(reciever == "studentsync"){
+        var studentId = params.studentid;
+        var result = "{\"applications\":["
+        Application.getApplicationResponseParent(studentId, function(err, applications){
+                if(err) throw err;
+            var counter = 1;
+            var appliLen = applications.length;
+            applications.forEach(function(appli){
+                Application.markApplicationResponseParent(appli._id, function(err, application){
+                if(err) throw err;
+                 console.log("marked application : " + application);
+                if(counter == appliLen){
+                        result += "{" + "\"id\":\""+ application._id +"\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"studentid\":\""+ application.studentid + "\"}]}";
+                        console.log("final result : " + result);
+                        res.json(JSON.parse(result));
+                    }else{
+                    result += "{" +"\"id\":\""+ application._id + "\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"studentid\":\""+ application.studentid + "\"},";
+                    }
+                    counter++;
+                });
+            });
+    });
+    }
+});
+
+function updateApplicationReadStatus(applicationId){
+    Application.getApplicationResponseParent(applicationId, function(err, application){
+                if(err) throw err;
+    });
+}
+
+app.get('/api/applications', function(req, res){
+    Application.getApplication(function(err, teachers){
+       if(err){
+           throw err;
+       } 
+        res.json(teachers);
+    });
+});
 
 /*
 //Add city manually
@@ -551,7 +824,7 @@ cityOrigin.save(function(err){
 */
 
 // clean up code - working
-/*
+
 City.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -560,4 +833,89 @@ City.remove({}, function(err) {
             }
         }
     );
-*/
+	
+Class.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+School.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+	
+Teacher.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+Student.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+	
+Parent.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+Notification.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+	
+Attendance.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+Resource.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+	
+Application.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+Notifmap.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('success');
+            }
+        }
+    );
+
