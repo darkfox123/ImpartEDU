@@ -389,9 +389,9 @@ app.get('/api/notifications', function(req, res){
 
 
 //Add Notif
-//input Class : {"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"18", "notification":{"title":"Sample Notif", "subject":"Hello There!"}}}
+//input Class : {"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"6", "notification":{"title":"Sample Notif", "subject":"Hello There!"}}}
 //input Student: {"reciever":"student", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "name":"Shibu","rollno":"121", "notification":{"title":"Sample Notif for student 2", "subject":"Hello There! 2"}}}
-//load Student ip: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e1"}}
+//load Student ip: {"reciever":"load", "params":{"studentid":"59d1e5b1f02d8f0400014ffc"}}
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
 app.post('/api/notifications', function(req, res){
     var reciever = req.body.reciever;
