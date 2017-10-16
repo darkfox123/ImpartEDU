@@ -447,6 +447,7 @@ app.post('/api/notifications', function(req, res){
           });
     }
     else if(reciever == "load"){
+		console.log("got into load");
         var studentId = params.studentid;
         var result = "{\"notifs\":[";
         
