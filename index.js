@@ -65,8 +65,9 @@ app.get('/api', function(req,res){
 // Object - City
 // Get Cities
 app.get('/api/cities', function(req, res){
-    var result = "{\"cities\":["
-    City.getCities(function(err, cities){
+    //var result = "{\"cities\":["
+    console.log("getting cities");
+	City.getCities(function(err, cities){
        if(err){
            throw err;
        } 
@@ -824,7 +825,7 @@ cityOrigin.save(function(err){
 */
 
 // clean up code - working
-
+/*
 City.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -918,4 +919,4 @@ Notifmap.remove({}, function(err) {
             }
         }
     );
-
+*/
