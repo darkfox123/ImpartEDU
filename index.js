@@ -202,10 +202,10 @@ app.post('/api/classes', function(req, res){
         console.log("classes : " + classes.length);
         classes.forEach(function(classInst){
            if(count != classes.length){
-            returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"},";
+            returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section + "\"," + "\"classId\":\"" + classInst._id +"\"},";
                 console.log("returnjson incomplete : " + returnJson);
            } else {
-               returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section +"\"}]}";
+               returnJson += "{" + "\"name\":\"" + classInst.name + "\"," + "\"section\":\"" + classInst.section + "\"," + "\"classId\":\"" + classInst._id +"\"}]}";
                console.log("returnjson : " + returnJson);
                res.json(JSON.parse(returnJson));
            }
@@ -230,7 +230,7 @@ app.post('/api/teachers', function(req, res){
         tid = tId;
         console.log("returned tid : " + returnJson );
          Class.addClassTeacher(tid, teacher.schoolId ,teacher.class, teacher.section, teacher.classId, function(classId){
-            console.log("returned classid : " + JSON.stringify(classId));
+            console.log("returned classid : " + classId);
 			returnJson += classId + "\"}";
              console.log("never came back : " + returnJson);
              var jsonObj = JSON.parse(returnJson);
