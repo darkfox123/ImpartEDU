@@ -262,6 +262,7 @@ app.get('/api/students', function(req, res){
 
 //Add classes (add school prerequisite){ "reciever" : "add", "params": {"classId":"59f4b7cf41618f04000a0a2f" , "students" :[{"name":" Yukti", "rollno":"120", "className":"II", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly","classid":"59f4b7cf41618f04000a0a2f", "notifCount":0}]}}
 // Test: {"classId":"-----" , "schoolId": "------", "students" : [{"name":"XI", "section":"E", "schoolId": "school9927"}, {"name":"VI", "section":"A","schoolId": "school9927"}, {"name":"IV", "section":"B","schoolId": "school9927"}]}
+/*
 app.post('/api/students', function(req, res){
     console.log("putting students");
 	console.log("got params : " + req.body.reciever);
@@ -297,6 +298,19 @@ console.log("skipping stud");
             counter++;
         });
 		}
+});
+*/
+
+{ "reciever" : "add", "params": {"classId":"59f4b7cf41618f04000a0a2f" , "student" :[{"name":" Yukti", "rollno":"120", "className":"II", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly","classid":"59f4b7cf41618f04000a0a2f", "notifCount":0}]}}
+app.post('/api/students', function(req, res){
+	var reciever = req.body.reciever;
+	var params = req.body.params;
+	var classId = params.classId;
+	var student = params.student;
+	var returnjson = "{ \"studentid\":[";
+	Student.addStudent(student, function(returnObj){
+		console.log("added student : " + returnObj );
+	});
 });
 
 //Get parents

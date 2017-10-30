@@ -66,12 +66,18 @@ module.exports.getStudentNotifsById = function(studentSrch , callback){
 }
 */
 
-//add student
+//add students
 module.exports.addStudents = function(studentinst,callback){
   Student.create(studentinst, callback);
 }
 
-// Add School
+//add student
+module.exports.addStudent = function(studentinst,callback){
+  Student.create(studentinst, callback);
+}
+
+
+// Add School - when single packet
 module.exports.addStudents = (students, callback) => {
     var count = students.length;
     var counter = 1;
@@ -99,7 +105,7 @@ module.exports.addStudents = (students, callback) => {
     });
 }
 
-module.exports.addApplicationToStudent = function(studentId, applicationId, callback){
+ module.exports.addApplicationToStudent = function(studentId, applicationId, callback){
  console.log("studentid : " + studentId + " : " + applicationId);
     Student.findOneAndUpdate({"_id":studentId}, {$push: {applications: mongoose.Types.ObjectId(applicationId)}},{new: true}, callback);
 }
