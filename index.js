@@ -264,7 +264,7 @@ app.get('/api/students', function(req, res){
 // Test: {"classId":"-----" , "schoolId": "------", "students" : [{"name":"XI", "section":"E", "schoolId": "school9927"}, {"name":"VI", "section":"A","schoolId": "school9927"}, {"name":"IV", "section":"B","schoolId": "school9927"}]}
 app.post('/api/students', function(req, res){
     console.log("putting students");
-	console.log("got params : " + req.body);
+	console.log("got params : " + req.body.reciever);
 	var reciever = req.body.reciever;
     var params = req.body.params;
 	var students = params.students;
