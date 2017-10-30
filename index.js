@@ -314,7 +314,7 @@ app.post('/api/students', function(req, res){
         console.log("student created : " + student._id);
 		Class.addStudent(classId, student._id, function(err,resultObj){
                 if(err){throw err;}
-				console.log("after class.addstudnts" + resultObj);
+				console.log("after class.addstudnts" + resultObj._id);
 				res.json(JSON.parse(student) );    
                 }); 
 	});
