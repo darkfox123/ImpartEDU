@@ -271,12 +271,12 @@ app.post('/api/students', function(req, res){
     //var classId = "#";
     var returnjson = "{ \"studentids\":[";
     var counter = 1;
-			//while(counter <= 3){  //students.length
+			while(counter <= students.length){  //students.length
 		Student.addStudents(students, function(returnobj){
                             returnjson += returnobj;
             console.log("student len : " + students.length);
 			console.log("resturnjson without counter : " + returnjson);
-            //if(counter == students.length){
+            if(counter == students.length){
                 var resultObj = JSON.parse(returnjson);
                 var studentids = resultObj.studentids;
                 //studentids.forEach(function(student) {   
@@ -285,12 +285,12 @@ app.post('/api/students', function(req, res){
                 console.log("after class.addstudnts" + resultObj);
 				res.json(resultObj);    
                 }); 
-				//});				
-           // }
+				});				
+            }
             console.log("incrementing counter to : " + counter);
             counter++;
         });
-		//}
+		}
 });
 
 //Get parents
