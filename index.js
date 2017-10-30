@@ -311,7 +311,11 @@ app.post('/api/students', function(req, res){
 	var returnjson = "{ \"studentid\":[";
 	Student.addStudent(student, function(err, student){
         if(err){throw err;}
-        console.log("student created : " + student);
+        console.log("student created : " + student._id);
+		Class.addStudents(classId, student._id, function(){
+                console.log("after class.addstudnts" + resultObj);
+				res.json(resultObj);    
+                }); 
 	});
 });
 
