@@ -307,7 +307,7 @@ app.post('/api/students', function(req, res){
 	var params = req.body.params;
 	var classId = params.classId;
 	var student = params.student;
-	console.log("adding student : " + student);
+	console.log("adding student : " + req.body.string);
 	var returnjson = "{ \"studentid\":[";
 	Student.addStudent(student, function(err, student){
         if(err){throw err;}
