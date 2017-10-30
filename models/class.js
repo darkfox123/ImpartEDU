@@ -71,9 +71,8 @@ module.exports.addApplicationToClass = function(classId, applicationId, callback
 }
 
 module.exports.addStudent = function( classId, studentid, callback) {
-  console.log("got classid scnd fn : " + classId);    
-    var query = {"_id": classId};  
-	Class.findOneAndUpdate(query, {$push: {students: mongoose.Types.ObjectId(student)}},{new: true}, callback);
+  console.log("got classid classadd fn : " + classId);    
+	Class.findOneAndUpdate({"_id":classId}, {$push: {students: mongoose.Types.ObjectId(studentid)}},{new: true}, callback);
 }
 
 /* When bulk class edit will be enabled
