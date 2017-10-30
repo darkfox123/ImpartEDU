@@ -315,7 +315,7 @@ app.post('/api/students', function(req, res){
 		Class.addStudent(classId, student._id, function(err,resultObj){
                 if(err){throw err;}
 				console.log("after class.addstudnts" + resultObj._id);
-				res.json(JSON.parse("{" + "\"name\":\"" + student.name + "\"}"));    
+				res.json(JSON.parse("{" + "\"name\":\"" + student.name + "\",\"rollno\":\"" + student.rollno + "\",\"id\":\"" + student._id + "\"}"));    
                 }); 
 	});
 });
