@@ -70,6 +70,13 @@ module.exports.addApplicationToClass = function(classId, applicationId, callback
     Class.findOneAndUpdate({"_id":classId}, {$push: {application: mongoose.Types.ObjectId(applicationId)}},{new: true}, callback);
 }
 
+module.exports.addStudent = function( classId, studentid, callback) {
+  console.log("got classid scnd fn : " + classId);    
+    var query = {"_id": classId};  
+	Class.findOneAndUpdate(query, {$push: {students: mongoose.Types.ObjectId(student)}},{new: true}, callback);
+}
+
+/* When bulk class edit will be enabled
 module.exports.addStudents = function( classId, studentids, callback) {
   console.log("got classid scnd fn : " + classId); 
   var counter = 1;
@@ -81,6 +88,7 @@ module.exports.addStudents = function( classId, studentids, callback) {
     //});
    });
 }
+*/
 
 function getClass(teacherid, schoolId, classname, section){
    var query = Class.findOneAndUpdate({schoolId:schoolId,name:classname,section:section}, {$push: {classTeacher: mongoose.Types.ObjectId(teacherid)}},{new: true});
