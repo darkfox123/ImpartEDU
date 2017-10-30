@@ -66,15 +66,11 @@ module.exports.getStudentNotifsById = function(studentSrch , callback){
 }
 */
 
-//add students
-module.exports.addStudents = function(studentinst,callback){
-  Student.create(studentinst, callback);
-}
 
 //add student
-module.exports.addStudent = function(studentinst,callback){
+module.exports.addStudent = function(student,callback){
   console.log("trying to add students");
-  Student.create(studentinst, callback);
+  Student.create(student, callback);
 }
 
 

@@ -309,8 +309,9 @@ app.post('/api/students', function(req, res){
 	var student = params.student;
 	console.log("adding student : " + student);
 	var returnjson = "{ \"studentid\":[";
-	Student.addStudent(student, function(returnObj){
-		console.log("added student : " + returnObj );
+	Student.addStudent(student, function(err, student){
+        if(err){throw err;}
+        console.log("student created : " + student);
 	});
 });
 
