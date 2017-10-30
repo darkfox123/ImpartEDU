@@ -312,9 +312,9 @@ app.post('/api/students', function(req, res){
 	Student.addStudent(student, function(err, student){
         if(err){throw err;}
         console.log("student created : " + student._id);
-		Class.addStudent(classId, student._id, function(){
+		Class.addStudent(classId, student._id, function(resultObj){
                 console.log("after class.addstudnts" + resultObj);
-				res.json(resultObj);    
+				res.json(student._id);    
                 }); 
 	});
 });
