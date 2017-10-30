@@ -279,7 +279,7 @@ app.post('/api/students', function(req, res){
             if(counter == students.length){
                 var resultObj = JSON.parse(returnjson);
                 var studentids = resultObj.studentids;
-                //studentids.forEach(function(student) {   
+                studentids.forEach(function(student) {   
 				console.log("result length : " + studentids.length);
                 Class.addStudents(classId, studentids, function(){
                 console.log("after class.addstudnts" + resultObj);
