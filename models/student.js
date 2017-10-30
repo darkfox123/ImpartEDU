@@ -73,6 +73,7 @@ module.exports.addStudents = function(studentinst,callback){
 
 //add student
 module.exports.addStudent = function(studentinst,callback){
+  console.log("trying to add students");
   Student.create(studentinst, callback);
 }
 
