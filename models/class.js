@@ -71,7 +71,7 @@ module.exports.addApplicationToClass = function(classId, applicationId, callback
 }
 
 module.exports.addStudent = function( classId, studentid, callback) {
-  console.log("got classid classadd fn : " + classId);    
+  console.log("got classid classadd fn : " + classId + " : " + studentid);    
 	Class.findOneAndUpdate({"_id":classId}, {$push: {students: mongoose.Types.ObjectId(studentid)}},{new: true}, callback);
 }
 
