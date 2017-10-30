@@ -260,12 +260,14 @@ app.get('/api/students', function(req, res){
     });
 });
 
-//Add classes (add school prerequisite){"classId":"59cd50a41e3b90c41fc05fbc" , "students" : [{"name":"Shibu", "rollno":"121", "className":"IV", "section":"B" , "schoolName":"St. stephens", "city":"Bareilly", "schoolId": "school9927"}, {"name":"Rupa", "rollno":"122","className":"IV", "section":"B" , "schoolName":"St. stephens", "city":"Bareilly", "schoolId": "school9927"}, {"name":"Sona", "rollno":"123", "className":"IV", "section":"B" , "schoolName":"St. stephens", "city":"Bareilly", "schoolId": "school9927"}]}
+//Add classes (add school prerequisite){ "reciever" : "add", "params": {"classId":"59f4b7cf41618f04000a0a2f" , "students" :[{"name":" Yukti", "rollno":"120", "className":"II", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly","classid":"59f4b7cf41618f04000a0a2f", "notifCount":0}]}}
 // Test: {"classId":"-----" , "schoolId": "------", "students" : [{"name":"XI", "section":"E", "schoolId": "school9927"}, {"name":"VI", "section":"A","schoolId": "school9927"}, {"name":"IV", "section":"B","schoolId": "school9927"}]}
 app.post('/api/students', function(req, res){
     console.log("putting students");
-	var classId = req.body.classId;
-    var students = req.body.students;
+	console.log("got params : " + req.body);
+	var reciever = req.body.reciever;
+    var params = req.body.params;
+	var students = params.students;
     //var classId = "#";
     var returnjson = "{ \"studentids\":[";
     var counter = 1;
