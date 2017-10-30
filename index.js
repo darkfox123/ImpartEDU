@@ -273,12 +273,13 @@ app.post('/api/students', function(req, res){
     var counter = 1;
 			console.log("counter : " + counter + " : student.len : " + students.length);
 			while(counter <= students.length){  //students.length
+		counter++;
 		console.log("entering add students");
 		Student.addStudents(students, function(returnobj){
                             returnjson += returnobj;
             console.log("student len : " + students.length);
 			console.log("resturnjson without counter : " + returnjson);
-            if(counter == students.length){
+            if(counter-1 == students.length){
                 var resultObj = JSON.parse(returnjson);
                 var studentids = resultObj.studentids;
                 /*
