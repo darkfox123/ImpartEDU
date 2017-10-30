@@ -290,7 +290,8 @@ app.post('/api/students', function(req, res){
                 console.log("after class.addstudnts" + resultObj);
 				res.json(resultObj);    
                 }); 
-				});				
+				});	
+console.log("skipping stud");				
             }
             console.log("incrementing counter to : " + counter);
             counter++;
