@@ -38,7 +38,7 @@ module.exports.addNotifToClass = function(className, section, city, schoolName, 
       console.log("found students : " + students.length);
       len = students.length;
      students.forEach(function(student){
-         console.log("cool till loop");
+         //console.log("cool till loop");
          Student.findOneAndUpdate({"_id":student._id}, {$push: {notifications: mongoose.Types.ObjectId(notifmapId)}},{new: true}, callback);
      });
  });

@@ -466,6 +466,7 @@ app.post('/api/notifications', function(req, res){
         if(err){throw err;}
         console.log("notif created : " + notif);
         createdNotif = notif;
+		console.log("sending json back");
 		res.json(createdNotif);
         Notifmap.addNotifMap(notif._id, function(err, notifmap){
             if(err){throw err;}
