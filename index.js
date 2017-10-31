@@ -307,6 +307,7 @@ app.post('/api/students', function(req, res){
 	var params = req.body.params;
 	var classId = params.classId;
 	var student = params.student;
+	if(reciever == "add"){
 	console.log("adding student : " + req.body.string);
 	var returnjson = "{ \"studentid\":[";
 	Student.addStudent(student, function(err, student){
@@ -318,6 +319,19 @@ app.post('/api/students', function(req, res){
 				res.json(JSON.parse("{" + "\"name\":\"" + student.name + "\",\"rollno\":\"" + student.rollno + "\",\"id\":\"" + student._id + "\"}"));    
                 }); 
 	});
+	}
+	else if(reciever == "remove"){
+		Student.removeStudent(student, function(err, student){
+        if(err){throw err;}
+        console.log("student created : " + student.string);
+		Class.removeStudent(classId, student._id, function(err,resultObj){
+                if(err){throw err;}
+				
+				console.log("after class.removestudnts" + resultObj._id);
+				res.json(JSON.parse("{" + "\"name\":\"" + student.name + "\",\"rollno\":\"" + student.rollno + "\",\"id\":\"" + student._id + "\"}"));    
+                }); 
+	});
+	}
 });
 
 //Get parents

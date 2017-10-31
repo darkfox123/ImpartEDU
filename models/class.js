@@ -75,6 +75,11 @@ module.exports.addStudent = function( classId, studentid, callback) {
 	Class.findOneAndUpdate({"_id":classId}, {$push: {students: mongoose.Types.ObjectId(studentid)}},{new: true}, callback);
 }
 
+module.exports.removeStudent = function( classId, studentid, callback) {
+  console.log("got classid classadd fn : " + classId + " : " + studentid);    
+	Class.findOneAndUpdate({"_id":classId}, {$pull: {students: mongoose.Types.ObjectId(studentid)}},{new: true}, callback);
+}
+
 /* When bulk class edit will be enabled
 module.exports.addStudents = function( classId, studentids, callback) {
   console.log("got classid scnd fn : " + classId); 
