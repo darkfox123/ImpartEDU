@@ -432,6 +432,17 @@ app.get('/api/notifications', function(req, res){
     });
 });
 
+//Get notifications
+app.get('/api/notifmaps', function(req, res){
+    console.log("getting notifmaps");
+	Notifmap.getNotifMap(function(err, notifmaps){
+       if(err){
+           throw err;
+       } 
+        res.json(notifmaps);
+    });
+});
+
 
 //Add Notif
 //input Class : {"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"6", "notification":{"title":"Sample Notif", "subject":"Hello There!"}}}
