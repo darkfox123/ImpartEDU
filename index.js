@@ -466,16 +466,18 @@ app.post('/api/notifications', function(req, res){
         if(err){throw err;}
         console.log("notif created : " + notif);
         createdNotif = notif;
+		res.json(createdNotif);
         Notifmap.addNotifMap(notif._id, function(err, notifmap){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
             Student.addNotifToClass(className, section, city, schoolName,notifmap._id, function(err, students){ if(err){throw err;}
-            console.log("updated  : " + count + " : " + counter);
-            if(counter == count)
+            //console.log("updated  : " + count + " : " + counter);
+/*           
+		   if(counter == count)
 			{
-				console.log("exit here"); res.json(createdNotif);
+				console.log("exit here"); 
 				}
-            counter++;                                                                       
+            counter++;*/                                                                       
             }); 
         });
     }); 
