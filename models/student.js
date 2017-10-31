@@ -32,7 +32,8 @@ module.exports.removeStudent = function(classId, studentid, callback){
 
 module.exports.addNotifToClass = function(className, section, city, schoolName, notifmapId, callback){
  var len = 0;
-  console.log("searching for : " + className + " : " + section + " : " + schoolName + " : " + city);  Student.find({className:className,section:section,city:city,schoolName:schoolName},function(err,students){
+  console.log("searching for : " + className + " : " + section + " : " + schoolName + " : " + city);  
+  Student.find({"className":className,"section":section,"city":city,"schoolName":schoolName},function(err,students){
      if(err){throw err;}
       console.log("found students : " + students.length);
       len = students.length;
