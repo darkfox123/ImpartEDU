@@ -450,7 +450,8 @@ app.get('/api/notifmaps', function(req, res){
 //load Student ip: {"reciever":"load", "params":{"studentid":"59d1e5b1f02d8f0400014ffc"}}
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
 app.post('/api/notifications', function(req, res){
-    var reciever = req.body.reciever;
+    console.log("api called notif");
+	var reciever = req.body.reciever;
     var params = req.body.params;
     var createdNotif = null;
     if(reciever == "class"){
