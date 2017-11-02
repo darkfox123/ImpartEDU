@@ -667,7 +667,8 @@ app.post('/api/attendance', function(req, res){
             Attendance.addAttendance(attendanceInst, function(err, attendanceRet){
                 var attendanceId = attendanceRet._id;
                 Student.addAttendanceById(studentId, attendanceId, function(student){
-                    if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
+                    cosole.log("added to stud : " + student);
+					if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
                     counter++;
                 });
             });
