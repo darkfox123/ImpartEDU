@@ -631,6 +631,7 @@ app.post('/api/attendance', function(req, res){
             if(err){throw err;}     
 console.log("student found : " + studentInst);			
             var attendancelist = studentInst.attendance;
+			console.log("attendancelist : " + attendancelist);
             attendancelist.forEach(function(attendanceId){
                 console.log("attendanceid  : " + attendanceId);
                 Attendance.getAttendanceById(attendanceId, function(err, attendance){
