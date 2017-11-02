@@ -451,10 +451,12 @@ app.get('/api/notifmaps', function(req, res){
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
 app.post('/api/notifications', function(req, res){
     console.log("api called notif");
+	
 	var reciever = req.body.reciever;
     var params = req.body.params;
     var createdNotif = null;
-    if(reciever == "class"){
+    
+	if(reciever == "class"){
         var className = params.class;
         var section = params.section;
         var schoolName = params.schoolName;
@@ -712,6 +714,8 @@ app.post('/api/attendance', function(req, res){
     }
 });
 
+
+
 //resorce ip: /*{"reciever":"upload","params":{"classid":"5910bc227803461e804c08f7","value":"iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAIAAAD6wG44AAAAA3NCSVQICAjb4U/gAAAEEElEQVR4nO2dzW7bRhSF7x1SgpqFl/4TjaxaIKuijmt75SfIomu/h9+raF/CMqB0n6xaiIic7uoWaFzy3i7kFAWacoYxSdEH59t6eEacTyQtje6MzmYzaeTs7Oz09LS5zb9ZLBY3Nzfp7Znfa35IP5I8RSgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGBwKBoeCwaFgcPL5fN7wZ3cXkbIs0xNVtTmT+UPm69XVVXPr6+vrxWKR3sH5+Xn69Bbz+87Pm1tv3kGqmt5BK5jfdz6fweBQMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBEBLedx9jMfqTD/L7ztbl81N0/Y/4yvTyS+X3n8woGz+czGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGJy87fxGM5vZj24zmf+YfL28vGw+pizL1WqV2IG7Hx0dpRc4M7/v/EiFv4isVqtWFeZtT6Ap33PR+/BV8BdZ5iIi7j4p8rzI0vPXe+9u99aJjTf54UiDh93fD5//Nq+Dff7r/xRdjk9CfqQAfLuo3ldB8i8nk1eZycNtZy23a7ltkbIr2XGL01zL7Tv9NZidWH3wx0HW1910IMb9T5aHYNM6mGvkMuoWdasyE88yG/UFkMKoBVuw4Ja5qw890JmJaZDw58D9ds6oBasH18pFB76CXU0kqNQy+Burc0YtmDweCgaHgsGhYHAoGBwKBoeCwaFgcCgYnI4F9zfTiUHf4/OJ+uCLi4vmY7ZdIWnrb96vX6bO93WCq6mHg+Xe7uv9aONtj08kP1IALtvfH9eWuz8t95fpgY9nI9h+qP76sY423vb4RPL5DAaHgsGhYHAoGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgYnInj4+cunxfjHJ14+Kn1ugJyQb3df3El8WrZ7dnZ2ZvNnKS23Oj6R/MgG0TL4/OV/sOzVZPLdZMhrfTMffLI+Pn5/Em287fGJ5PMZDA4Fg0PB4FAwOBQMDgWDQ8HgjHsNCq3EZvbW7PvKwsPn4KIoDg8P0zPKsmz1RUFRFPP953X2obib1ypPfRmlUQuuZTp1qd5UH94E/bgQ2t75/sss/v3DP1TL+uebXxIbP+R/+3WVWbBpbhZdCG3kjPoWHaSycB9cwsf1qtrWcbTlYa1HlbwOolWd3ffa3QCMWrB6bhpcgoWBB9osSDARnw7bb/eMWrCIbe7M6gO/zqAuriLytO/PMnrB5LFQMDgUDM7464OZz/pg8v9QMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBQMDgUDE7HG0TL5nfFvW2AzPy2+R1vEO3ubU+A+b3md3yLHuZ3y8xPz+czGBwKBoeCwaFgcCgYnL8BuYGEJNco/uMAAAAASUVORK5CYII=","title":"Sample Image"}}*/
 // 2). LOad ip : {"reciever":"load","params":{"classid":"5910bc227803461e804c08f7"}}
 // o/p : {"resource":[{"date":"Tue May 16 2017 19:34:46 GMT+0530 (India Standard Time)","value":"iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAIAAAD6wG44AAAAA3NCSVQICAjb4U/gAAAEEElEQVR4nO2dzW7bRhSF7x1SgpqFl/4TjaxaIKuijmt75SfIomu/h9+raF/CMqB0n6xaiIic7uoWaFzy3i7kFAWacoYxSdEH59t6eEacTyQtje6MzmYzaeTs7Oz09LS5zb9ZLBY3Nzfp7Znfa35IP5I8RSgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGBwKBoeCwaFgcPL5fN7wZ3cXkbIs0xNVtTmT+UPm69XVVXPr6+vrxWKR3sH5+Xn69Bbz+87Pm1tv3kGqmt5BK5jfdz6fweBQMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBEBLedx9jMfqTD/L7ztbl81N0/Y/4yvTyS+X3n8woGz+czGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgaHgsGhYHAoGJy87fxGM5vZj24zmf+YfL28vGw+pizL1WqV2IG7Hx0dpRc4M7/v/EiFv4isVqtWFeZtT6Ap33PR+/BV8BdZ5iIi7j4p8rzI0vPXe+9u99aJjTf54UiDh93fD5//Nq+Dff7r/xRdjk9CfqQAfLuo3ldB8i8nk1eZycNtZy23a7ltkbIr2XGL01zL7Tv9NZidWH3wx0HW1910IMb9T5aHYNM6mGvkMuoWdasyE88yG/UFkMKoBVuw4Ja5qw890JmJaZDw58D9ds6oBasH18pFB76CXU0kqNQy+Burc0YtmDweCgaHgsGhYHAoGBwKBoeCwaFgcCgYnI4F9zfTiUHf4/OJ+uCLi4vmY7ZdIWnrb96vX6bO93WCq6mHg+Xe7uv9aONtj08kP1IALtvfH9eWuz8t95fpgY9nI9h+qP76sY423vb4RPL5DAaHgsGhYHAoGBwKBoeCwaFgcCgYHAoGh4LBoWBwKBgcCgYnInj4+cunxfjHJ14+Kn1ugJyQb3df3El8WrZ7dnZ2ZvNnKS23Oj6R/MgG0TL4/OV/sOzVZPLdZMhrfTMffLI+Pn5/Em287fGJ5PMZDA4Fg0PB4FAwOBQMDgWDQ8HgjHsNCq3EZvbW7PvKwsPn4KIoDg8P0zPKsmz1RUFRFPP953X2obib1ypPfRmlUQuuZTp1qd5UH94E/bgQ2t75/sss/v3DP1TL+uebXxIbP+R/+3WVWbBpbhZdCG3kjPoWHaSycB9cwsf1qtrWcbTlYa1HlbwOolWd3ffa3QCMWrB6bhpcgoWBB9osSDARnw7bb/eMWrCIbe7M6gO/zqAuriLytO/PMnrB5LFQMDgUDM7464OZz/pg8v9QMDgUDA4Fg0PB4FAwOBQMDgWDQ8HgUDA4FAwOBYNDweBQMDgUDE7HG0TL5nfFvW2AzPy2+R1vEO3ubU+A+b3md3yLHuZ3y8xPz+czGBwKBoeCwaFgcCgYnL8BuYGEJNco/uMAAAAASUVORK5CYII=","title":"Sample Image"}]}
@@ -755,6 +759,17 @@ app.post('/api/resource', function(req, res){
             });
         });
     }
+});
+
+//Get notifications
+app.get('/api/resource', function(req, res){
+    console.log("getting notifications");
+	Notification.getNotification(function(err, notifications){
+       if(err){
+           throw err;
+       } 
+        res.json(notifications);
+    });
 });
 
 // Application recieve : {"reciever":"recieve","params":{"classid":"5910bc227803461e804c08f6","studentid":"59159716307f0e1cf052b990","date":"16-06-2017","title":"For Leave of 3 dayz","subject":"My sample leave application yo"}}
