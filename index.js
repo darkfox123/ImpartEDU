@@ -605,7 +605,7 @@ app.post('/api/attendance', function(req, res){
 				var attendanceId = attendanceRet._id;
                 Student.getStudentById(studentId, function(err,student){
                 if(err){console.log("error hoya pappe");}; 
-				cosole.log("added to stud : " + student);
+				console.log("added to stud : " + student);
 				});
 				
 				/*
