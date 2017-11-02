@@ -51,12 +51,7 @@ module.exports.addNotifToStudent = function(name, rollno, className, section, ci
 module.exports.addAttendanceById = function(studentId, attendanceId, callback){
  console.log("studentid : " + studentId + " : " + attendanceId);
   
-	Student.findOneAndUpdate({"_id":studentId}, {$push: {attendance: mongoose.Types.ObjectId(attendanceId)}},{new: true}, function(err, person) {
-  if (err) {
-    console.log('got an error');
-	}
-	console.log("mil gaya ++++++ " + person);
-  });
+	Student.findOneAndUpdate({"_id":studentId}, {$push: {attendance: mongoose.Types.ObjectId(attendanceId)}},{new: true}, callback);
 }
 
 
