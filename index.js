@@ -603,9 +603,13 @@ app.post('/api/attendance', function(req, res){
                  if(err){throw err;} 
 				console.log("debug : 2");
 				var attendanceId = attendanceRet._id;
-                Class.getClassByID(classId, function(err,classInst){
+                Student.getStudentById(studentId, function(err,classInst){
                      if(err){throw err;} 
-					console.log("got class : " + classInst);
+					console.log("got stud : " + classInst);
+                });
+				Class.getClassByID(classId, function(err,classInst){
+                     if(err){throw err;} 
+					console.log("got class : " + classInst.students);
                 });
 				
 				/*
