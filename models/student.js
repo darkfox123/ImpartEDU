@@ -55,6 +55,7 @@ module.exports.addAttendanceById = function(studentId, attendanceId, callback){
   if (err) {
     console.log('got an error');
 	}
+	console.log("mil gaya ++++++");
   });
 }
 
