@@ -50,7 +50,7 @@ module.exports.addNotifToStudent = function(name, rollno, className, section, ci
 
 module.exports.addAttendanceById = function(studentId, attendanceId, callback){
  console.log("studentid : " + studentId + " : " + attendanceId);
-    Student.findOne({"_id":studentId} , function(err, person) {
+    Student.find({"_id":studentId} , function(err, person) {
   if (err) {
     console.log('got an error in find');
   }
