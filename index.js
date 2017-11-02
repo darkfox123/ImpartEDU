@@ -618,7 +618,6 @@ app.post('/api/attendance', function(req, res){
                      if(err){throw err;} 
 					console.log("added to stud : " + counter + " : " + count);
 					if(counter == count){
-						
 						res.json(JSON.parse("{\"success\":\"true\"}"));}
                     counter++;
                 });
