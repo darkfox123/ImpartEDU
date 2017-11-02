@@ -588,74 +588,8 @@ app.post('/api/notifications', function(req, res){
 // 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
 // 3) load: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e3"}}
 app.post('/api/attendance', function(req, res){
-    var reciever = req.body.reciever;
-    var params = req.body.params;
-    if(reciever == "post"){
-        var classId = params.classid;
-        var attendanceArr = params.attendanceArr;
-        var count = attendanceArr.length;
-        var counter = 1;
-        attendanceArr.forEach(function(attendanceInst){
-            var studentId = attendanceInst.studentid;
-            Attendance.addAttendance(attendanceInst, function(err, attendanceRet){
-                var attendanceId = attendanceRet._id;
-				console.log("got attendanceid");
-                Student.addAttendanceById(studentId, attendanceId, function(student){
-                    if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
-                    counter++;
-                });
-            });
-        });
-    }
-    else if(reciever == "get"){
-        var studentId = params.studentid;
-        var date = params.date;
-        Student.getStudentById(studentId, function(err, studentInst){
-            if(err){throw err;}
-console.log("studentInst : " + studentInst);            
-            var attendancelist = studentInst.attendance;
-            attendancelist.forEach(function(attendanceId){
-                console.log("attendanceid  : " + attendanceId);
-                Attendance.getAttendanceById(attendanceId, function(err, attendance){
-                    if(err){throw err;}
-                    if(attendance.date == date){
-                    var response = "{" + "\"attendance\":\"" + attendance.attendance + "\"}";
-                        res.json(JSON.parse(response));
-                    }
-                })
-            });
-        });
-    }
-    else if(reciever == "load"){
-        var studentId = params.studentid;
-        var result = "{\"attendance\":["
-        Student.getStudentById(studentId, function(err, studentInst){
-            if(err){throw err;}            
-            var attendancelist = studentInst.attendance;
-            var len = attendancelist.length;
-            var counter = 1;
-            attendancelist.forEach(function(attendanceId){
-                console.log("attendanceid  : " + attendanceId);
-                Attendance.getAttendanceById(attendanceId, function(err, attendance){
-                    if(err){throw err;}
-                    if(counter == len){
-                        result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"}]}"
-                        console.log("result : " + result);
-                        res.json(JSON.parse(result));
-                    }else
-                    {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
-                    counter++;
-                });
-            });
-        });
-    }
-});
-
-//1) input : {"reciever":"post", "params":{"classid":"5910bc227803461e804c08f7"(IV-B), "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e3","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e2","date":"14/05/2017","attendance":"Absent"}]}
-// 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
-// 3) load: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e3"}}
-app.post('/api/attendance', function(req, res){
-    var reciever = req.body.reciever;
+    console.log();
+	var reciever = req.body.reciever;
     var params = req.body.params;
     if(reciever == "post"){
         var classId = params.classid;
