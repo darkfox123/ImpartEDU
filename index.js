@@ -664,8 +664,10 @@ app.post('/api/attendance', function(req, res){
         var counter = 1;
         attendanceArr.forEach(function(attendanceInst){
             var studentId = attendanceInst.studentid;
+			console.log("debug : 1");
             Attendance.addAttendance(attendanceInst, function(err, attendanceRet){
                  if(err){throw err;} 
+				console.log("debug : 2");
 				var attendanceId = attendanceRet._id;
                 Student.addAttendanceById(studentId, attendanceId, function(err,student){
                      if(err){throw err;} 
