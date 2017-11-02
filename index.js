@@ -605,7 +605,7 @@ app.post('/api/attendance', function(req, res){
 				var attendanceId = attendanceRet._id;
                 Class.getClassByID(classId, function(err,classInst){
                      if(err){throw err;} 
-					console.log("got class : " + classnst);
+					console.log("got class : " + classInst);
                 });
 				
 				/*
