@@ -764,6 +764,17 @@ app.post('/api/resource', function(req, res){
 });
 
 //Get notifications
+app.get('/api/attendance', function(req, res){
+    console.log("getting attendance");
+	Attendance.getAttendance(function(err, attendance){
+       if(err){
+           throw err;
+       } 
+        res.json(attendance);
+    });
+});
+
+//Get notifications
 app.get('/api/resource', function(req, res){
     console.log("getting notifications");
 	Notification.getNotification(function(err, notifications){
