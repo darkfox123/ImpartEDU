@@ -599,6 +599,7 @@ app.post('/api/attendance', function(req, res){
             var studentId = attendanceInst.studentid;
             Attendance.addAttendance(attendanceInst, function(err, attendanceRet){
                 var attendanceId = attendanceRet._id;
+				console.log("got attendanceid");
                 Student.addAttendanceById(studentId, attendanceId, function(student){
                     if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
                     counter++;
@@ -727,7 +728,7 @@ app.post('/api/resource', function(req, res){
         Resource.addResource(params, function(err, resource){
            if(err) throw err;
             console.log("rsc added : " + resource);
-            var resourceId = resource._id;
+			var resourceId = resource._id;
             Class.addResourceToClass(classId, resourceId, function(err, classInst){
                 if(err) throw err;
                 console.log("updated class : " + classInst);
