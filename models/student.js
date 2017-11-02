@@ -53,6 +53,7 @@ module.exports.addAttendanceById = function(studentId, attendanceId, callback){
     Student.findOne({"_id":studentId} , function(err, person) {
   if (err) {
     console.log('got an error in find');
+  }
 	});
 	/*
 	Student.findOneAndUpdate({"_id":studentId}, {$push: {attendance: mongoose.Types.ObjectId(attendanceId)}},{new: true}, function(err, person) {
