@@ -603,7 +603,8 @@ app.post('/api/attendance', function(req, res){
                  if(err){throw err;} 
 				console.log("debug : 2");
 				var attendanceId = attendanceRet._id;
-                Student.getStudentById(studentId, function(err,classInst){
+                /*
+				Student.getStudentById(studentId, function(err,classInst){
                      if(err){throw err;} 
 					console.log("got stud : " + classInst);
                 });
@@ -611,15 +612,14 @@ app.post('/api/attendance', function(req, res){
                      if(err){throw err;} 
 					console.log("got class : " + classInst.students);
                 });
+				*/
 				
-				/*
 				Student.addAttendanceById(studentId, attendanceId, function(err,student){
                      if(err){throw err;} 
 					cosole.log("added to stud : " + student);
 					if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
                     counter++;
                 });
-				*/
             });
         });
     }
