@@ -603,10 +603,10 @@ app.post('/api/attendance', function(req, res){
                  if(err){throw err;} 
 				console.log("debug : 2");
 				var attendanceId = attendanceRet._id;
-                Student.getStudentById(studentId, function(err,student){
-                if(err){console.log("error hoya pappe");}; 
-				console.log("added to stud : " + student);
-				});
+                Class.getClassByID(classId, function(err,classInst){
+                     if(err){throw err;} 
+					cosole.log("got class : " + classnst);
+                });
 				
 				/*
 				Student.addAttendanceById(studentId, attendanceId, function(err,student){
