@@ -616,7 +616,7 @@ app.post('/api/attendance', function(req, res){
 				
 				Student.addAttendanceById(studentId, attendanceId, function(err,student){
                      if(err){throw err;} 
-					console.log("added to stud : " + student);
+					console.log("added to stud : " + counter + " : " + count);
 					if(counter == count){res.json(JSON.parse("{\"success\":\"true\"}"));}
                     counter++;
                 });
