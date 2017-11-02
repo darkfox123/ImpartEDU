@@ -60,7 +60,7 @@ module.exports.getStudentById = function(studentSrch , callback){
  console.log("student srch : " + studentSrch);
     Student.find({"_id":studentSrch} , function(err, student){
         if(err){throw err;}
-	console.log("student inside : " + student);});
+	console.log("student inside : " + student.attendance);});
 }
 
 /*
