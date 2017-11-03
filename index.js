@@ -632,7 +632,10 @@ app.post('/api/attendance', function(req, res){
             if(err){throw err;}     
 			var StuStr = studentInst.toString();
 			var attendancePos = StuStr.indexOf("attendance");
-			console.log("attendancePos : " + attendancePos);	
+			var notifPos = StuStr.indexOf("notifications");
+			console.log("attendancePos : " + notifPos);
+var attendanceSub = StuStr.substr(attendancePos + 10, notifPos);
+			console.log("attendanceSub : " + attendanceSub);
 			
 			
 console.log("student found : " + studentInst);		
