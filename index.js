@@ -616,8 +616,8 @@ app.post('/api/attendance', function(req, res){
 				
 				Student.addAttendanceById(studentId, attendanceId, function(err,student){
                      if(err){throw err;} 
-					var studentObj =JSON.parse(student);
-					console.log("added to stud : " +studentObj);
+					//var studentObj =JSON.parse(student);
+					console.log("added to stud : " +student);
 					if(counter == count){
 						res.json(JSON.parse("{\"success\":\"true\"}"));}
                     counter++;
@@ -630,10 +630,10 @@ app.post('/api/attendance', function(req, res){
         var date = params.date;
         Student.getStudentById(studentId, function(err, studentInst){
             if(err){throw err;}     
-			var studentObj = JSON.parse(studentInst);
-console.log("student found : " + studentInst._id);			
-            var attendancelist = studentObj._id;
-			console.log("attendancelist : " + attendancelist);
+			//var studentObj = JSON.parse(studentInst);
+console.log("student found : " + studentInst);			
+           // var attendancelist = studentObj._id;
+			//console.log("attendancelist : " + attendancelist);
             attendancelist.forEach(function(attendanceId){
                 console.log("attendanceid  : " + attendanceId);
                 Attendance.getAttendanceById(attendanceId, function(err, attendance){
