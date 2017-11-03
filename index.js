@@ -634,11 +634,11 @@ app.post('/api/attendance', function(req, res){
 			var attendancePos = StuStr.indexOf("attendance");
 			var notifPos = StuStr.indexOf("notifications");
 			console.log("attendancePos : " + notifPos);
-var attendanceSub = StuStr.substr(attendancePos + 10, notifPos);
+var attendanceSub = StuStr.substr(attendancePos + 10, notifPos - 13);
 			console.log("attendanceSub : " + attendanceSub);
 			
 			
-console.log("student found : " + studentInst);		
+//console.log("student found : " + studentInst);		
            // var attendancelist = studentObj._id;
 			//console.log("attendancelist : " + attendancelist);
 /*           
