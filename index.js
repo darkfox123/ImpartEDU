@@ -630,7 +630,7 @@ app.post('/api/attendance', function(req, res){
         var date = params.date;
         Student.getStudentById(studentId, function(err, studentInst){
             if(err){throw err;}     
-			var attendancePos = studentInst.indexOf("attendance");
+			var attendancePos = studentInst.substr(1, 10);
 			console.log("attendancePos : " + attendancePos);	
 			
 console.log("student found : " + studentInst);		
