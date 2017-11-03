@@ -634,8 +634,9 @@ app.post('/api/attendance', function(req, res){
 			var attendancePos = StuStr.indexOf("attendance");
 			var notifPos = StuStr.indexOf("notifications");
 			console.log("attendancePos : " + notifPos);
-var attendanceSub = StuStr.substr(attendancePos + 10, notifPos - 13);
-			console.log("attendanceSub : " + attendanceSub);
+var attendanceSub = StuStr.substr(attendancePos + 10, notifPos - 14);
+var attendancelist = JSON.parse(attendanceSub);
+			console.log("attendanceSub : " + attendancelist);
 			
 			
 //console.log("student found : " + studentInst);		
