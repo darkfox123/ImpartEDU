@@ -588,7 +588,7 @@ app.post('/api/notifications', function(req, res){
 // 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
 // 3) load: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e3"}}
 app.post('/api/attendance', function(req, res){
-    console.log();
+    console.log("adding attendance");
 	var reciever = req.body.reciever;
     var params = req.body.params;
     if(reciever == "post"){
@@ -937,7 +937,7 @@ Notification.remove({}, function(err) {
             }
         }
     );
-	
+*/	
 Attendance.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -946,6 +946,7 @@ Attendance.remove({}, function(err) {
             }
         }
     );
+	/*
 Resource.remove({}, function(err) {
             if (err) {
                 console.log(err)
