@@ -626,9 +626,14 @@ app.post('/api/attendance', function(req, res){
         });
     }
     else if(reciever == "get"){
-        var studentId = params.studentid;
+        var classid = params.classid;
         var date = params.date;
-        Student.getStudentById(studentId, function(err, studentInst){
+        Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
+            if(err){throw err;}
+			console.log("attendanceList : " + attendanceList);			
+			);
+		/*
+		Student.getStudentById(studentId, function(err, studentInst){
             if(err){throw err;}     
 			var StuStr = studentInst.toString();
 			var attendancePos = StuStr.indexOf("attendance");
@@ -637,7 +642,7 @@ app.post('/api/attendance', function(req, res){
 var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
 			console.log("attendanceSub : " + attendanceSub.substr(0,3));
 			var attendancelist = JSON.parse(attendanceSub);
-			
+			*/
 			
 //console.log("student found : " + studentInst);		
            // var attendancelist = studentObj._id;

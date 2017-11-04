@@ -20,3 +20,8 @@ module.exports.addAttendance = function(attendance,callback){
 module.exports.getAttendanceById = function(attendanceId , callback){
     Attendance.findOne({"_id":attendanceId} , callback);
 }
+
+module.exports.getAttendanceByDay = function(classid,date, callback){
+ console.log("class srch : " + classid);
+    Student.find({"classid":studentSrch, "date":date} ,callback);
+}
