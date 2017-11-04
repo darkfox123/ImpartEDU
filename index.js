@@ -920,6 +920,7 @@ Student.remove({}, function(err) {
             }
         }
     );
+	
 	/*
 Parent.remove({}, function(err) {
             if (err) {
