@@ -937,7 +937,7 @@ Notification.remove({}, function(err) {
             }
         }
     );
-*/	
+
 Attendance.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -946,7 +946,7 @@ Attendance.remove({}, function(err) {
             }
         }
     );
-	/*
+	
 Resource.remove({}, function(err) {
             if (err) {
                 console.log(err)
