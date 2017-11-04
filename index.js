@@ -630,7 +630,7 @@ app.post('/api/attendance', function(req, res){
         var date = params.date;
         Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
             if(err){throw err;}
-			console.log("attendanceList : " + attendanceList);			
+		console.log("attendanceList : " + attendanceList);	}		
 			);
 		/*
 		Student.getStudentById(studentId, function(err, studentInst){
@@ -658,8 +658,7 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
                     }
                 })
             });*/
-        });
-    }
+        }
     else if(reciever == "load"){
         var studentId = params.studentid;
         var result = "{\"attendance\":["
