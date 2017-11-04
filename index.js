@@ -911,7 +911,7 @@ Teacher.remove({}, function(err) {
             }
         }
     );
-	*/
+	
 Student.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -921,7 +921,6 @@ Student.remove({}, function(err) {
         }
     );
 	
-	/*
 Parent.remove({}, function(err) {
             if (err) {
                 console.log(err)
