@@ -4,6 +4,7 @@ var AttendanceSchema = new mongoose.Schema({
     studentId: String,
     attendance: String,
     date: String,
+	classid:String
 });
 
 var Attendance = module.exports = mongoose.model('Attendance', AttendanceSchema);

@@ -635,7 +635,7 @@ app.post('/api/attendance', function(req, res){
 			var notifPos = StuStr.indexOf("notifications");
 			console.log("attendancePos : " + notifPos);
 var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
-			console.log("attendanceSub : " + attendanceSub.substr(0,2));
+			console.log("attendanceSub : " + attendanceSub.substr(0,3));
 			var attendancelist = JSON.parse(attendanceSub);
 			
 			
@@ -911,6 +911,7 @@ Teacher.remove({}, function(err) {
             }
         }
     );
+	*/
 Student.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -919,7 +920,7 @@ Student.remove({}, function(err) {
             }
         }
     );
-	
+	/*
 Parent.remove({}, function(err) {
             if (err) {
                 console.log(err)

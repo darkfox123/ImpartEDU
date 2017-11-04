@@ -7,6 +7,7 @@ var classSchema = new mongoose.Schema({
     res:[{type: mongoose.Schema.Types.ObjectId, ref: 'Resource'}],
     application:[{type: mongoose.Schema.Types.ObjectId, ref: 'Studentapplication'}],
     classTeacher: {type: mongoose.Schema.Types.ObjectId, ref: 'Teacher'},
+	classAttendance:[{date:String, attendance: {type: mongoose.Schema.Types.ObjectId, ref: 'Attendance'}}],
     schoolName: String,
     schoolId:String,
     city: String
