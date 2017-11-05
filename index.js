@@ -628,7 +628,7 @@ app.post('/api/attendance', function(req, res){
     else if(reciever == "get"){
         var classid = params.classid;
         var date = params.date;
-		var resultjson = "{\"attendance\":\"[";
+		var resultjson = "{\"attendance\":[";
         Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
             if(err){throw err;}
 			 attendanceList.forEach(function(attendanceId){
@@ -636,7 +636,7 @@ app.post('/api/attendance', function(req, res){
 			 resultjson+="{\"studentid\":\"" + attendanceId.studentid + "\",\"value\":\"" + attendanceId.attendance + "\"},";
 			 })
 			 resultjson = resultjson.substr(0, resultjson.length - 1);
-		resultjson +="}";
+		resultjson +="]}";
 		console.log("resturnjson : " + resultjson);	
 res.json(JSON.parse(resultjson));		
 		});
