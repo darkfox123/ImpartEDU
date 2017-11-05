@@ -635,10 +635,10 @@ app.post('/api/attendance', function(req, res){
 			 console.log("attendanceid  : " + attendanceId.studentid + ":" + attendanceId.attendance);
 			 resultjson+="{\"studentid\":\"" + attendanceId.studentid + "\",\"value\":\"" + attendanceId.attendance + "\"},";
 			 })
-			 resturnjson = resturnjson.substr(0, returnjson.length - 1);
+			 resultjson = resultjson.substr(0, resultjson.length - 1);
 		resultjson +="}";
-		console.log("resturnjson : " + resturnjson);	
-res.json(JSON.parse(resturnjson));		
+		console.log("resturnjson : " + resultjson);	
+res.json(JSON.parse(resultjson));		
 		});
 		/*
 		Student.getStudentById(studentId, function(err, studentInst){
