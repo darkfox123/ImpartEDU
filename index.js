@@ -630,7 +630,7 @@ app.post('/api/attendance', function(req, res){
         var date = params.date;
         Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
             if(err){throw err;}
-			 attendancelist.forEach(function(attendanceId){
+			 attendanceList.forEach(function(attendanceId){
 			 console.log("attendanceid  : " + attendanceId);
 			 })
 		//console.log("attendanceList : " + attendanceList);	
