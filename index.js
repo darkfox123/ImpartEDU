@@ -630,8 +630,11 @@ app.post('/api/attendance', function(req, res){
         var date = params.date;
         Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
             if(err){throw err;}
-		console.log("attendanceList : " + attendanceList);	
-res.json(JSON.parse(attendanceList));		
+			 attendancelist.forEach(function(attendanceId){
+			 console.log("attendanceid  : " + attendanceId);
+			 })
+		//console.log("attendanceList : " + attendanceList);	
+//res.json(JSON.parse(attendanceList));		
 		});
 		/*
 		Student.getStudentById(studentId, function(err, studentInst){
