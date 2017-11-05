@@ -633,10 +633,12 @@ app.post('/api/attendance', function(req, res){
             if(err){throw err;}
 			 attendanceList.forEach(function(attendanceId){
 			 console.log("attendanceid  : " + attendanceId.studentid + ":" + attendanceId.attendance);
-			 resultjson+="{\"studentid\":\"" + attendanceId.studentid + "\",\"value\":\"" + attendanceId.attendance + "\"}";
+			 resultjson+="{\"studentid\":\"" + attendanceId.studentid + "\",\"value\":\"" + attendanceId.attendance + "\"},";
 			 })
-		console.log("resturnjson : " + resultjson);	
-//res.json(JSON.parse(attendanceList));		
+			 resturnjson = resturnjson.substr(0, returnjson.length - 1);
+		resultjson +="}";
+		console.log("resturnjson : " + resturnjson);	
+res.json(JSON.parse(resturnjson));		
 		});
 		/*
 		Student.getStudentById(studentId, function(err, studentInst){
