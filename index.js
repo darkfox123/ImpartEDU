@@ -628,13 +628,14 @@ app.post('/api/attendance', function(req, res){
     else if(reciever == "get"){
         var classid = params.classid;
         var date = params.date;
-		var resultjson = "";
+		var resultjson = "{\"attendance\":\"[";
         Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
             if(err){throw err;}
 			 attendanceList.forEach(function(attendanceId){
 			 console.log("attendanceid  : " + attendanceId.studentid + ":" + attendanceId.attendance);
+			 resultjson+="{\"studentid\":\"" + attendanceId.studentid + "\",\"value\":\"" + attendanceId.attendance + "\"}";
 			 })
-		//console.log("attendanceList : " + attendanceList);	
+		console.log("resturnjson : " + resultjson);	
 //res.json(JSON.parse(attendanceList));		
 		});
 		/*
