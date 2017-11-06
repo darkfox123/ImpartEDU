@@ -377,7 +377,9 @@ app.post('/api/parents', function(req, res){
        if(err){
            throw err;
        } 
-         students.forEach(function(student) { 
+         console.log("students found : " + students.length);
+		 //if(students.length == 0)
+		 students.forEach(function(student) { 
          returnVal += "{ \"name\":\"" + student.name + "\"," + "\"rollno\":\"" + student.rollno + "\"," + "\"studentid\":\""+ student._id + "\"},";
          });
             returnVal = returnVal.substring(0, returnVal.length-1);
