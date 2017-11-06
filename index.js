@@ -107,7 +107,7 @@ app.get('/api/schools', function(req, res){
            throw err;
        } 
         schools.forEach(function(school){
-            console.log("school : " + school);
+            //console.log("school : " + school);
             response += "{\"name\":\"" + school.name + "\"," + "\"city\":\"" + school.city + "\"," + "\"schoolId\":\"" + school.schoolId + "\"," + "\"classes\":\"" + school.classes + "\"},"; 
         });
         response = response.substr(0, response.length-1);
@@ -475,13 +475,12 @@ app.post('/api/notifications', function(req, res){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
             Student.addNotifToClass(className, section, city, schoolName,notifmap._id, function(err, students){ if(err){throw err;}
-            //console.log("updated  : " + count + " : " + counter);
-/*           
+            console.log("updated  : " + count + " : " + counter);           
 		   if(counter == count)
 			{
 				console.log("exit here"); 
 				}
-            counter++;*/                                                                       
+            counter++;                                                                       
             }); 
         });
     }); 
