@@ -386,7 +386,7 @@ app.post('/api/parents', function(req, res){
 			returnVal = returnVal.substring(0, returnVal.length-1);
             returnVal += "]}"
             console.log("return value : " + returnVal);
-           res.json(returnVal);
+           res.json(JSON.parse(returnVal));
     });
     });
     }
