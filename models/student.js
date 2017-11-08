@@ -58,7 +58,7 @@ module.exports.addAttendanceById = function(studentId, attendanceId, callback){
 //get student by id
 module.exports.getStudentById = function(studentSrch , callback){
  console.log("student srch : " + studentSrch);
-    Student.find({"_id":studentSrch} , 'notifications', callback);
+    Student.find({"_id":studentSrch} , 'notifications',{lean:true}, callback);
 }
 
 /*
