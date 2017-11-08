@@ -519,7 +519,7 @@ app.post('/api/notifications', function(req, res){
             console.log("student : " + student);
             //var studentnotifs = student.notifications;
             var counter = 1;
-            var notifCount = student.length;
+            var notifCount = student.notifications.length;
             console.log("notif count : " + notifCount);
             studentnotifs.forEach(function(notifmapid){
                 Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
