@@ -516,10 +516,10 @@ app.post('/api/notifications', function(req, res){
         Student.getStudentById(studentId, function(err, student){
             if(err){throw err;}
 			//var studObj = JSON.parse(student.);
-            console.log("student : " + (student[0])._id);
+            console.log("student : " + (student[0]).notifications);
             //var studentnotifs = student.notifications;
             var counter = 1;
-            var notifCount = student.notifications;
+            var notifCount = student[0].notifications.length;
             console.log("notif count : " + notifCount);
             studentnotifs.forEach(function(notifmapid){
                 Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
