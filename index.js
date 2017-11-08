@@ -515,7 +515,7 @@ app.post('/api/notifications', function(req, res){
         
         Student.getStudentById(studentId, function(err, student){
             if(err){throw err;}
-			//var studObj = student.;
+			var studObj = JSON.parse(student);
             console.log("student : " + student.notifications);
             var studentnotifs = student.notifications;
             var counter = 1;
