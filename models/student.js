@@ -58,10 +58,7 @@ module.exports.addAttendanceById = function(studentId, attendanceId, callback){
 //get student by id
 module.exports.getStudentById = function(studentSrch , callback){
  console.log("student srch : " + studentSrch);
-    Student.find({"_id":studentSrch} ,function (err, student_instance) {
-	if (err) throw err;
-	console.log("got val : " + student_instance.name);
-	}
+    Student.find({"_id":studentSrch} , 'name', callback);
   );
 }
 
