@@ -539,7 +539,7 @@ app.post('/api/notifications', function(req, res){
                                    {
                                        result = result.substr(0, result.length-1);
                                        result += "]}";
-                                       res.json(result);
+                                       res.json(JSON.parse(result));
                                    }
                                 counter++;
                            }); 
