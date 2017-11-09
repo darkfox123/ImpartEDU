@@ -536,8 +536,9 @@ app.post('/api/notifications', function(req, res){
                                 console.log("result : " + counter + " : " + notifCount);
                                if(counter == notifCount)
                                    {
-                                       result = result.substr(0, result.length-1);
+									   result = result.substr(0, result.length-1);
                                        result += "]}";
+									   console.log("final result notif load : " + result);
                                        res.json(JSON.parse(result));
                                    }
                                 counter++;
