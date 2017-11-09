@@ -403,7 +403,6 @@ app.post('/api/parents', function(req, res){
                students.forEach(function(student){
             if(student._id == studentid){ res.json(student);}
         })
-               res.json({});
         //res.json(students);
     });
             /*
