@@ -532,7 +532,7 @@ app.post('/api/notifications', function(req, res){
                            //console.log("notifreturn : " + notifmapRet);
                             if( notifmapRet != null){
                             Notification.getNotificationById(notifmapRet.notification, function(err, notifRet){
-                               result += notifRet.subject + ",";
+                               result += "{\"time\":\"" + notifRet.time + "\",\"subject\":\"" + notifRet.subject +  "\",\"_id\":\"" + notifRet._id + "\",\"date\":\"" + notifRet.date.substr(0,11) + "}";
                                 console.log("result : " + counter + " : " + notifCount);
                                if(counter == notifCount)
                                    {
