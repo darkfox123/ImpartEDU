@@ -676,6 +676,17 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
         Attendance.getAttendanceByStudentId(studentId, function(err, attendanceInst){
             if(err){throw err;} 
 			console.log("result attList : " + attendanceInst);
+			var len = attendancelist.length;
+            var counter = 1;
+			attendanceInst.forEach(function(attendance){
+                console.log("attendance  : " + attendance);
+				if(counter == len){
+                        result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"}]}"
+                        console.log("result : " + result);
+                        res.json(JSON.parse(result));
+                    }else
+                    {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
+                    counter++;
 		});
 		/*
 		Student.getStudentById(studentId, function(err, studentInst){
