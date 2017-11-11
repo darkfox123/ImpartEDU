@@ -747,11 +747,11 @@ app.post('/api/resource', function(req, res){
                 Resource.getResourceByID(resId, function(err, resource){
                     if(err){throw err;}
                     if(counter == len){
-                        result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id + "\"," + "\"value\":\"" + resource.value + "\"," + "\"title\":\"" + resource.title + "\"}]}"
+                        result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + resource.value "\"}]}"
                         console.log("result : " + result);
                         res.json(JSON.parse(result));
                     }else
-                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"value\":\"" + resource.value + "\"," + "\"title\":\"" + resource.title  + "\"},";}
+                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  + + "\"," + "\"value\":\"" + resource.value  "\"},";}
                     counter++;
                 });
             });
