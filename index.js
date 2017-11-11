@@ -676,7 +676,7 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
         Attendance.getAttendanceByStudentId(studentId, function(err, attendanceInst){
             if(err){throw err;} 
 			console.log("result attList : " + attendanceInst);
-			var len = attendancelist.length;
+			var len = attendanceInst.length;
             var counter = 1;
 			attendanceInst.forEach(function(attendance){
                 console.log("attendance  : " + attendance);
