@@ -589,7 +589,7 @@ app.post('/api/notifications', function(req, res){
 
 //1) input : {"reciever":"post", "params":{"classid":"5910bc227803461e804c08f7"(IV-B), "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e3","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e2","date":"14/05/2017","attendance":"Absent"}]}
 // 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
-// 3) load: {"reciever":"load", "params":{"studentid":"5916b119aec2b708a0b960e3"}}
+// 3) load: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
 app.post('/api/attendance', function(req, res){
     console.log("adding attendance");
 	var reciever = req.body.reciever;
@@ -673,7 +673,12 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
     else if(reciever == "load"){
         var studentId = params.studentid;
         var result = "{\"attendance\":["
-        Student.getStudentById(studentId, function(err, studentInst){
+        Attendance.getAttendanceByStudentId(studentId, function(err, attendanceInst){
+            if(err){throw err;} 
+			console.log("result attList : " + attendanceInst);
+		});
+		/*
+		Student.getStudentById(studentId, function(err, studentInst){
             if(err){throw err;}            
             var attendancelist = studentInst.attendance;
             var len = attendancelist.length;
@@ -692,6 +697,7 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
                 });
             });
         });
+		*/
     }
 });
 
