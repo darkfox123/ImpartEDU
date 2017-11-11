@@ -709,7 +709,7 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
             });
         });
 		*/
-    }
+    });}
 });
 
 
