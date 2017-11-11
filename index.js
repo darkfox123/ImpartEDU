@@ -751,7 +751,7 @@ app.post('/api/resource', function(req, res){
                         console.log("result : " + result);
                         res.json(JSON.parse(result));
                     }else
-                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  + + "\"," + "\"value\":\"" + resource.value  "\"},";}
+                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  + + "\"," + "\"value\":\"" + resource.value + "\"},";}
                     counter++;
                 });
             });
