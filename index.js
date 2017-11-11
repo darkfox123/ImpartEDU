@@ -773,7 +773,7 @@ app.get('/api/attendance', function(req, res){
 //Get notifications
 app.get('/api/resource', function(req, res){
     console.log("getting notifications");
-	Resource.getResources(function(err, resources){
+	Resource.getResource(function(err, resources){
        if(err){
            throw err;
        } 
