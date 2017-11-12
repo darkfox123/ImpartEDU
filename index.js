@@ -746,13 +746,12 @@ app.post('/api/resource', function(req, res){
                 console.log("resid  : " + resId);
                 Resource.getResourceByID(resId, function(err, resource){
                     if(err){throw err;}
-					console.log("resVal  : " + resource.title);
                     if(counter == len){
                         result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + resource.value + "\"}]}";
                         //console.log("result : " + result);
                         res.json(JSON.parse(result));
                     }else
-                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  + + "\"," + "\"value\":\"" + resource.value + "\"},";}
+                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + resource.value + "\"},";}
                     counter++;
                 });
             });
