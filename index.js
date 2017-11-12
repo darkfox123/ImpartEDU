@@ -748,7 +748,7 @@ app.post('/api/resource', function(req, res){
                     if(err){throw err;}
                     if(counter == len){
                         result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + resource.value + "\"}]}";
-                        //console.log("result : " + result);
+                        console.log("result : " + result);
                         res.json(JSON.parse(result));
                     }else
                     {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + resource.value + "\"},";}
