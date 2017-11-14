@@ -753,14 +753,14 @@ app.post('/api/resource', function(req, res){
                         //result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"}]}";
                         console.log("result : " + result + img);
                         res.json(JSON.parse(result));
-                    }else
-						
+                    }else	
                     {
 						var data = getIcon(resource.value);
 						var img = new Buffer(data, 'base64');
 
 						console.log("result : " + result + img);
-				//result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"},";}
+				//result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"},";
+				}
                     counter++;
                 });
             });
