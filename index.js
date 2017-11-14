@@ -747,11 +747,20 @@ app.post('/api/resource', function(req, res){
                 Resource.getResourceByID(resId, function(err, resource){
                     if(err){throw err;}
                     if(counter == len){
-                        result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"}]}";
-                        console.log("result : " + result);
+						var data = getIcon(resource.value);
+						var img = new Buffer(data, 'base64');
+
+                        //result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"}]}";
+                        console.log("result : " + result + img);
                         res.json(JSON.parse(result));
                     }else
-                    {result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"},";}
+						
+                    {
+						var data = getIcon(resource.value);
+						var img = new Buffer(data, 'base64');
+
+						console.log("result : " + result + img);
+				//result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"},";}
                     counter++;
                 });
             });
