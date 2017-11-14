@@ -750,16 +750,16 @@ app.post('/api/resource', function(req, res){
 						var data = resource.value;
 						var img = new Buffer(data, 'base64');
 
-                        //result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"}]}";
-                        console.log("result : " + result + img);
+                        result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":\"" + img + "\"}]}";
+                        console.log("result : " + result);
                         res.json(JSON.parse(result));
                     }else	
                     {
 						var data = resource.value;
 						var img = new Buffer(data, 'base64');
 
-						console.log("result : " + result + img);
-				//result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + resource.value.data.toString('base64') + "\"},";
+						console.log("result : " + result);
+				result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":\"" + img + "\"},";
 				}
                     counter++;
                 });
