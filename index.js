@@ -796,6 +796,7 @@ app.get('/api/resource', function(req, res){
 // Teacher Application response : {"reciever":"teacherResponse","applicationid":"","accepted":"true"}
 //Student sync request : {"reciever":"studentsync","params":{"studentid":"59159716307f0e1cf052b990"}}
 // Student sync response: {"applications":[{"id":"593e47e70353a3095002f97e","title":"For Leave of 4 dayz","accepted":"false","date":"16-06-2017","studentid":"59159716307f0e1cf052b990"},{"id":"593e5367ab63b30aac025868","title":"For Leave of 3 dayz","accepted":"true","date":"16-06-2017","studentid":"59159716307f0e1cf052b990"}]}
+// Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"25-11-2017"}}
 app.post('/api/applications', function(req, res){
     var reciever = req.body.reciever;
     var params = req.body.params;
@@ -875,6 +876,14 @@ app.post('/api/applications', function(req, res){
             });
     });
     }
+	else if(reciever == "adminRead"){
+		var classId = params.classid;
+		var date = params.date;
+		Application.getApplicationByClassDate(classId, date, function(err, applications){
+			 if(err) throw err;
+			 res.json(applications);
+		})
+	}
 });
 
 function updateApplicationReadStatus(applicationId){

@@ -33,6 +33,10 @@ module.exports.getApplicationById = function(applicationId,callback){
     Application.find({"_id":applicationId},callback);
 }
 
+module.exports.getApplicationByClassDate = function(classId,date,callback){
+    Application.find({"classid":classId,"date":date},callback);
+}
+
 module.exports.markApplicationTeacherRead = function(applicationId,  callback){
  console.log("appid : " + applicationId);
     Application.findOneAndUpdate({"_id":applicationId}, {$set: {"teacherreadstatus": true}},{new: true}, callback);
