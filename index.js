@@ -338,7 +338,7 @@ app.post('/api/students', function(req, res){
 		var schoolName = params.schoolName;
 		Student.getStudentsBySchool(city,schoolName, function(err, students){
         if(err){throw err;}
-		res.json(JSON.parse(students));
+		res.json(students);
 		});
 	}
 });
