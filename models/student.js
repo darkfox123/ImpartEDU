@@ -25,6 +25,10 @@ module.exports.getStudentsByClass = function(className, section, city, schoolNam
  Student.find({"className":className,"section":section,"city":city,"schoolName":schoolName},callback);
 }
 
+module.exports.getStudentsBySchool = function(city, schoolName, callback){
+ Student.find({"city":city,"schoolName":schoolName},callback);
+}
+
 //get students by class id
 module.exports.removeStudent = function(classId, studentid, callback){
  Student.findOneAndRemove({"classid":classId,"_id":studentid}, callback);
