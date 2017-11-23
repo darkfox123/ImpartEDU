@@ -599,6 +599,7 @@ app.post('/api/notifications', function(req, res){
 //1) input : {"reciever":"post", "params":{"classid":"5910bc227803461e804c08f7"(IV-B), "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e3","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e2","date":"14/05/2017","attendance":"Absent"}]}
 // 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
 // 3) load: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
+// Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"5/11/2017"}}
 app.post('/api/attendance', function(req, res){
     console.log("adding attendance");
 	var reciever = req.body.reciever;
@@ -719,6 +720,14 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
         });
 		*/
     });}
+	else if(reciever == "adminRead"){
+		var classId = params.classid;
+		var date = params.date;
+		Attendance.getAttendanceByClassDate(classId, date, function(err, applications){
+			 if(err) throw err;
+			 res.json(applications);
+		})
+	}
 });
 
 

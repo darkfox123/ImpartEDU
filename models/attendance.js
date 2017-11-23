@@ -29,3 +29,7 @@ module.exports.getAttendanceByDay = function(classid,date, callback){
  console.log("class srch : " + classid);
     Attendance.find({"classid":classid, "date":date} ,callback);
 }
+
+module.exports.getAttendanceByClassDate = function(classId,date,callback){
+    Application.find({"classid":classId,"date":date},{studentId:1,attendance:1},callback);
+}
