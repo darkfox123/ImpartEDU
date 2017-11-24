@@ -23,3 +23,7 @@ module.exports.addResource = function(resource,callback){
   Resource.create(resource, callback);
 }
 
+module.exports.getResourceByClass = function(classId,callback){
+    Resource.find({"classid":classId},{date:1,title:1,value:1},callback);
+}
+
