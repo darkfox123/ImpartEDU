@@ -1073,3 +1073,8 @@ Notifmap.remove({}, function(err) {
         }
     );
 */
+School.update(
+     {admin : '' },
+     {multi:true}, 
+       function(err, numberAffected){  
+       });
