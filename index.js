@@ -232,7 +232,7 @@ app.post('/api/admins', function(req, res){
              console.log("never came back : " + returnJson);
              var jsonObj = JSON.parse(returnJson);
              res.json(jsonObj);
-    })
+    });
         });
 });
 
