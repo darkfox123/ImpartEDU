@@ -2,6 +2,7 @@ Author = require('./models/author');
 Book = require('./models/book');
 City = require('./models/city');
 School = require('./models/school');
+Admin = require('./models/admin');
 Class = require('./models/class');
 Teacher = require('./models/teacher');
 Student = require('./models/student');
@@ -214,6 +215,25 @@ app.post('/api/classes', function(req, res){
       });
     }	
 	}
+});
+
+//Add admin
+//{"function":"add", "admin" :{"schoolId":"school9927","password":"pihugolu","aadharId":"fghjklasd","section":"B","city":"Bareilly","email":"oathak.sb@gmail.com","phone":"9004890850","schoolName":"Uttam Public","firstName":"shibu","class":"IV","middleName":"nope","role":"teacher","lastName":"pathak"}}
+app.post('/api/admins', function(req, res){
+    var admin = req.body.admin;
+    console.log("request body teacher : " + JSON.stringify(admin));
+    var returnJson = "{ \"adminId\":\""; 
+    Admin.addAdmin(admin, function( adminId){
+       //console.log("returned response : " + JSON.stringify(tId));
+	returnJson += adminId + "\"}";
+	School.addAdmin(schoolId, adminId ,function(schoolId){
+            console.log("returned classid : " + schoolId);
+			//returnJson += adminId + "\"}";
+             console.log("never came back : " + returnJson);
+             var jsonObj = JSON.parse(returnJson);
+             res.json(jsonObj);
+    })
+        });
 });
 
 //Add Teacher

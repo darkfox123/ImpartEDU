@@ -4,6 +4,7 @@ var schoolSchema = new mongoose.Schema({
     name: String,
     schoolId: String,
     city: String,
+	admin: String,
     classes : [{type: mongoose.Schema.Types.ObjectId, ref: 'Class'}],
     teachers : [{type: mongoose.Schema.Types.ObjectId, ref: 'Teacher'}]
 });
@@ -41,6 +42,16 @@ module.exports.addSchools = (school, schoolId, callback) => {
   if (err) return handleError(err);
         school = awesome_instance;
   console.log("added from callback  " + school);
+        callback(school);
+});
+}
+
+// Add class
+module.exports.addAdmin = function(schoolId ,adminId, callback){ 
+     School.findOneAndUpdate({schoolId:schoolId}, {$set: {admin:adminId}},{new: true}, function (err, awesome_instance) {
+  if (err) return handleError(err);
+        school = awesome_instance;
+  // console.log("updated scchool : " + school);
         callback(school);
 });
 }
