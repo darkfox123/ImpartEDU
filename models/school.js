@@ -49,7 +49,7 @@ module.exports.addSchools = (school, schoolId, callback) => {
 // Add class
 module.exports.addAdmin = function(schoolId ,adminId, callback){ 
      School.findOneAndUpdate({"schoolId":schoolId}, {{"admin":adminId}},{multi: true}, function (err, awesome_instance) {
-  if (err) return handleError(err);
+  if (err) console.log("err hua");;
         school = awesome_instance;
    console.log("updated scchool : " + school);
         callback(school);
