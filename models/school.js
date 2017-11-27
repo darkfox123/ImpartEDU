@@ -51,9 +51,9 @@ module.exports.addAdminToSchool = function(schoolId ,adminId, callback){
      console.log("calling school add");
 	 School.update({}, {$set: {admin: ''}}, function(err, numberAffected, rawResponse) {
    //handle it
-   if (err) return handleError(err);
+   if (err) console.log("err in school : " + err);
    console.log("updated scchool : " + rawResponse);
-   })
+   });
 
 }
 
