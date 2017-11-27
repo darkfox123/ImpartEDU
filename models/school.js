@@ -53,7 +53,7 @@ module.exports.addAdminToSchool = function(schoolId ,adminId, callback){
     if (err) return done(err);
     // Create the new field if it doesn't exist yet
     doc.admin || (doc.admin = [])
-    doc.workUnits.push('value');
+    doc.admin.push('value');
 console.log("saving done");
     doc.save(done);
 });
