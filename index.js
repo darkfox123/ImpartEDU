@@ -226,7 +226,7 @@ app.post('/api/admins', function(req, res){
     Admin.addAdmin(admin, function( adminId){
        console.log("returned response : " + JSON.stringify(adminId));
 	returnJson += adminId + "\"}";
-	School.addAdminToSchool(schoolId, adminId ,function(schoolId){
+				School.addAdminToSchool(schoolId, adminId ,function(schoolId){
             console.log("returned classid : " + schoolId);
 			//returnJson += adminId + "\"}";
              console.log("never came back : " + returnJson);
