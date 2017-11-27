@@ -49,14 +49,11 @@ module.exports.addSchools = (school, schoolId, callback) => {
 // Add class
 module.exports.addAdminToSchool = function(schoolId ,adminId, callback){ 
      console.log("calling school add");
-	 School.find({schoolId:schoolId}, function (err, doc) {
-    if (err) return done(err);
-    // Create the new field if it doesn't exist yet
-    doc.admin || (doc.admin = [])
-    doc.admin.push('value');
-console.log("saving done");
-    //doc.save();
-});
+	 School.update({}, {$set: {admin: ''}}, function(err, numberAffected, rawResponse) {
+   //handle it
+   if (err) return handleError(err);
+   console.log("updated scchool : " + rawResponse);
+   })
 
 }
 
