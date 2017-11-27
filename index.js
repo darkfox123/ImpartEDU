@@ -122,6 +122,7 @@ app.get('/api/schools', function(req, res){
 
 //Add schools
 //{"function":"add", "params":{"city":"Bareilly", "school": {"name" : "RDBMS", "schoolId":"pihu9927", "city":"Bareilly"}}}
+//{"function":"adminRead", "params":{"schoolId":"school9927"}}
 app.post('/api/schools', function(req, res){
     console.log("request : " + req.body.toString);
     var functionVal = req.body.function;
@@ -138,7 +139,16 @@ app.post('/api/schools', function(req, res){
             res.json(city);
     });
     });   
-    }
+    } else if(functionVal == "adminRead"){
+		console.log("admin read");
+		 var schoolId = params.schoolId;
+	School.addAdminToSchool(schoolId, "yoadmin", function(err, school){
+       if(err){
+           throw err;
+       } 
+        res.json(school);
+    });	
+	}
 });
 
 // Get class
