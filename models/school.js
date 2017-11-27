@@ -55,7 +55,7 @@ module.exports.addAdminToSchool = function(schoolId ,adminId, callback){
     doc.admin || (doc.admin = [])
     doc.admin.push('value');
 console.log("saving done");
-    doc.save(done);
+    doc.save();
 });
 
 }
