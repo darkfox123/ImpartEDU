@@ -47,7 +47,7 @@ module.exports.addSchools = (school, schoolId, callback) => {
 }
 
 // Add class
-module.exports.addAdmin = function(schoolId ,adminId, callback){ 
+module.exports.addAdminToSchool = function(schoolId ,adminId, callback){ 
      console.log("calling school add");
 	 School.findOneAndUpdate({"schoolId":schoolId}, {"admin":adminId},{multi: true}, callback);
 }
