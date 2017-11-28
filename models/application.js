@@ -45,8 +45,10 @@ module.exports.markApplicationTeacherRead = function(applicationId,  callback){
 module.exports.setApplicationTeacherResponse = function(applicationId, accepted, callback){
  console.log("appid : " + applicationId);
     if(accepted == "true"){
-    Application.findOneAndUpdate({"_id":applicationId}, {$set: {"teacherresponsestatus": true, "acceptancestatus": true}},{new: true}, callback);
+    console.log("accepted true :: ->>");
+	Application.findOneAndUpdate({"_id":applicationId}, {$set: {"teacherresponsestatus": true, "acceptancestatus": true}},{new: true}, callback);
     } else if(accepted == "false"){
+	console.log("accepted false :: ->>");
     Application.findOneAndUpdate({"_id":applicationId}, {$set: {"teacherresponsestatus": true, "acceptancestatus": false}},{new: true}, callback);
     }
 }
