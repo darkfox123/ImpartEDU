@@ -784,7 +784,7 @@ app.post('/api/resource', function(req, res){
         var classId = params.classid;
         Resource.addResource(params, function(err, resource){
            if(err) throw err;
-            console.log("rsc added : " + resource);
+           // console.log("rsc added : " + resource);
 			var resourceId = resource._id;
             Class.addResourceToClass(classId, resourceId, function(err, classInst){
                 if(err) throw err;
@@ -811,14 +811,14 @@ app.post('/api/resource', function(req, res){
 						var img = new Buffer(data, 'base64');
 
                         result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":" + JSON.stringify(resource.value) + "}]}";
-                        console.log("result : " + result);
+                        //console.log("result : " + result);
                         res.json(JSON.parse(result));
                     }else	
                     {
 						var data = resource.value;
 						var img = new Buffer(data, 'base64');
 
-						console.log("result : " + result);
+						//console.log("result : " + result);
 				result += "{" + "\"date\":\"" + resource.date + "\"," + "\"title\":\"" + resource.title  +  "\"," + "\"value\":" + JSON.stringify(resource.value) + "},";
 				}
                     counter++;
@@ -831,7 +831,7 @@ app.post('/api/resource', function(req, res){
 		///var date = params.date;         set date
 		Resource.getResourceByClass(classId, function(err, resources){
 			 if(err) throw err;
-			 console.log("admin read response");
+			 //console.log("admin read response");
 			 res.json(resources);
 		})
 	}
@@ -936,11 +936,11 @@ app.post('/api/applications', function(req, res){
                 if(err) throw err;
                  console.log("marked application : " + application);
                 if(counter == appliLen){
-                        result += "{" + "\"id\":\""+ application._id +"\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"studentid\":\""+ application.studentid + "\"}]}";
+                        result += "{" + "\"id\":\""+ application._id +"\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"subject\":\""+ application.subject + "\",\"studentid\":\""+ application.studentid + "\"}]}";
                         console.log("final result : " + result);
                         res.json(JSON.parse(result));
                     }else{
-                    result += "{" +"\"id\":\""+ application._id + "\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"studentid\":\""+ application.studentid + "\"},";
+                    result += "{" +"\"id\":\""+ application._id + "\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"subject\":\""+ application.subject + "\",\"studentid\":\""+ application.studentid + "\"},";
                     }
                     counter++;
                 });
