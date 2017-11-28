@@ -915,6 +915,7 @@ app.post('/api/applications', function(req, res){
     }
     else if(reciever == "teacherResponse"){
         var applicationId = req.body.applicationid;
+		console.log("application id to search : " + applicationId);
         var accepted = req.body.accepted;
         Application.setApplicationTeacherResponse(applicationId,accepted, function(err, application){
                 if(err) throw err;
@@ -928,6 +929,7 @@ app.post('/api/applications', function(req, res){
         Application.getApplicationResponseParent(studentId, function(err, applications){
                 if(err) throw err;
             var counter = 1;
+			console.log("marked application :->> " + applications.length);
             var appliLen = applications.length;
             applications.forEach(function(appli){
                 Application.markApplicationResponseParent(appli._id, function(err, application){
