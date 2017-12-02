@@ -245,7 +245,7 @@ app.post('/api/admins', function(req, res){
 //{"function":"principalToken", "params":{"schoolId":"school9927"}}
 app.post('/api/teachers', function(req, res){
     var func = req.body.function;
-	if(function == "add"){
+	if(func == "add"){
 	var teacher = req.body.teacher;
     console.log("request body teacher : " + JSON.stringify(teacher));
 	var tid= "#";
@@ -265,7 +265,7 @@ app.post('/api/teachers', function(req, res){
     });
         });
 	}
-	else if(function == "principalToken"){
+	else if(func == "principalToken"){
 		console.log("request principal token");
 		var numbers = [0,1,2,3,4,5,6,7,8,9];
 		var lowerAlphabets = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
