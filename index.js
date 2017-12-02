@@ -141,8 +141,7 @@ app.post('/api/schools', function(req, res){
     });   
     } else if(functionVal == "adminRead"){
 		console.log("admin read");
-        res.json(school);
-    });	
+        res.json(school);	
 	}
 });
 
