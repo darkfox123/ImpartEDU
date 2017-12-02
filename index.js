@@ -141,11 +141,6 @@ app.post('/api/schools', function(req, res){
     });   
     } else if(functionVal == "adminRead"){
 		console.log("admin read");
-		 var schoolId = params.schoolId;
-	School.addAdminToSchool(schoolId, "yoadmin", function(err, school){
-       if(err){
-           throw err;
-       } 
         res.json(school);
     });	
 	}
@@ -248,8 +243,11 @@ app.post('/api/admins', function(req, res){
 
 //Add Teacher
 //{"function":"add", "teacher" :{"schoolId":"school9927","password":"pihugolu","aadharId":"fghjklasd","section":"B","city":"Bareilly","email":"oathak.sb@gmail.com","phone":"9004890850","schoolName":"Uttam Public","firstName":"shibu","class":"IV","middleName":"nope","role":"teacher","lastName":"pathak","classId":"59cd50a41e3b90c41fc05fbc"}}
+//{"function":"principalToken", "params":{"schoolId":"school9927"}}
 app.post('/api/teachers', function(req, res){
-    var teacher = req.body.teacher;
+    var func = req.body.function;
+	if(function == "add"){
+	var teacher = req.body.teacher;
     console.log("request body teacher : " + JSON.stringify(teacher));
 	var tid= "#";
     var classId = "#";
@@ -267,7 +265,28 @@ app.post('/api/teachers', function(req, res){
              res.json(jsonObj);
     });
         });
+	}
+	else if(function == "principalToken"){
+		console.log("request principal token");
+		var numbers = [0,1,2,3,4,5,6,7,8,9];
+		var lowerAlphabets = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
+
+        var token = shuffleArray(numbers).slice(0,8).join('') + shuffleArray(lowerAlphabets).slice(0,8).join('');
+		var permToken = shuffleArray(token).slice(0,7).join('');
+		var returnVal = "{\"token\":\"" + permToken + "\"}";
+		var returnJson = JSON.parse(returnVal);
+	}
 });
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
 //Get admins
 app.get('/api/admins', function(req, res){
@@ -936,7 +955,7 @@ app.post('/api/applications', function(req, res){
                 if(err) throw err;
                  console.log("marked application : " + application);
                 if(counter == appliLen){
-                        result += "{" + "\"id\":\""+ application._id +"\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"subject\":\""+ application.subject + "\",\"studentid\":\""+ application.studentid + "\"}]}";
+                        result += "{" + "\"id\":\""+ application._id +"\",\"title\":\""+ application.title + "\",\"accepted\":\"" + application.acceptancestatus + "\",\"date\":\""+ application.date + "\",\"subject\":\""+ application.subject  + "\",\"studentid\":\""+ application.studentid + "\"}]}";
                         console.log("final result : " + result);
                         res.json(JSON.parse(result));
                     }else{
