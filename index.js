@@ -282,6 +282,7 @@ app.post('/api/teachers', function(req, res){
 		var returnVal = "{\"token\":\"" + numRet.slice(0,8).join('') + "\"}";
 		console.log("ho gya retval : " + returnVal);
 		var returnJson = JSON.parse(returnVal);
+		res.json(returnJson);
 	}
 });
 
