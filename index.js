@@ -269,7 +269,13 @@ app.post('/api/teachers', function(req, res){
 		console.log("request principal token");
 		var numbers = [0,1,2,3,4,5,6,7,8,9];
 		var lowerAlphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-var numRet = shuffleArray(numbers);
+ for (var i = numbers.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = numbers[i];
+        numbers[i] = numbers[j];
+        numbers[j] = temp;
+    }
+		var numRet = numbers;
         //var token = shuffleArray(numbers).slice(0,8).join('') + shuffleArray(lowerAlphabets).slice(0,8).join('');
 		//var permToken = shuffleArray(token).slice(0,7).join('');
 		var returnVal = "{\"token\":\"" + numRet + "\"}";
