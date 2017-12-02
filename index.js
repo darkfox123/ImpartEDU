@@ -275,11 +275,19 @@ app.post('/api/teachers', function(req, res){
         numbers[i] = numbers[j];
         numbers[j] = temp;
     }
-		var numRet = numbers;
-		console.log("ho gya shuffle : " + numRet.slice(0,8).join(''));
+		var numRet = numbers.slice(0,8).join('');
+		console.log("ho gya num shuffle : " + numRet);
         //var token = shuffleArray(numbers).slice(0,8).join('') + shuffleArray(lowerAlphabets).slice(0,8).join('');
 		//var permToken = shuffleArray(token).slice(0,7).join('');
-		var returnVal = "{\"token\":\"" + numRet.slice(0,8).join('') + "\"}";
+		for (var i = lowerAlphabets.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = lowerAlphabets[i];
+        lowerAlphabets[i] = lowerAlphabets[j];
+        lowerAlphabets[j] = temp;
+    }
+		var aplhaRet = lowerAlphabets.slice(0,8).join('');
+		console.log("ho gya num shuffle : " + aplhaRet);
+		var returnVal = "{\"token\":\"" + numRet + aplhaRet + "\"}";
 		console.log("ho gya retval : " + returnVal);
 		var returnJson = JSON.parse(returnVal);
 		res.json(returnJson);
