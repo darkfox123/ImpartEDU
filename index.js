@@ -268,7 +268,7 @@ app.post('/api/teachers', function(req, res){
 	else if(func == "principalToken"){
 		console.log("request principal token");
 		var numbers = [0,1,2,3,4,5,6,7,8,9];
-		var lowerAlphabets = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
+		var lowerAlphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
         var token = shuffleArray(numbers).slice(0,8).join('') + shuffleArray(lowerAlphabets).slice(0,8).join('');
 		var permToken = shuffleArray(token).slice(0,7).join('');
