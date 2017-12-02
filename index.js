@@ -279,7 +279,7 @@ app.post('/api/teachers', function(req, res){
 		console.log("ho gya shuffle : " + numRet.slice(0,8).join(''));
         //var token = shuffleArray(numbers).slice(0,8).join('') + shuffleArray(lowerAlphabets).slice(0,8).join('');
 		//var permToken = shuffleArray(token).slice(0,7).join('');
-		var returnVal = "{\"token\":\"" + numRet.slice(0,8).join('')) + "\"}";
+		var returnVal = "{\"token\":\"" + numRet.slice(0,8).join('') + "\"}";
 		console.log("ho gya retval : " + returnVal);
 		var returnJson = JSON.parse(returnVal);
 	}
