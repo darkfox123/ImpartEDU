@@ -276,7 +276,7 @@ app.post('/api/teachers', function(req, res){
         numbers[j] = temp;
     }
 		var numRet = numbers;
-		console.log("ho gya shuffle : " + numRet);
+		console.log("ho gya shuffle : " + numRet.slice(0,8).join(''));
         //var token = shuffleArray(numbers).slice(0,8).join('') + shuffleArray(lowerAlphabets).slice(0,8).join('');
 		//var permToken = shuffleArray(token).slice(0,7).join('');
 		var returnVal = "{\"token\":\"" + numRet + "\"}";
