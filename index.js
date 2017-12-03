@@ -121,7 +121,7 @@ app.get('/api/schools', function(req, res){
 
 
 //Add schools
-//{"function":"add", "params":{"city":"Bareilly", "school": {"name" : "RDBMS", "schoolId":"pihu9927", "city":"Bareilly"}}}
+//{"function":"add", "params":{"city":"Bareilly", "school": {"name" : "RDBMS", "schoolId":"pihu9927", "city":"Bareilly", "admin":""}}}
 //{"function":"adminRead", "params":{"schoolId":"school9927"}}
 app.post('/api/schools', function(req, res){
     console.log("request : " + req.body.toString);
