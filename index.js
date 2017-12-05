@@ -310,7 +310,7 @@ app.post('/api/teachers', function(req, res){
 		 if(counter == countLen){
 		returnVal = returnVal.substr(0, returnVal.length-1);
 		returnVal += "]";
-		res.json(returnVal); 
+		res.json(JSON.parse(returnVal)); 
 		 }
 		 counter++;
 		});
