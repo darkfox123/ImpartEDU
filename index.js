@@ -294,7 +294,9 @@ app.post('/api/teachers', function(req, res){
 		res.json(returnJson);
 	}
 	else if(func == "adminRead"){
-		Teacher.getTeachers( function(err, teachers){
+		var params = req.body.params;
+		var schoolId = params.schoolId;
+		Teacher.getTeacherBySchool(schoolId, function(err, teachers){
 			 if(err){
            throw err;
        } 
