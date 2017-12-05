@@ -313,6 +313,7 @@ app.post('/api/teachers', function(req, res){
 		 }
 		 counter++;
 		});
+		});
 		/*
 		var returnVal = "{\"teachers\":{";
 		var params = req.body.params;
