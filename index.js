@@ -297,11 +297,18 @@ app.post('/api/teachers', function(req, res){
 		var returnVal = "{\"teachers\":{";
 		var params = req.body.schoolId;
 		Teacher.getTeacherBySchool(teacher, function( teachers){
+			var counter = 1;
+			var countLen = teachers.length;
+			console.log("teachers len : " + countLen);
 			teachers.forEach(function(teacher) { 
          returnVal += "{ \"firstname\":\"" + teacher.firstName + "\"," + "\"lastname\":\"" + teacher.lastName + "\"," + "\"id\":\""+ teacher._id + "\"},";
+		 console.log("counter match : " + countLen + " : " + counter);
+		 if(counter == countLen){
+			returnVal += "}}";
+		res.json(returnVal); 
+		 }
+		 counter++;
          });
-		returnVal += "}}";
-		res.json(returnVal);
 		});
 	}
 });
