@@ -36,3 +36,9 @@ module.exports.addTeachers = function(teacher, callback){
         callback(awesome_instance._id);
 });
 }
+
+module.exports.getTeacherBySchool = function(schoolId,callback){
+    Teacher.find({"schoolId":schoolId},callback);
+}
+
+

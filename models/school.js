@@ -42,13 +42,7 @@ module.exports.addSchools = (school, schoolId, callback) => {
   if (err) return handleError(err);
         school = awesome_instance;
   console.log("added from callback  " + school);
-  School.update(
-     {admin : 'example' },
-     {multi:true}, 
-       function(err, numberAffected){  
-       console.log(" rows affectyed : " + numberAffected);
 	   callback(school);
-	   });
 });
 }
 

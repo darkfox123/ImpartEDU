@@ -243,6 +243,7 @@ app.post('/api/admins', function(req, res){
 //Add Teacher
 //{"function":"add", "teacher" :{"schoolId":"school9927","password":"pihugolu","aadharId":"fghjklasd","section":"B","city":"Bareilly","email":"oathak.sb@gmail.com","phone":"9004890850","schoolName":"Uttam Public","firstName":"shibu","class":"IV","middleName":"nope","role":"teacher","lastName":"pathak","classId":"59cd50a41e3b90c41fc05fbc"}}
 //{"function":"principalToken", "params":{"schoolId":"school9927"}}
+//{"function":"adminRead", "params":{"schoolId":"school9927"}}
 app.post('/api/teachers', function(req, res){
     var func = req.body.function;
 	if(func == "add"){
@@ -291,6 +292,17 @@ app.post('/api/teachers', function(req, res){
 		console.log("ho gya retval : " + returnVal);
 		var returnJson = JSON.parse(returnVal);
 		res.json(returnJson);
+	}
+	else if(func == "adminRead"){
+		var returnVal = "{\"teachers\":{";
+		var params = req.body.schoolId;
+		Teacher.getTeacherBySchool(teacher, function( teachers){
+			teachers.forEach(function(teacher) { 
+         returnVal += "{ \"firstname\":\"" + teacher.firstName + "\"," + "\"lastname\":\"" + teacher.lastName + "\"," + "\"id\":\""+ teacher._id + "\"},";
+         });
+		returnVal += "}}";
+		res.json(returnVal);
+		});
 	}
 });
 
