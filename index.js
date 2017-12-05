@@ -294,13 +294,24 @@ app.post('/api/teachers', function(req, res){
 		res.json(returnJson);
 	}
 	else if(func == "adminRead"){
+		var returnVal = "{\"teachers\":{";
 		var params = req.body.params;
 		var schoolId = params.schoolId;
 		Teacher.getTeacherBySchool(schoolId, function(err, teachers){
 			 if(err){
            throw err;
        } 
-        res.json(teachers);
+        var counter = 1;
+			var countLen = teachers.length;
+			console.log("teachers len : " + countLen);
+			teachers.forEach(function(teacher) { 
+         returnVal += "{ \"firstname\":\"" + teacher.firstName + "\"," + "\"lastname\":\"" + teacher.lastName + "\"," + "\"id\":\""+ teacher._id + "\"},";
+		 console.log("counter match : " + countLen + " : " + counter);
+		 if(counter == countLen){
+			returnVal += "}}";
+		res.json(returnVal); 
+		 }
+		 counter++;
 		});
 		/*
 		var returnVal = "{\"teachers\":{";
