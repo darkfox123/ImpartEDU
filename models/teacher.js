@@ -38,6 +38,7 @@ module.exports.addTeachers = function(teacher, callback){
 }
 
 module.exports.getTeacherBySchool = function(schoolId,callback){
+	console.log("find teacher by : " + schoolId);
       Teacher.find({"schoolId":schoolId},callback);
 }
 

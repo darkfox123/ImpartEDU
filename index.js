@@ -298,6 +298,7 @@ app.post('/api/teachers', function(req, res){
 		var params = req.body.params;
 		var schoolId = params.schoolId;
 		Teacher.getTeacherBySchool(schoolId, function( teachers){
+			console.log("teachers ret : " + teachers);
 			var counter = 1;
 			var countLen = teachers.length;
 			console.log("teachers len : " + countLen);
