@@ -308,6 +308,7 @@ app.post('/api/teachers', function(req, res){
          returnVal += "{ \"firstname\":\"" + teacher.firstName + "\"," + "\"lastname\":\"" + teacher.lastName + "\"," + "\"id\":\""+ teacher._id + "\"},";
 		 console.log("counter match : " + countLen + " : " + counter);
 		 if(counter == countLen){
+		returnVal = returnVal.substr(0, returnVal.length-1);
 		res.json(returnVal); 
 		 }
 		 counter++;
