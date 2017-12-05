@@ -294,7 +294,7 @@ app.post('/api/teachers', function(req, res){
 		res.json(returnJson);
 	}
 	else if(func == "adminRead"){
-		var returnVal = "{\"teachers\":{";
+		var returnVal = "";
 		var params = req.body.params;
 		var schoolId = params.schoolId;
 		Teacher.getTeacherBySchool(schoolId, function(err, teachers){
@@ -308,7 +308,6 @@ app.post('/api/teachers', function(req, res){
          returnVal += "{ \"firstname\":\"" + teacher.firstName + "\"," + "\"lastname\":\"" + teacher.lastName + "\"," + "\"id\":\""+ teacher._id + "\"},";
 		 console.log("counter match : " + countLen + " : " + counter);
 		 if(counter == countLen){
-			returnVal += "}}";
 		res.json(returnVal); 
 		 }
 		 counter++;
