@@ -295,8 +295,9 @@ app.post('/api/teachers', function(req, res){
 	}
 	else if(func == "adminRead"){
 		var returnVal = "{\"teachers\":{";
-		var params = req.body.schoolId;
-		Teacher.getTeacherBySchool(teacher, function( teachers){
+		var params = req.body.params;
+		var schoolId = params.schoolId;
+		Teacher.getTeacherBySchool(schoolId, function( teachers){
 			var counter = 1;
 			var countLen = teachers.length;
 			console.log("teachers len : " + countLen);
