@@ -294,6 +294,13 @@ app.post('/api/teachers', function(req, res){
 		res.json(returnJson);
 	}
 	else if(func == "adminRead"){
+		Teacher.getTeachers( function(err, teachers){
+			 if(err){
+           throw err;
+       } 
+        res.json(teachers);
+		});
+		/*
 		var returnVal = "{\"teachers\":{";
 		var params = req.body.params;
 		var schoolId = params.schoolId;
@@ -312,6 +319,7 @@ app.post('/api/teachers', function(req, res){
 		 counter++;
          });
 		});
+		*/
 	}
 });
 
