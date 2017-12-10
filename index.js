@@ -1081,7 +1081,7 @@ app.post('/api/periods', function(req, res){
     });
 	}
 	if(funcVal == "adminT"){
-    Period.getPeriodByTeacher(params.schoolId, params.tId, params.tname, function(err, periodObj){
+    Period.getPeriodByTeacher(params.schoolId, params.tid, params.tname, function(err, periodObj){
        if(err){
            throw err;
        } 
