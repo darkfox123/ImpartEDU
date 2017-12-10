@@ -12,6 +12,7 @@ Attendance = require('./models/attendance');
 Resource = require('./models/resource');
 Application = require('./models/application');
 Notifmap = require('./models/notifmap');
+Period = require('./models/period');
 
 var mongoose = require('mongoose');
 var mongodbUri = require('mongodb-uri');
@@ -1047,8 +1048,35 @@ app.get('/api/applications', function(req, res){
        if(err){
            throw err;
        } 
-        res.json(teachers);
+        res.json(JSON.parse(teachers));
     });
+});
+
+app.get('/api/periods', function(req, res){
+    Period.getPeriod(function(err, periods){
+       if(err){
+           throw err;
+       } 
+        res.json(JSON.parse(periods));
+    });
+});
+
+
+//Add period
+// {"function":"add", "params" : {"period":{"schoolId":"","class":"","section":"","serialNo":"","tid":"","tname":"","dayOfW":""}}}
+app.post('/api/periods', function(req, res){
+    var funcVal = req.body.func;
+	var params = req.body.params;
+	if(funcVal == "add"){
+		var periodVal = params.period;
+    Period.addPeriod(period, function(err, period){
+       if(err){
+           throw err;
+       } 
+        console.log("period added : " + );
+		res.json(JSON.parse(period));
+    });
+	}
 });
 
 /*
