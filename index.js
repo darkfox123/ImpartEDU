@@ -1053,7 +1053,7 @@ app.get('/api/applications', function(req, res){
 });
 
 app.get('/api/periods', function(req, res){
-    Period.getPeriod(function(err, periods){
+    Period.getPeriods(function(err, periods){
        if(err){
            throw err;
        } 
