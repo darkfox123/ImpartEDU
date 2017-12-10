@@ -1069,12 +1069,12 @@ app.post('/api/periods', function(req, res){
 	var params = req.body.params;
 	if(funcVal == "add"){
 		var periodVal = params.period;
-    Period.addPeriod(period, function(err, period){
+    Period.addPeriod(period, function(err, periodObj){
        if(err){
            throw err;
        } 
-        console.log("period added : " + );
-		res.json(JSON.parse(period));
+        console.log("period added : " + periodObj);
+		res.json(JSON.parse(periodObj));
     });
 	}
 });
