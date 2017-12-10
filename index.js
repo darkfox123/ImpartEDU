@@ -1069,6 +1069,7 @@ app.post('/api/periods', function(req, res){
 	var params = req.body.params;
 	if(funcVal == "add"){
 		var periodVal = params.period;
+		console.log("period to add : " + periodVal);
     Period.addPeriod(periodVal, function(err, periodObj){
        if(err){
            throw err;
