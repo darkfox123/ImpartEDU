@@ -1063,10 +1063,11 @@ app.get('/api/periods', function(req, res){
 
 
 //Add period
-// {"function":"add", "params" : {"period":{"schoolId":"","class":"","section":"","serialNo":"","tid":"","tname":"","dayOfW":""}}}
+// {"func":"add", "params" : {"period":{"schoolId":"","class":"","section":"","serialNo":"","tid":"","tname":"","dayOfW":""}}}
 app.post('/api/periods', function(req, res){
     var funcVal = req.body.func;
 	var params = req.body.params;
+	console.log("period to add : " + periodVal);
 	if(funcVal == "add"){
 		var periodVal = params.period;
 		console.log("period to add : " + periodVal);
@@ -1076,7 +1077,7 @@ app.post('/api/periods', function(req, res){
        } 
         
 		console.log("period added : " + periodObj);
-		res.json(JSON.parse(periodObj));
+		res.json(periodObj);
     });
 	}
 });
