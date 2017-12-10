@@ -22,5 +22,6 @@ module.exports.addPeriod = function(period,callback){
 }
 
 module.exports.getPeriodByTeacher = function(schid, id, name, callback){
-    Period.find({"schoolId":schid, "tid":id, "tname":name} ,callback);
+    console.log("to match : " + schid + " : " + id + " : " + name);
+	Period.find({"schoolId":schid, "tid":id, "tname":name} ,callback);
 }
