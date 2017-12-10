@@ -20,3 +20,7 @@ module.exports.getPeriods = function(callback, limit){
 module.exports.addPeriod = function(period,callback){
   Period.create(period, callback);
 }
+
+module.exports.getPeriodByTeacher = function(schid, id, name, callback){
+    Period.find({"schoolId":schid, "tid":id, "tname":name} ,callback);
+}

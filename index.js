@@ -1063,9 +1063,10 @@ app.get('/api/periods', function(req, res){
 
 
 //Add period
-// {"func":"add", "params" : {"period":{"schoolId":"","class":"","section":"","serialNo":"","tid":"","tname":"","dayOfW":""}}}
+// {"reciever":"add", "params" : {"period":{"schoolId":"pihu007","class":"II","section":"B","serialNo":"4","tid":"5a25b37717bf790400ba78d5","tname":"Shiv","dayOfW":"Saturday"}}}
+// {"reciever":"adminT", "params" :{"tid":"5a25b37717bf790400ba78d5","tname":"Shiv","schoolId":"pihu007"}}
 app.post('/api/periods', function(req, res){
-    var funcVal = req.body.func;
+    var funcVal = req.body.reciever;
 	var params = req.body.params;
 	console.log("period to add : " + periodVal);
 	if(funcVal == "add"){
@@ -1077,6 +1078,15 @@ app.post('/api/periods', function(req, res){
        } 
         
 		console.log("period added : " + periodObj);
+		res.json(periodObj);
+    });
+	}
+	if(funcVal == "adminT"){
+    Period.getPeriodByTeacher(params.schoolId, params.tId, params.tname, function(err, periodObj){
+       if(err){
+           throw err;
+       } 
+		console.log("period ret : " + periodObj);
 		res.json(periodObj);
     });
 	}
