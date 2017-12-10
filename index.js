@@ -1057,7 +1057,7 @@ app.get('/api/periods', function(req, res){
        if(err){
            throw err;
        } 
-        res.json(JSON.parse(periods));
+        res.json(periods);
     });
 });
 
@@ -1068,7 +1068,6 @@ app.get('/api/periods', function(req, res){
 app.post('/api/periods', function(req, res){
     var funcVal = req.body.reciever;
 	var params = req.body.params;
-	console.log("period to add : " + periodVal);
 	if(funcVal == "add"){
 		var periodVal = params.period;
 		console.log("period to add : " + periodVal);
