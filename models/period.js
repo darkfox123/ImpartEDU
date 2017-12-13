@@ -33,7 +33,7 @@ module.exports.getPeriodByTeacher = function(schid, id, name, callback){
 
 module.exports.getPeriodsByCD = function(schid, classname, sectionname, dayOfW, callback){
     console.log("to match : " + schid + " : " + classname + " : " + sectionname);
-	Period.find({"schoolId":schid, "class":className, "section":sectionname, "dayOfW":dayOfW} ,callback);
+	Period.find({"schoolId":schid, "class":classname, "section":sectionname, "dayOfW":dayOfW} ,callback);
 }
 
 module.exports.updatePeriodByAdmin = function(pId,newTid,tname, callback){
