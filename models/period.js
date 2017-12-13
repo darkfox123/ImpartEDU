@@ -7,6 +7,7 @@ var periodSchema = new mongoose.Schema({
     serialNo: String,
 	tid: String,
 	tname: String,
+	subject: String,
 	dayOfW: String
 });
 
@@ -18,6 +19,10 @@ module.exports.getPeriods = function(callback, limit){
 }
 
 module.exports.addPeriod = function(period,callback){
+  Period.update({}, { subject: "" }, { multi: true }, function (err, raw) {
+  if (err) return handleError(err);
+  console.log('The raw response from Mongo was ', raw);
+});
   Period.create(period, callback);
 }
 
