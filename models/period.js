@@ -31,6 +31,11 @@ module.exports.getPeriodByTeacher = function(schid, id, name, callback){
 	Period.find({"schoolId":schid, "tid":id, "tname":name} ,callback);
 }
 
+module.exports.getPeriodsByCD = function(schid, classname, sectionname, dayOfW, callback){
+    console.log("to match : " + schid + " : " + classname + " : " + sectionname);
+	Period.find({"schoolId":schid, "class":className, "section":sectionname, "dayOfW":dayOfW} ,callback);
+}
+
 module.exports.updatePeriodByAdmin = function(pId,newTid,tname, callback){
     console.log("to search : " + pId + " : " + newTid + " : " + tname);
 	Period.findOneAndUpdate({"_id":pId},{$set: {"tid": newTid, "tname":tname}},{new: true},callback);

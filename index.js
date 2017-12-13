@@ -1065,7 +1065,7 @@ app.get('/api/periods', function(req, res){
 //Add period
 // {"reciever":"add", "params" : {"period":{"schoolId":"pihu007","class":"II","section":"B","serialNo":"4","tid":"5a25b37717bf790400ba78d5","tname":"Shiv","dayOfW":"Saturday","subject":"History"}}}
 // {"reciever":"adminT", "params" :{"tid":"5a25b37717bf790400ba78d5","tname":"Shiv","schoolId":"pihu007"}}
-// {"reciever":"adminDay", "params": {"schoolId":"pihu007", "class":"", "section":"", "dayOfW":""}}
+// {"reciever":"adminCD", "params": {"schoolId":"pihu007", "class":"", "section":"", "dayOfW":""}}
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
 app.post('/api/periods', function(req, res){
     var funcVal = req.body.reciever;
@@ -1093,6 +1093,16 @@ app.post('/api/periods', function(req, res){
 	}
 	else if(funcVal == "adminEdit"){
     Period.updatePeriodByAdmin(params.pid, params.newTid, params.tname, function(err, periodObj){
+       if(err){
+           throw err;
+       } 
+		console.log("period ret : " + periodObj);
+		res.json(periodObj);
+    });
+	}
+	else if(funcVal == "adminCD")
+	{
+		Period.getPeriodsByCD(params.schoolId, params.class, params.section, params.dayOfW,function(err, periodObj){
        if(err){
            throw err;
        } 
