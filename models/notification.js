@@ -23,5 +23,5 @@ module.exports.getNotificationById = function(notif , callback){
 }
 
 module.exports.getNotifByClassDate = function(classId,date,callback){
-    Notification.find({"classid":classId,"date":date},callback);
+    Notification.find({"classid":classId,"time":date},callback);
 }
