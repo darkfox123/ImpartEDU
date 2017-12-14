@@ -581,6 +581,7 @@ app.get('/api/notifmaps', function(req, res){
 //input Student: {"reciever":"student", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "name":"Shibu","rollno":"121", "notification":{"title":"Sample Notif for student 2", "subject":"Hello There! 2"}}}
 //load Student ip: {"reciever":"load", "params":{"studentid":"59d1e5b1f02d8f0400014ffc"}}
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
+//admin read : Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-10-31T17:51:07.837Z"}}
 app.post('/api/notifications', function(req, res){
     console.log("api called notif");
 	
@@ -715,7 +716,16 @@ app.post('/api/notifications', function(req, res){
         });
         */
     }
-});
+else if(reciever == "adminRead"){
+		var classId = params.classid;
+		var date = params.date;
+		Notification.getNotifByClassDate(classId, date, function(err, applications){
+			 if(err) throw err;
+			 res.json(applications);
+		})
+	}
+	
+	});
 
 //1) input : {"reciever":"post", "params":{"classid":"5910bc227803461e804c08f7"(IV-B), "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e3","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e2","date":"14/05/2017","attendance":"Absent"}]}
 // 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
