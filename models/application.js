@@ -17,14 +17,14 @@ var ApplicationSchema = new mongoose.Schema({
 var Application = module.exports = mongoose.model('Application', ApplicationSchema);
 
 module.exports.getApplication = function(callback, limit){
-    Application.update({}, {ISOdate : "" }, { multi: true }, function (err, raw) {
-  if (err) console.log('The err response from Mongo was '+ err);;
-  console.log('The raw response from Mongo was ', raw);
-});
 	Application.find(callback).limit(limit);
 }
 
 module.exports.addApplication = function(application,callback){
+    Application.update({}, {ISOdate : "" }, { multi: true }, function (err, raw) {
+  if (err) console.log('The err response from Mongo was '+ err);;
+  console.log('The raw response from Mongo was ', raw);
+});
   Application.create(application, callback);
 }
 
