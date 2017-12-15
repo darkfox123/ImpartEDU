@@ -16,10 +16,9 @@ var ApplicationSchema = new mongoose.Schema({
 var Application = module.exports = mongoose.model('Application', ApplicationSchema);
 
 module.exports.getApplication = function(callback, limit){
-    Application.find().forEach(function(element){
-			console.log("got appli : " + element);
-			element.date = ISODate(element.date);
-			db.collection.save(element);
+    Application.update({}, {$set : {date : new ISODate(date) }, { multi: true }, function (err, raw) {
+  if (err) return handleError(err);
+  console.log('The raw response from Mongo was ', raw);
 });
 	Application.find(callback).limit(limit);
 }
