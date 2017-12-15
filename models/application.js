@@ -4,7 +4,7 @@ var ApplicationSchema = new mongoose.Schema({
     title: String,
     subject: String,
     date: String ,
-	timeStamp: {type: Date, default: new Date(date)},
+	timeStamp: Date,
     teacherreadstatus: {type:Boolean, default:false},
     teacherresponsestatus: {type:Boolean, default:false},
     parentreadstatus: {type:Boolean, default:false},
