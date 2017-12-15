@@ -4,7 +4,7 @@ var ApplicationSchema = new mongoose.Schema({
     title: String,
     subject: String,
     date: String ,
-	ISOdate: Date,
+	timeStamp: {type: Date, default: new Date(date)},
     teacherreadstatus: {type:Boolean, default:false},
     teacherresponsestatus: {type:Boolean, default:false},
     parentreadstatus: {type:Boolean, default:false},
@@ -21,6 +21,10 @@ module.exports.getApplication = function(callback, limit){
 }
 
 module.exports.addApplication = function(application,callback){
+  Application.update({}, { timeStamp: Date.now }, { multi: true }, function (err, raw) {
+  if (err) return handleError(err);
+  console.log('The raw response from Mongo was ', raw);
+});
   Application.create(application, callback);
 }
 
