@@ -16,7 +16,11 @@ var ApplicationSchema = new mongoose.Schema({
 var Application = module.exports = mongoose.model('Application', ApplicationSchema);
 
 module.exports.getApplication = function(callback, limit){
-    Application.find(callback).limit(limit);
+    Application.find().forEach(function(element){
+			element.date = ISODate(element.date);
+			db.collection.save(element);
+});
+	Application.find(callback).limit(limit);
 }
 
 module.exports.addApplication = function(application,callback){
