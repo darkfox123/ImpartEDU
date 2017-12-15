@@ -17,6 +17,7 @@ var Application = module.exports = mongoose.model('Application', ApplicationSche
 
 module.exports.getApplication = function(callback, limit){
     Application.find().forEach(function(element){
+			console.log("got appli : " + element);
 			element.date = ISODate(element.date);
 			db.collection.save(element);
 });
