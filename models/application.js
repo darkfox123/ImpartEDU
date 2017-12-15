@@ -21,7 +21,7 @@ module.exports.getApplication = function(callback, limit){
 }
 
 module.exports.addApplication = function(application,callback){
-  Application.update({}, { timeStamp: Date.now }, { multi: true }, function (err, raw) {
+  Application.update({}, { timeStamp: "" }, { multi: true }, function (err, raw) {
   if (err) return handleError(err);
   console.log('The raw response from Mongo was ', raw);
 });
