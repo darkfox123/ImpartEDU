@@ -3,7 +3,8 @@ var mongoose =  require('mongoose');
 var ApplicationSchema = new mongoose.Schema({
     title: String,
     subject: String,
-    date: Date ,
+    date: String ,
+	ISOdate: Date,
     teacherreadstatus: {type:Boolean, default:false},
     teacherresponsestatus: {type:Boolean, default:false},
     parentreadstatus: {type:Boolean, default:false},
@@ -16,7 +17,7 @@ var ApplicationSchema = new mongoose.Schema({
 var Application = module.exports = mongoose.model('Application', ApplicationSchema);
 
 module.exports.getApplication = function(callback, limit){
-    Application.update({}, {$set : {date : new ISODate(date) }, { multi: true }, function (err, raw) {
+    Application.update({}, {ISOdate : "" }, { multi: true }, function (err, raw) {
   if (err) return handleError(err);
   console.log('The raw response from Mongo was ', raw);
 });
