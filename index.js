@@ -960,6 +960,7 @@ app.post('/api/applications', function(req, res){
     var reciever = req.body.reciever;
     var params = req.body.params;
     if(reciever == "recieve"){
+		console.log("application adding : " + params);
         var classId = params.classid;
         var studentId = params.studentid;
         Application.addApplication(params, function(err, application){
