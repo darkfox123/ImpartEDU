@@ -21,10 +21,6 @@ module.exports.getApplication = function(callback, limit){
 }
 
 module.exports.addApplication = function(application,callback){
-  Application.update({}, { timeStamp: "" }, { multi: true }, function (err, raw) {
-  if (err) return handleError(err);
-  console.log('The raw response from Mongo was ', raw);
-});
   Application.create(application, callback);
 }
 
@@ -65,6 +61,11 @@ module.exports.getApplicationResponseParent = function(studentId, callback){
 module.exports.markApplicationResponseParent = function(applicationId, callback){
     Application.findOneAndUpdate({"_id":applicationId},{$set: {"parentreadstatus": true}},{new: true},callback);
 }
+
+module.exports.updateTimeStamp = function(applicationId, date, callback){
+    Application.findOneAndUpdate({"_id":applicationId},{$set: {"timeStamp": new Date(date)}},{new: true},callback);
+}
+
 
 //{$set: {"parentreadstatus": true}},{new: true, multi: true},
 

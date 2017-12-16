@@ -966,6 +966,10 @@ app.post('/api/applications', function(req, res){
         Application.addApplication(params, function(err, application){
            if(err) throw err;
             console.log("application added : " + application);
+			Application.updateTimeStamp(application._id, application.date ,function(err, application){
+			if(err) throw err;
+			console.log("updated timestamp for : " + application);
+			});
             var applicationId = application._id;
             Class.addApplicationToClass(classId, applicationId, function(err, classInst){
                 if(err) throw err;
