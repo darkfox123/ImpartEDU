@@ -949,13 +949,13 @@ app.get('/api/resource', function(req, res){
     });
 });
 
-// Application recieve : {"reciever":"recieve","params":{"classid":"5910bc227803461e804c08f6","studentid":"59159716307f0e1cf052b990","date":"16-06-2017","ISOdate":"","title":"For Leave of 3 dayz","subject":"My sample leave application yo"}}
+// Application recieve : {"reciever":"recieve","params":{"classid":"5910bc227803461e804c08f6","studentid":"59159716307f0e1cf052b990","date":"2017-12-16", "title":"For Leave of 7 dayz","subject":"My sample leave application yo"}}
 // Application recieve : {"reciever":"sync","params":{"classid":"59f4b7cf41618f04000a0a2f"}}
 // recieve response : {"applications":[{},{}]}
 // Teacher Application response : {"reciever":"teacherResponse","applicationid":"","accepted":"true"}
 //Student sync request : {"reciever":"studentsync","params":{"studentid":"59159716307f0e1cf052b990"}}
 // Student sync response: {"applications":[{"id":"593e47e70353a3095002f97e","title":"For Leave of 4 dayz","accepted":"false","date":"16-06-2017","studentid":"59159716307f0e1cf052b990"},{"id":"593e5367ab63b30aac025868","title":"For Leave of 3 dayz","accepted":"true","date":"16-06-2017","studentid":"59159716307f0e1cf052b990"}]}
-// Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"25-11-2017"}}
+// Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-16"}}
 app.post('/api/applications', function(req, res){
     var reciever = req.body.reciever;
     var params = req.body.params;

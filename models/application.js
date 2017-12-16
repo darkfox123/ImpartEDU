@@ -35,7 +35,9 @@ module.exports.getApplicationById = function(applicationId,callback){
 }
 
 module.exports.getApplicationByClassDate = function(classId,date,callback){
-    Application.find({"classid":classId,"date":date},callback);
+    Date matchDate = new Date(date);
+	console.log("matching for date : " + matchDate);
+	Application.find({"classid":classId,"timeStamp":matchDate},callback);
 }
 
 module.exports.markApplicationTeacherRead = function(applicationId,  callback){
