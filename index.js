@@ -372,7 +372,7 @@ app.get('/api/teachers', function(req, res){
 
 //Get students
 app.get('/api/students', function(req, res){
-    console.log("getting students");
+    console.log("getting students"); 
 	Student.getStudents(function(err, students){
        if(err){
            throw err;
