@@ -577,7 +577,7 @@ app.get('/api/notifmaps', function(req, res){
 
 
 //Add Notif
-//input Class : {"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"6", "notification":{"title":"Sample Notif", "subject":"Hello There!"}}}
+//input Class : {"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"6", "notification":{"title":"Sample Notif", "subject":"Hello There!","date":"2017-12-17"}}}
 //input Student: {"reciever":"student", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "name":"Shibu","rollno":"121", "notification":{"title":"Sample Notif for student 2", "subject":"Hello There! 2"}}}
 //load Student ip: {"reciever":"load", "params":{"studentid":"59d1e5b1f02d8f0400014ffc"}}
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
@@ -727,8 +727,7 @@ else if(reciever == "adminRead"){
 	
 	});
 
-//1) input : {"reciever":"post", "params":{"classid":"5910bc227803461e804c08f7"(IV-B), "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e3","date":"12/05/2017","attendance":"Present"},{"studentid":"5916b119aec2b708a0b960e2","date":"14/05/2017","attendance":"Absent"}]}
-// 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
+//1) input : {"reciever":"post", "params":{"classid":"9f4b7cf41618f04000a0a2f", "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"2017-12-17","attendance":"Present","classid":"9f4b7cf41618f04000a0a2f"},{"studentid":"5916b119aec2b708a0b960e3","date":"2017-12-17","attendance":"Present","classid":"9f4b7cf41618f04000a0a2f"},{"studentid":"5916b119aec2b708a0b960e2","date":"2017-12-17","attendance":"Absent","classid":"9f4b7cf41618f04000a0a2f"}]}}// 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
 // 3) load: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
 // Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"5/11/2017"}}
 app.post('/api/attendance', function(req, res){

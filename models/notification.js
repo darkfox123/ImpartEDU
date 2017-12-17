@@ -4,6 +4,7 @@ var NotificationSchema = new mongoose.Schema({
     title: String,
     subject: String,
     time: {type: Date, default: Date.now},
+	date: String ,
     author: {type: mongoose.Schema.Types.ObjectId, ref: 'Teacher'}
 });
 
@@ -15,7 +16,11 @@ module.exports.getNotification = function(callback, limit){
 
 module.exports.addNotification = function(notif,callback){
   console.log("notification to add  : " + notif.toString);
-    Notification.create(notif, callback);
+    Notification.update({}, { date: "" }, { multi: true }, function (err, raw) {
+  if (err) return handleError(err);
+  console.log('The raw response from Mongo was ', raw);
+});
+	Notification.create(notif, callback);
 }
 
 module.exports.getNotificationById = function(notif , callback){
@@ -24,4 +29,8 @@ module.exports.getNotificationById = function(notif , callback){
 
 module.exports.getNotifByClassDate = function(classId,date,callback){
     Notification.find({"classid":classId,"time":date},callback);
+}
+
+module.exports.updateTimeStamp = function(applicationId, date, callback){
+    Notification.findOneAndUpdate({"_id":applicationId},{$set: {"time": new Date(date)}},{new: true},callback);
 }
