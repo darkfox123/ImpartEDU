@@ -3,7 +3,7 @@ var mongoose =  require('mongoose');
 var NotificationSchema = new mongoose.Schema({
     title: String,
     subject: String,
-    time: {type: Date, default: Date.now},
+    time: Date,
 	date: String ,
     author: {type: mongoose.Schema.Types.ObjectId, ref: 'Teacher'}
 });
