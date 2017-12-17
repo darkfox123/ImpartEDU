@@ -5,7 +5,8 @@ var ResourceSchema = new mongoose.Schema({
     value: String,
     title:String,
     type:String,
-    date: {type: Date, default: Date.now}
+	time: String,
+    date: Date
 });
 
 var Resource = module.exports = mongoose.model('Resource', ResourceSchema);
@@ -20,6 +21,10 @@ module.exports.getResourceByID = function(resId, callback){
 }
 
 module.exports.addResource = function(resource,callback){
+  Resource.update({}, { time: "" }, { multi: true }, function (err, raw) {
+  if (err) return handleError(err);
+  console.log('The raw response from Mongo was ', raw);
+});
   Resource.create(resource, callback);
 }
 
