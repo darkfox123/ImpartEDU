@@ -959,7 +959,7 @@ app.get('/api/resource', function(req, res){
     });
 });
 
-// Application recieve : {"reciever":"recieve","params":{"classid":"5910bc227803461e804c08f6","studentid":"59159716307f0e1cf052b990","date":"2017-12-16", "title":"For Leave of 7 dayz","subject":"My sample leave application yo"}}
+// Application recieve : {"reciever":"recieve","params":{"classid":"59f4b7cf41618f04000a0a2f","studentid":"59fe17650d7f850400b3e203","date":"2017-12-27", "title":"For Leave of 27 dayz","subject":"My sample leave application yo"}}
 // Application recieve : {"reciever":"sync","params":{"classid":"59f4b7cf41618f04000a0a2f"}}
 // recieve response : {"applications":[{},{}]}
 // Teacher Application response : {"reciever":"teacherResponse","applicationid":"","accepted":"true"}

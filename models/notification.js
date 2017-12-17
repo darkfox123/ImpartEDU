@@ -18,7 +18,7 @@ module.exports.getNotification = function(callback, limit){
 
 module.exports.addNotification = function(notif,callback){
   console.log("notification to add  : " + notif.toString);
-    Notification.update({}, { studentid: "" }, { multi: true }, function (err, raw) {
+    Notification.update({}, { classid: "" }, { multi: true }, function (err, raw) {
   if (err) return handleError(err);
   console.log('The raw response from Mongo was ', raw);
 });
