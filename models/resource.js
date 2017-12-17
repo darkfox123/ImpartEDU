@@ -21,10 +21,6 @@ module.exports.getResourceByID = function(resId, callback){
 }
 
 module.exports.addResource = function(resource,callback){
-  Resource.update({}, { date: "" }, { multi: true }, function (err, raw) {
-  if (err) return handleError(err);
-  console.log('The raw response from Mongo was ', raw);
-});
   Resource.create(resource, callback);
 }
 
