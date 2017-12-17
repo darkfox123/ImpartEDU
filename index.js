@@ -741,6 +741,7 @@ app.post('/api/attendance', function(req, res){
         var count = attendanceArr.length;
         var counter = 1;
         attendanceArr.forEach(function(attendanceInst){
+			console.log("bug : 1 " + attendanceInst);
             var studentId = attendanceInst.studentid;
 			console.log("debug : 1 " + attendanceInst);
             Attendance.addAttendance(attendanceInst, function(err, attendanceRet){
