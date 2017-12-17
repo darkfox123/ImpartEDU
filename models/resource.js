@@ -33,6 +33,6 @@ module.exports.getResourceByClass = function(classId,date,callback){
 }
 
 module.exports.updateTimeStamp = function(applicationId, date, callback){
-    Notification.findOneAndUpdate({"_id":applicationId},{$set: {"date": new Date(date)}},{new: true},callback);
+    Resource.findOneAndUpdate({"_id":applicationId},{$set: {"date": new Date(date)}},{new: true},callback);
 }
 
