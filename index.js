@@ -1256,11 +1256,4 @@ Notifmap.remove({}, function(err) {
         }
     );
 */
-Resource.remove({}, function(err) {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log('success');
-            }
-        }
-    );
+
