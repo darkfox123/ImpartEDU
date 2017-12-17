@@ -881,6 +881,10 @@ app.post('/api/resource', function(req, res){
            if(err) throw err;
            // console.log("rsc added : " + resource);
 			var resourceId = resource._id;
+			Resource.updateTimeStamp(resourceId, resource.time ,function(err, resource){
+			if(err) throw err;
+			console.log("updated timestamp for : " + resource);
+			});
             Class.addResourceToClass(classId, resourceId, function(err, classInst){
                 if(err) throw err;
                 console.log("updated class : " + classInst);
