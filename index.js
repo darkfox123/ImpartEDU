@@ -1261,4 +1261,7 @@ Notifmap.remove({}, function(err) {
         }
     );
 */
-
+ Period.update({}, { classVal: class }, { multi: true }, function (err, raw) {
+  if (err) return handleError(err);
+  console.log('The raw response from Mongo was ', raw);
+});
