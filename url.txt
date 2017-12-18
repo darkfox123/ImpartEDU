@@ -1,0 +1,15 @@
+attendance:
+{"reciever":"post", "params":{"classid":"9f4b7cf41618f04000a0a2f", "attendanceArr":[{"studentid":"59fe17650d7f850400b3e203","date":"2017-12-28","attendance":"Present","classid":"9f4b7cf41618f04000a0a2f"},{"studentid":"59fe17650d7f850400b3e204","date":"2017-12-28","attendance":"Present","classid":"9f4b7cf41618f04000a0a2f"},{"studentid":"59fe17650d7f850400b3e203","date":"2017-12-28","attendance":"Absent","classid":"59f4b7cf41618f04000a0a2f"}]}}
+{"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-27"}}
+
+notifications:
+{"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"6", "notification":{"title":"Latest notif", "subject":"Hello There!dddddd","date":"2017-12-28","classid":"59f4b7cf41618f04000a0a2f"}}}
+{"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-28"}}
+
+resource:
+{"reciever":"upload","params":{"classid":"59f4b7cf41618f04000a0a2f","value":"iVBOR", "title":"woo new updated man", "time":"2017-12-28" }}
+{"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-26"}}
+
+application:
+{"reciever":"recieve","params":{"classid":"59f4b7cf41618f04000a0a2f","studentid":"59fe17650d7f850400b3e203","date":"2017-12-28", "title":"For Leave of 288 dayz","subject":"My sample leave application yo"}}
+{"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-27"}}
