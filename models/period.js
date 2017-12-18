@@ -3,7 +3,6 @@ var mongoose =  require('mongoose');
 var periodSchema = new mongoose.Schema({
     schoolId: String,
     class: String,
-	classVal:String,
 	section: String,
     serialNo: String,
 	tid: String,
@@ -16,10 +15,6 @@ var Period = module.exports = mongoose.model('Period', periodSchema);
 
  //get Periods
 module.exports.getPeriods = function(callback, limit){
-    Period.update({}, { "classVal": class }, { multi: true }, function (err, raw) {
-  if (err) return handleError(err);
-  console.log('The raw response from Mongo was ', raw);
-});
 	Period.find(callback).limit(limit);
 }
 
