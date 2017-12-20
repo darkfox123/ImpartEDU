@@ -585,7 +585,6 @@ app.get('/api/notifmaps', function(req, res){
 //admin Student wise: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
 app.post('/api/notifications', function(req, res){
     console.log("api called notif");
-	
 	var reciever = req.body.reciever;
     var params = req.body.params;
     var createdNotif = null;
