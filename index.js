@@ -422,7 +422,7 @@ console.log("skipping stud");
 */
 
 //{ "reciever" : "add", "params": {"classId":"59f4b7cf41618f04000a0a2f" , "student" :[{"name":" Yukti", "rollno":"120", "className":"II", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly","classid":"59f4b7cf41618f04000a0a2f", "notifCount":0}]}}
-//{"reciever" : "adminRead", "params": {"schoolName":"Uttam Public","city":"Bareilly"}}
+//{"reciever" : "adminRead", "params": {"schoolName":"Uttam Public","city":"Bareilly", "class":"II","section":"B"}}
 app.post('/api/students', function(req, res){
 	var reciever = req.body.reciever;
 	var params = req.body.params;
@@ -456,10 +456,14 @@ app.post('/api/students', function(req, res){
 	else if(reciever == "adminRead"){
 		var city = params.city;
 		var schoolName = params.schoolName;
-		Student.getStudentsBySchool(city,schoolName, function(err, students){
-        if(err){throw err;}
-		res.json(students);
-		});
+		var city = params.class;
+		var section = params.section;
+		  Student.getStudentsByClass(className, section, city, school, function(err, students){
+       if(err){
+           throw err;
+       } 
+	   res.json(students);
+		  });
 	}
 });
 
