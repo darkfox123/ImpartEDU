@@ -456,7 +456,7 @@ app.post('/api/students', function(req, res){
 	else if(reciever == "adminRead"){
 		var city = params.city;
 		var schoolName = params.schoolName;
-		var city = params.class;
+		var className = params.class;
 		var section = params.section;
 		  Student.getStudentsByClass(className, section, city, school, function(err, students){
        if(err){
