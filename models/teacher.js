@@ -27,7 +27,7 @@ module.exports.getTeachers = function(callback, limit){
     Teacher.find(callback).limit(limit);
 }
 
-module.exports.addNotifToTeacher = function(tid, callback){
+module.exports.addNotifToTeacher = function(tid,notifmapId, callback){
 	Teacher.findOneAndUpdate({"_id":tid}, {$push: {notifications: mongoose.Types.ObjectId(notifmapId)}},{new: true}, callback);
 }
 
