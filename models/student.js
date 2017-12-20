@@ -22,7 +22,7 @@ module.exports.getStudents = function(callback, limit){
 
 //get students by class id
 module.exports.getStudentsByClass = function(className, section, city, schoolName, callback){
- Student.find({"className":className,"section":section,"city":city,"schoolName":schoolName},callback);
+ Student.find({"className":className,"section":section,"city":city,"schoolName":schoolName},{name:1,rollno:1,_id:1},callback);
 }
 
 module.exports.getStudentsBySchool = function(city, schoolName, callback){
