@@ -607,7 +607,7 @@ app.post('/api/notifications', function(req, res){
 			console.log("updated timestamp for : " + application);
 			});
 		console.log("sending json back");
-		res.json(createdNotif);
+		res.json(createdNotif._id);
         Notifmap.addNotifMap(notif._id, function(err, notifmap){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
