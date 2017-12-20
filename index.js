@@ -656,7 +656,7 @@ app.post('/api/notifications', function(req, res){
              Notifmap.addNotifMap(notif._id, function(err, notifmap){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
-                 Teacher.addNotifToTeacher(tid, function(err, student){ if(err){throw err;}
+                 Teacher.addNotifToTeacher(tid, function(err, student){ if(err){console.log("err : " + err);}
                         console.log("updated  : " + student);
                       res.json(createdNotif._id);                                                                                                       
                 });

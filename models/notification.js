@@ -19,7 +19,7 @@ module.exports.getNotification = function(callback, limit){
 }
 
 module.exports.addNotification = function(notif,callback){
-  console.log("notification to add  : " + notif.toString);
+ // console.log("notification to add  : " + notif.toString);
 	Notification.create(notif, callback);
 }
 
