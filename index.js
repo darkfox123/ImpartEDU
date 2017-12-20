@@ -641,7 +641,7 @@ app.post('/api/notifications', function(req, res){
             console.log("notifmap created : " + notifmap);
                  Student.addNotifToStudent(name,rollno,className,section,city,schoolName,notifmap._id, function(err, student){ if(err){throw err;}
                         console.log("updated  : " + student);
-                      res.json(createdNotif);                                                                                                       
+                      res.json(createdNotif._id);                                                                                                       
                 });
              });
           });
