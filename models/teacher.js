@@ -28,10 +28,6 @@ module.exports.getTeachers = function(callback, limit){
 }
 
 module.exports.addNotifToTeacher = function(tid, callback){
-	 Teacher.update({}, { notifications: [] }, { multi: true }, function (err, raw) {
-  if (err) return handleError(err);
-  console.log('The raw response from Mongo was ', raw);
-});
 	Teacher.findOneAndUpdate({"_id":tid}, {$push: {notifications: mongoose.Types.ObjectId(notifmapId)}},{new: true}, callback);
 }
 
