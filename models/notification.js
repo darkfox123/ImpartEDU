@@ -20,10 +20,6 @@ module.exports.getNotification = function(callback, limit){
 
 module.exports.addNotification = function(notif,callback){
   console.log("notification to add  : " + notif.toString);
-    Notification.update({}, { attachment: "", attachmentTitle: "" }, { multi: true }, function (err, raw) {
-  if (err) return handleError(err);
-  console.log('The raw response from Mongo was ', raw);
-});
 	Notification.create(notif, callback);
 }
 
