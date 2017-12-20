@@ -16,15 +16,14 @@ Period = require('./models/period');
 
 var mongoose = require('mongoose');
 var mongodbUri = require('mongodb-uri');
-var bodyParser = require('body-parser');
 var async = require("async");
 var express = require('express');
 var app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: false
-})); 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+ 
 
 // A MongoDB URI, not compatible with Mongoose because it lists multiple hosts in the address
 // Could be pulled from an environment variable or config file
