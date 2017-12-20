@@ -458,7 +458,7 @@ app.post('/api/students', function(req, res){
 		var schoolName = params.schoolName;
 		var className = params.class;
 		var section = params.section;
-		  Student.getStudentsByClass(className, section, city, school, function(err, students){
+		  Student.getStudentsByClass(className, section, city, schoolName, function(err, students){
        if(err){
            throw err;
        } 
