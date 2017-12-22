@@ -159,7 +159,7 @@ app.get('/api/classes', function(req, res){
 
 //Add classes (add school prerequisite)
 // Test: {"city":"Moradabad" , "schoolId": "school9927", "classes" : [{"name":"XI", "section":"E", "schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"VI", "section":"A","schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"IV", "section":"B","schoolId": "school9927" , "schoolName":"RDBMS", "city":"Moradabad"}]}
-// Test: {""}
+// Test: {"function":"fetch", "params":""}
 app.post('/api/classes', function(req, res){
     //console.log(JSON.stringify(req.body))
 	var reqBody = req.body;
@@ -202,7 +202,7 @@ app.post('/api/classes', function(req, res){
     var returnJson = "";
     var count = 1;
     if(params.city != null && params.school != null){   
-    Class.getClasseBySchool(params.city, params.school, function(err, classes){
+    Class.getClasseBySchool(params.city, params.schoolId, function(err, classes){
      returnJson += "{\"classes\":[";
         console.log("classes : " + classes.length);
         classes.forEach(function(classInst){

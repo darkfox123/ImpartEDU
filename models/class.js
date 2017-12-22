@@ -21,9 +21,9 @@ module.exports.getClasses = function(callback, limit){
 }
 
 //get classes by school
-module.exports.getClasseBySchool = function(city,schoolName, callback){
-    console.log("getclassesBySchool :" + schoolName + " : " + city );
-	Class.find({schoolName:schoolName,city:city},callback);
+module.exports.getClasseBySchool = function(city,schoolId, callback){
+    console.log("getclassesBySchool :" + schoolId + " : " + city );
+	Class.find({"schoolId":schoolId,"city":city},callback);
 }
 
 //get classes by school
