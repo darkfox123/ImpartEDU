@@ -197,7 +197,7 @@ app.post('/api/classes', function(req, res){
 });  
 	}
 	else if (functionVal == "fetch"){
-	var params = req.params;
+	var params = reqBody.params;
 	console.log("city : " + params.city + " : ");
     var returnJson = "";
     var count = 1;
