@@ -165,7 +165,7 @@ app.post('/api/classes', function(req, res){
 	var reqBody = req.body;
 	console.log(JSON.stringify(reqBody));
 	var functionVal = reqBody.function;
-    console.log("fnval : " + functionVal + " params : " + JSON.stringify(reqBody.queryparam));
+    console.log("fnval : " + functionVal + " params : " + JSON.stringify(req.params));
     if(functionVal == "add"){
 		console.log("inside add");
 	var params = req.body.params;
@@ -197,7 +197,7 @@ app.post('/api/classes', function(req, res){
 });  
 	}
 	else if (functionVal == "fetch"){
-	var params = reqBody.params;
+	var params = req.params;
 	console.log("city : " + params.city + " : ");
     var returnJson = "";
     var count = 1;
