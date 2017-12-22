@@ -198,11 +198,11 @@ app.post('/api/classes', function(req, res){
 	}
 	else if (functionVal == "fetch"){
 	var params = reqBody.params;
-	console.log("city : " + params.city + " : ");
+	console.log("city : " + params.city + " : " + params.school);
     var returnJson = "";
     var count = 1;
     if(params.city != null && params.school != null){   
-    Class.getClasseBySchool(params.city, params.schoolId, function(err, classes){
+    Class.getClasseBySchool(params.city, params.school, function(err, classes){
      returnJson += "{\"classes\":[";
         console.log("classes : " + classes.length);
         classes.forEach(function(classInst){
