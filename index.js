@@ -163,7 +163,7 @@ app.get('/api/classes', function(req, res){
 app.post('/api/classes', function(req, res){
     //console.log(JSON.stringify(req.body))
 	var reqBody = req.body;
-	console.log(JSON.stringify(reqBody));
+	console.log(JSON.stringify(reqBody.params.city));
 	var functionVal = reqBody.function;
     console.log("fnval : " + functionVal + " params : " + JSON.stringify(req.params));
     if(functionVal == "add"){
