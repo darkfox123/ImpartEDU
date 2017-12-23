@@ -500,13 +500,14 @@ app.post('/api/parents', function(req, res){
         var school = params.school;
         var city = params.city;
         var schoolId = params.schoolId;
+		var classId = params.classId;
         var parent = params;
         var returnVal = "{ \"parentid\":";
     //console.log("got header id : " + classId);
     Parent.addParents(parent, function(err, parent){
         returnVal += "\"" + parent._id + "\"," + "\"students\":[";
         console.log("class chahiye : " + className + " : " + section + " : " + city + " : " + school);
-        Student.getStudentsByClass(className, section, city, school, function(err, students){
+        Student.getStudentsByClass(classId, function(err, students){
        if(err){
            throw err;
        } 
