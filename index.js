@@ -741,7 +741,7 @@ app.post('/api/notifications', function(req, res){
                 //var status = nm.readStatus;
                   //  var nmid = nm._id;
 				   console.log("notifmap 111111 : " + notifmap);
-                    if(notifmap.readStatus == false){
+                    if(notifmap.readStatus === false){
                          console.log("notifmap 22222 : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
                            //console.log("notifreturn : " + notifmapRet);
