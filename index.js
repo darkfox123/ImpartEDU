@@ -584,8 +584,8 @@ app.get('/api/notifmaps', function(req, res){
 
 //Add Notif
 //input Class : {"reciever":"class", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "studentcount":"6", "notification":{"title":"Sample Notif", "subject":"Hello There!","date":"2017-12-17","classid":"9f4b7cf41618f04000a0a2f"}}}
-//input Student: {"reciever":"student", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "name":"Shibu","rollno":"121", "notification":{"title":"Sample Notif for student 2", "subject":"Hello There! 2"}}}
-//input Student: {"reciever":"teacher", "params":{"tid":"5a25b37717bf790400ba78d5", "notification":{"title":"Sample Notif for student 2", "subject":"Hello There! 2"}}}
+//input Student: {"reciever":"student", "params":{"class":"II", "section":"B", "city":"Bareilly", "schoolName":"St. stephens", "name":"Shibu","rollno":"121", "notification":{"title":"Sample Notif for student 2","date":"2017-12-17", "subject":"Hello There! 2"}}}
+//input Student: {"reciever":"teacher", "params":{"tid":"5a25b37717bf790400ba78d5", "notification":{"title":"Sample Notif for student 2","date":"2017-12-17", "subject":"Hello There! 2"}}}
 //load Student ip: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
 //admin read : Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-17T00:00:00.000Z"}}
@@ -641,6 +641,12 @@ app.post('/api/notifications', function(req, res){
         Notification.addNotification(notif, function(err, notif){
         console.log("notif created : " + notif);
         createdNotif = notif;
+		Notification.updateTimeStamp(notif._id, notif.date ,function(err, application){
+			if(err) throw err;
+			console.log("updated timestamp for : " + application);
+			});
+		console.log("sending json back");
+		res.json(createdNotif._id);
              Notifmap.addNotifMap(notif._id, function(err, notifmap){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
@@ -657,6 +663,12 @@ app.post('/api/notifications', function(req, res){
         Notification.addNotification(notif, function(err, notif){
         console.log("notif created : " + notif);
         createdNotif = notif;
+		Notification.updateTimeStamp(notif._id, notif.date ,function(err, application){
+			if(err) throw err;
+			console.log("updated timestamp for : " + application);
+			});
+		console.log("sending json back");
+		res.json(createdNotif._id);
              Notifmap.addNotifMap(notif._id, function(err, notifmap){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
@@ -728,8 +740,9 @@ app.post('/api/notifications', function(req, res){
                     //var nm = JSON.parse(notifmap);
                 //var status = nm.readStatus;
                   //  var nmid = nm._id;
-                    if(!notifmap.readStatus){
-                         console.log("notifmap : " + notifmap);
+				   console.log("notifmap 111111 : " + notifmap);
+                    if(notifmap.readStatus == false){
+                         console.log("notifmap 22222 : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
                            //console.log("notifreturn : " + notifmapRet);
                             if( notifmapRet != null){
