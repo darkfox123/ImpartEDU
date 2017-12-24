@@ -590,7 +590,7 @@ app.get('/api/notifmaps', function(req, res){
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
 //admin read : Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-17T00:00:00.000Z"}}
 //admin Student wise: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
-//load Teacher ip: {"reciever":"loadT", "params":{"teacherid":"59fe17650d7f850400b3e203"}}
+//load Teacher ip: {"reciever":"loadT", "params":{"teacherid":"5a25b37717bf790400ba78d5"}}
 app.post('/api/notifications', function(req, res){
     console.log("api called notif");
 	var reciever = req.body.reciever;
@@ -734,7 +734,7 @@ app.post('/api/notifications', function(req, res){
                            //console.log("notifreturn : " + notifmapRet);
                             if( notifmapRet != null){
                             Notification.getNotificationById(notifmapRet.notification, function(err, notifRet){
-							    result += "{\"time\":\"" + notifRet.time + "\",\"subject\":\"" + notifRet.subject +  "\",\"_id\":\"" + notifRet._id +  "\",\"title\":\"" + notifRet.title + "\",\"date\":" + JSON.stringify(notifRet.time).substr(0,11) + "\"},";
+							    result += "{\"time\":\"" + notifRet.time + "\",\"subject\":\"" + notifRet.subject +  "\",\"_id\":\"" + notifRet._id +  "\",\"title\":\"" + notifRet.title + "\"},";
                                 console.log("result : " + result);
                                if(counter == notifCount)
                                    {
