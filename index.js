@@ -22,7 +22,7 @@ var app = express();
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+//app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
  //.use(bodyParser.urlencoded({ extended: false }));
 //app.use(bodyParser.json({ type: 'application/*+json' }));
 
@@ -590,6 +590,7 @@ app.get('/api/notifmaps', function(req, res){
 //load Student op: {"notifs":[{"title":"Sample Notif for student","subject":"Hello There!","time":"Sat May 13 2017 13:32:14 GMT+0530 (India Standard Time)"},{"title":"Sample Notif for student 2","subject":"Hello There! 2","time":"Sat May 13 2017 13:32:49 GMT+0530 (India Standard Time)"}]}
 //admin read : Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"2017-12-17T00:00:00.000Z"}}
 //admin Student wise: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
+//load Teacher ip: {"reciever":"loadT", "params":{"teacherid":"59fe17650d7f850400b3e203"}}
 app.post('/api/notifications', function(req, res){
     console.log("api called notif");
 	var reciever = req.body.reciever;
@@ -708,40 +709,49 @@ app.post('/api/notifications', function(req, res){
             });
         }
         );
-        /*
-        Student.getStudentById(studentId, function(err, student){
+    }
+	else if(reciever == "loadT"){
+        var teacherId = params.teacherid;
+        var result = "{\"notifs\":[";
+        
+        Teacher.getTeacherById(teacherId, function(err, student){
             if(err){throw err;}
-            //console.log("student : " + student);
-            var notif = student.notifications;
-            var readStatus = student.notifReadStatus;
-            var unreadIndex = [];
-            var notiflen = notif.length; 
-            var statusCounter = 1;
+			//var studObj = JSON.parse(student.);
+            console.log("student : " + (student[0]).notifications);
+            var studentnotifs = student[0].notifications;
             var counter = 1;
-            readStatus.forEach(function(status){
-                if(status == false){
-                    unreadIndex.push(statusCounter);
-                    Student.UpdateReadStatus(statusCounter);
-                }
-                statusCounter++;
-            });
-            
-            notif.forEach(function(notifInst){
-                //console.log("notifInst : " + notifInst);
-                Notification.getNotificationById(notifInst, function(err,notif){
-                    //console.log("notification : " + notif);
-                    if(counter == notiflen){
-                        result += "{" + "\"id\":\""+ notif._id +"\",\"title\":\""+ notif.title + "\",\"subject\":\"" + notif.subject + "\",\"time\":\""+ notif.time + "\"}]}";
-                        console.log("final result : " + result);
-                        res.json(JSON.parse(result));
-                    }else{
-                    result += "{" +"\"id\":\""+ notif._id + "\",\"title\":\""+ notif.title + "\",\"subject\":\"" + notif.subject + "\",\"time\":\""+ notif.time + "\"},";
+            var notifCount = student[0].notifications.length;
+            console.log("notif count : " + notifCount);
+            studentnotifs.forEach(function(notifmapid){
+                Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
+            if(err){throw err;}
+                    //var nm = JSON.parse(notifmap);
+                //var status = nm.readStatus;
+                  //  var nmid = nm._id;
+                    if(!notifmap.readStatus){
+                         console.log("notifmap : " + notifmap);
+                        Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
+                           //console.log("notifreturn : " + notifmapRet);
+                            if( notifmapRet != null){
+                            Notification.getNotificationById(notifmapRet.notification, function(err, notifRet){
+							    result += "{\"time\":\"" + notifRet.time + "\",\"subject\":\"" + notifRet.subject +  "\",\"_id\":\"" + notifRet._id +  "\",\"title\":\"" + notifRet.title + "\",\"date\":" + JSON.stringify(notifRet.time).substr(0,11) + "\"},";
+                                console.log("result : " + result);
+                               if(counter == notifCount)
+                                   {
+									   result = result.substr(0, result.length-1);
+                                       result += "]}";
+									   console.log("final result notif load : " + result);
+                                       res.json(JSON.parse(result));
+                                   }
+                                counter++;
+                           }); 
+                            }
+                        });
                     }
-                    counter++;
                 });
             });
-        });
-        */
+        }
+        );
     }
 else if(reciever == "adminRead"){
 		var classId = params.classid;
