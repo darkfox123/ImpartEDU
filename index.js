@@ -737,10 +737,10 @@ app.post('/api/notifications', function(req, res){
             studentnotifs.forEach(function(notifmapid){
                 Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
             if(err){throw err;}
-                    var nm = JSON.parse(notifmap);
-                var status = nm.readStatus;
+                    //var nm = JSON.parse(notifmap);
+               // var status = nm.readStatus;
                   //  var nmid = nm._id;
-				   console.log("notifmap 111111 : " + status + " : " + (status == "false") + " : " + (status === "false") + (status == false) + " : " + (status === false));
+				   console.log("notifmap 111111 : " + notifmap.readStatus + " : " + (notifmap.readStatus == "false") + " : " + (notifmap.readStatus === "false") + (notifmap.readStatus == false) + " : " + (notifmap.readStatus === false));
                     if(false){
                          console.log("notifmap 22222 : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
