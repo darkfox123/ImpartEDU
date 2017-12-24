@@ -426,7 +426,7 @@ console.log("skipping stud");
 app.post('/api/students', function(req, res){
 	var reciever = req.reciever;
 	var params = req.params;
-	console.log("entering student : " + params);
+	console.log("entering student : " + reciever);
 	if(reciever == "add"){
 	var classId = params.classId;
 	var student = params.student;
@@ -455,6 +455,7 @@ app.post('/api/students', function(req, res){
 	});
 	}
 	else if(reciever == "adminRead"){
+		console.log("enteresd admin read");
 		var classId = params.classId;
 		console.log("getting students by : " + classId);
 		Student.getStudentsByClass(classId, function(err, students){
