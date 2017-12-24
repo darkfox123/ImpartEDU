@@ -424,9 +424,9 @@ console.log("skipping stud");
 //{ "reciever" : "add", "params": {"classId":"59f4b7cf41618f04000a0a2f" , "student" :[{"name":" Yukti", "rollno":"120", "className":"II", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly","classid":"59f4b7cf41618f04000a0a2f", "notifCount":0}]}}
 //{"reciever" : "adminRead", "params": {"classId":"59f4b7cf41618f04000a0a2f"}}
 app.post('/api/students', function(req, res){
-	var reciever = req.body.reciever;
-	console.log("entering student : " + req.body.string);
-	var params = req.body.params;
+	var reciever = req.reciever;
+	var params = req.params;
+	console.log("entering student : " + params);
 	if(reciever == "add"){
 	var classId = params.classId;
 	var student = params.student;
