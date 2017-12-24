@@ -425,6 +425,7 @@ console.log("skipping stud");
 //{"reciever" : "adminRead", "params": {"classId":"59f4b7cf41618f04000a0a2f"}}
 app.post('/api/students', function(req, res){
 	var reciever = req.body.reciever;
+	console.log("entering student : " + req.body.string);
 	var params = req.body.params;
 	if(reciever == "add"){
 	var classId = params.classId;
