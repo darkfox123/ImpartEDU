@@ -422,7 +422,7 @@ console.log("skipping stud");
 */
 
 //{ "reciever" : "add", "params": {"classId":"59f4b7cf41618f04000a0a2f" , "student" :[{"name":" Yukti", "rollno":"120", "className":"II", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly","classid":"59f4b7cf41618f04000a0a2f", "notifCount":0}]}}
-//{"reciever" : "adminRead", "params": {"schoolName":"Uttam Public","city":"Bareilly", "className":"II","section":"B"}}
+//{"reciever" : "adminRead", "params": {"classId":"59f4b7cf41618f04000a0a2f"}}
 app.post('/api/students', function(req, res){
 	var reciever = req.body.reciever;
 	var params = req.body.params;
@@ -454,16 +454,14 @@ app.post('/api/students', function(req, res){
 	});
 	}
 	else if(reciever == "adminRead"){
-		var city = params.city;
-		var schoolName = params.schoolName;
-		var className = params.className;
-		var section = params.section;
-		  Student.getStudentsByClass(className, section, city, schoolName, function(err, students){
+		var classId = params.classId;
+		console.log("getting students by : " + classId);
+		Student.getStudentsByClass(classId, function(err, students){
        if(err){
            throw err;
        } 
 	   res.json(students);
-		  });
+	});
 	}
 });
 
