@@ -422,13 +422,13 @@ console.log("skipping stud");
 */
 
 //{ "reciever" : "add", "params": {"classId":"59f4b7cf41618f04000a0a2f" , "student" :[{"name":" Yukti", "rollno":"120", "className":"II", "section":"B" , "schoolName":"Uttam Public", "city":"Bareilly","classid":"59f4b7cf41618f04000a0a2f", "notifCount":0}]}}
-//{"reciever" : "adminRead", "params": {"schoolName":"Uttam Public","city":"Bareilly", "class":"II","section":"B"}}
+//{"reciever" : "adminRead", "params": {"schoolName":"Uttam Public","city":"Bareilly", "className":"II","section":"B"}}
 app.post('/api/students', function(req, res){
 	var reciever = req.body.reciever;
 	var params = req.body.params;
+	if(reciever == "add"){
 	var classId = params.classId;
 	var student = params.student;
-	if(reciever == "add"){
 	console.log("adding student : " + req.body.string);
 	var returnjson = "{ \"studentid\":[";
 	Student.addStudent(student, function(err, student){
@@ -442,12 +442,12 @@ app.post('/api/students', function(req, res){
 	});
 	}
 	else if(reciever == "remove"){
+		var student = params.student;
 		Student.removeStudent(student, function(err, student){
         if(err){throw err;}
         console.log("student created : " + student.string);
 		Class.removeStudent(classId, student._id, function(err,resultObj){
-                if(err){throw err;}
-				
+                if(err){throw err;}				
 				console.log("after class.removestudnts" + resultObj._id);
 				res.json(JSON.parse("{" + "\"name\":\"" + student.name + "\",\"rollno\":\"" + student.rollno + "\",\"id\":\"" + student._id + "\"}"));    
                 }); 
