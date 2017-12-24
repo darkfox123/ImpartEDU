@@ -23,7 +23,8 @@ var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
- 
+ //.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ type: 'application/*+json' }));
 
 // A MongoDB URI, not compatible with Mongoose because it lists multiple hosts in the address
 // Could be pulled from an environment variable or config file
