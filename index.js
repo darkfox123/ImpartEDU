@@ -693,10 +693,10 @@ app.post('/api/notifications', function(req, res){
             studentnotifs.forEach(function(notifmapid){
                 Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
             if(err){throw err;}
-                    //var nm = JSON.parse(notifmap);
-                //var status = nm.readStatus;
-                  //  var nmid = nm._id;
-                    if(!notifmap.readStatus){
+                      var nm = JSON.stringify(notifmap);
+                var status = nm.substr(nm.lastIndexOf(":")+1, 5);
+				counter++;
+                    if(status === "false"){
                          console.log("notifmap : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
                            //console.log("notifreturn : " + notifmapRet);
@@ -711,7 +711,6 @@ app.post('/api/notifications', function(req, res){
 									   console.log("final result notif load : " + result);
                                        res.json(JSON.parse(result));
                                    }
-                                counter++;
                            }); 
                             }
                         });
@@ -754,7 +753,7 @@ app.post('/api/notifications', function(req, res){
 									   result = result.substr(0, result.length-1);
                                        result += "]}";
 									   console.log("final result notif load : " + result);
-                                       res.json(JSON.parse(result));
+                                       res.json(result);
                                    }
                            }); 
                             }
