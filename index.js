@@ -739,9 +739,9 @@ app.post('/api/notifications', function(req, res){
                     var nm = JSON.stringify(notifmap);
                 var status = nm.substr(nm.lastIndexOf(":")+1, 4);
                   //  var nmid = nm._id;
-				   console.log("notifmap 111111 : " + status + " : " + (status == "true") + " : " + (status === "true") + (status == true) + " : " + (status === true));
-                    if(false){
-                         console.log("notifmap 22222 : " + notifmap);
+				   //console.log("notifmap 111111 : " + status + " : " + (status == "true") + " : " + (status === "true") + (status == true) + " : " + (status === true));
+                    if(status === "fals"){
+                        // console.log("notifmap 22222 : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
                            //console.log("notifreturn : " + notifmapRet);
                             if( notifmapRet != null){
