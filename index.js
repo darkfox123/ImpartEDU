@@ -737,7 +737,7 @@ app.post('/api/notifications', function(req, res){
                 Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
             if(err){throw err;}
                     var nm = JSON.stringify(notifmap);
-                var status = nm.substr(nm.lastIndexOf(":")+1, 6);
+                var status = nm.substr(nm.lastIndexOf(":")+1, 5);
                   //  var nmid = nm._id;
 				     console.log("notifmap 111111 : " + status + " : " + (status == "false") + " : " + (status === "false"));
                     if(status === "false"){
