@@ -736,10 +736,10 @@ app.post('/api/notifications', function(req, res){
             studentnotifs.forEach(function(notifmapid){
                 Notifmap.getNotifMapById(notifmapid, function(err, notifmap){
             if(err){throw err;}
-                    //var nm = JSON.parse(notifmap);
-               // var status = nm.readStatus;
+                    var nm = JSON.stringify(notifmap);
+                var status = nm.substr(nm.lastIndexOf(":")+1, 4);
                   //  var nmid = nm._id;
-				   console.log("notifmap 111111 : " + JSON.stringify(notifmap) + JSON.stringify(notifmap.readStatus) + " : " + (notifmap.readStatus == "true") + " : " + (notifmap.readStatus === "true") + (notifmap.readStatus == true) + " : " + (notifmap.readStatus === true));
+				   console.log("notifmap 111111 : " + status + " : " + (status == "true") + " : " + (status === "true") + (status == true) + " : " + (status === true));
                     if(false){
                          console.log("notifmap 22222 : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
