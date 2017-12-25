@@ -730,7 +730,7 @@ app.post('/api/notifications', function(req, res){
 			//var studObj = JSON.parse(student.);
             console.log("student : " + (student[0]).notifications);
             var studentnotifs = student[0].notifications;
-            var counter = 1;
+            var counter = 0;
             var notifCount = student[0].notifications.length;
             console.log("notif count : " + notifCount);
             studentnotifs.forEach(function(notifmapid){
@@ -740,6 +740,7 @@ app.post('/api/notifications', function(req, res){
                 var status = nm.substr(nm.lastIndexOf(":")+1, 5);
                   //  var nmid = nm._id;
 				     console.log("notifmap 111111 : " + status + " : " + (status == "false") + " : " + (status === "false"));
+					 counter++;
                     if(status === "false"){
                         // console.log("notifmap 22222 : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
@@ -755,7 +756,6 @@ app.post('/api/notifications', function(req, res){
 									   console.log("final result notif load : " + result);
                                        res.json(JSON.parse(result));
                                    }
-                                counter++;
                            }); 
                             }
                         });
