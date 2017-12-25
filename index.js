@@ -18,7 +18,6 @@ var mongoose = require('mongoose');
 var mongodbUri = require('mongodb-uri');
 var async = require("async");
 var express = require('express');
-var Type = require('type-of-is');
 var app = express();
 
 var bodyParser = require('body-parser');
@@ -740,7 +739,7 @@ app.post('/api/notifications', function(req, res){
                     //var nm = JSON.parse(notifmap);
                // var status = nm.readStatus;
                   //  var nmid = nm._id;
-				   console.log("notifmap 111111 : " + Type(notifmap) + Type(notifmap.readStatus) + " : " + (notifmap.readStatus == "true") + " : " + (notifmap.readStatus === "true") + (notifmap.readStatus == true) + " : " + (notifmap.readStatus === true));
+				   console.log("notifmap 111111 : " + typeof notifmap + typeof notifmap.readStatus + " : " + (notifmap.readStatus == "true") + " : " + (notifmap.readStatus === "true") + (notifmap.readStatus == true) + " : " + (notifmap.readStatus === true));
                     if(false){
                          console.log("notifmap 22222 : " + notifmap);
                         Notifmap.updateReadStatus(notifmapid, function(err, notifmapRet){
