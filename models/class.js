@@ -22,7 +22,7 @@ module.exports.getClasses = function(callback, limit){
 
 //get classes by school
 module.exports.getClasseBySchool = function(schoolId, callback){
-    console.log("getclassesBySchool :" + schoolId + " : " + city );
+    console.log("getclassesBySchool :" + schoolId);
 	Class.find({"schoolId":schoolId},callback);
 }
 
