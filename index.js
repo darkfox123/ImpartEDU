@@ -164,14 +164,14 @@ app.get('/api/classes', function(req, res){
 });
 
 //Add classes (add school prerequisite)
-// Test: {"city":"Bareilly" , "schoolId": "school9927", "classes" : [{"name":"XI", "section":"E", "schoolId": "school9927", "schoolName":"St. stephens", "city":"Bareilly"}]}
+// Test: {"function":"add", "params":{"city":"Bareilly" , "schoolId": "school9927", "classes" : [{"name":"XI", "section":"E", "schoolId": "school9927", "schoolName":"St. stephens", "city":"Bareilly"}]}}
 // Test: {"function":"fetch", "params":""}
 app.post('/api/classes', function(req, res){
     //console.log(JSON.stringify(req.body))
 	var reqBody = req.body;
-	console.log(JSON.stringify(reqBody.params.city));
+	//console.log(JSON.stringify(reqBody.params.city));
 	var functionVal = reqBody.function;
-    console.log("fnval : " + functionVal + " params : " + JSON.stringify(req.params));
+    //console.log("fnval : " + functionVal + " params : " + JSON.stringify(req.params));
     if(functionVal == "add"){
 		console.log("inside add");
 	var params = req.body.params;
