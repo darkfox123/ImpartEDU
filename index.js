@@ -164,7 +164,7 @@ app.get('/api/classes', function(req, res){
 });
 
 //Add classes (add school prerequisite)
-// Test: {"city":"Moradabad" , "schoolId": "school9927", "classes" : [{"name":"XI", "section":"E", "schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"VI", "section":"A","schoolId": "school9927", "schoolName":"RDBMS", "city":"Moradabad"}, {"name":"IV", "section":"B","schoolId": "school9927" , "schoolName":"RDBMS", "city":"Moradabad"}]}
+// Test: {"city":"Bareilly" , "schoolId": "school9927", "classes" : [{"name":"XI", "section":"E", "schoolId": "school9927", "schoolName":"St. stephens", "city":"Bareilly"}]}
 // Test: {"function":"fetch", "params":""}
 app.post('/api/classes', function(req, res){
     //console.log(JSON.stringify(req.body))
