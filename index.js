@@ -144,7 +144,7 @@ app.post('/api/schools', function(req, res){
     });   
     } else if(functionVal == "adminRead"){
 		console.log("admin read");
-		School.getSchoolById(params.school, function(err, schoolR){
+		School.getSchoolById(params.schoolId, function(err, schoolR){
 			if(err) throw err;
 			res.json(schoolR);	
 		});
