@@ -16,6 +16,11 @@ module.exports.getSchools = function(callback, limit){
     School.find(callback).limit(limit);
 }
 
+//get classes by school
+module.exports.getSchoolById = function(schoolId, callback){
+	School.find({"schoolId":schoolId},callback);
+}
+
 module.exports.getSchoolNameById = function(school , callback){
     School.findOne({"_id":school}, function (err, awesome_instance) {
   if (err) return handleError(err);
