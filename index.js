@@ -954,7 +954,8 @@ app.post('/api/resource', function(req, res){
                 console.log("resid  : " + resId);
                 Resource.getResourceByID(resId, function(err, resource){
                     if(err){throw err;}
-                    if(counter == len){
+                    if(resource == null){continue;}
+					if(counter == len){
 						var data = resource.value;
 						var img = new Buffer(data, 'base64');
 
