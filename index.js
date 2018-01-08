@@ -1282,7 +1282,7 @@ Attendance.remove({}, function(err) {
             }
         }
     );
-	
+*/	
 Resource.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -1291,7 +1291,7 @@ Resource.remove({}, function(err) {
             }
         }
     );
-	
+/*	
 Application.remove({}, function(err) {
             if (err) {
                 console.log(err)
