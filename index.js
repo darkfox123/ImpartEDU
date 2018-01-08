@@ -954,15 +954,14 @@ app.post('/api/resource', function(req, res){
                 console.log("resid  : " + resId);
                 Resource.getResourceByID(resId, function(err, resource){
                     if(err){throw err;}
-                    if(resource == null){continue;}
-					if(counter == len){
+					if(counter == len && resource != null){
 						var data = resource.value;
 						var img = new Buffer(data, 'base64');
 
                         result += "{" + "\"date\":\"" + resource.date + "\"," + "\"id\":\"" + resource._id  + "\"," + "\"title\":\"" + resource.title + "\"," + "\"value\":" + JSON.stringify(resource.value) + "}]}";
                         //console.log("result : " + result);
                         res.json(JSON.parse(result));
-                    }else	
+                    }else if(counter != len && resource != null)	
                     {
 						var data = resource.value;
 						var img = new Buffer(data, 'base64');
