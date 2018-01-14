@@ -700,6 +700,7 @@ app.post('/api/notifications', function(req, res){
             if(err){throw err;}
                       var nm = JSON.stringify(notifmap);
                 var status = nm.substr(nm.lastIndexOf(":")+1, 5);
+				 console.log("notifmap status : " + nm + " : " + status);
 				counter++;
                     if(status === "false"){
                          console.log("notifmap : " + notifmap);
