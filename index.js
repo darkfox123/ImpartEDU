@@ -513,7 +513,7 @@ app.post('/api/parents', function(req, res){
     //console.log("got header id : " + classId);
     Parent.addParents(parent, function(err, parent){
         returnVal += "\"" + parent._id + "\"," + "\"students\":[";
-        console.log("class chahiye : " + className + " : " + section + " : " + city + " : " + school);
+        console.log("class chahiye : " + classId + " : " + section + " : " + city + " : " + school);
         Student.getStudentsByClass(classId, function(err, students){
        if(err){
            throw err;
