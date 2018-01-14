@@ -1220,7 +1220,7 @@ City.remove({}, function(err) {
             }
         }
     );
-	*/
+	
 Class.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -1307,5 +1307,5 @@ Notifmap.remove({}, function(err) {
             }
         }
     );
-
+*/
  
