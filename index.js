@@ -1220,7 +1220,7 @@ City.remove({}, function(err) {
             }
         }
     );
-	
+	*/
 Class.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -1237,7 +1237,6 @@ School.remove({}, function(err) {
             }
         }
     );
-	*/
 Teacher.remove({}, function(err) {
             if (err) {
                 console.log(err)
