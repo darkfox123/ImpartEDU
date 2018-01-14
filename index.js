@@ -692,7 +692,7 @@ app.post('/api/notifications', function(req, res){
 			//var studObj = JSON.parse(student.);
             console.log("student : " + (student[0]).notifications);
             var studentnotifs = student[0].notifications;
-            var counter = 1;
+            var counter = 0;
             var notifCount = student[0].notifications.length;
             console.log("notif count : " + notifCount);
             studentnotifs.forEach(function(notifmapid){
@@ -710,7 +710,7 @@ app.post('/api/notifications', function(req, res){
                             Notification.getNotificationById(notifmapRet.notification, function(err, notifRet){
 							    result += "{\"time\":\"" + notifRet.time + "\",\"subject\":\"" + notifRet.subject +  "\",\"_id\":\"" + notifRet._id +  "\",\"title\":\"" + notifRet.title + "\",\"date\":" + JSON.stringify(notifRet.time).substr(0,11) + "\"},";
                                 console.log("result : " + result);
-								console.log("result : " + counter + " : " + count);
+								console.log("result : " + counter + " : " + notifCount);
                                if(counter == notifCount)
                                    {
 									   result = result.substr(0, result.length-1);
