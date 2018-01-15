@@ -636,10 +636,7 @@ app.post('/api/notifications', function(req, res){
     }); 
     }
     else if(reciever == "student"){
-        var className = params.class;
-        var section = params.section;
-        var schoolName = params.schoolName;
-        var city = params.city;
+        var classId = params.classId;
         var notif = params.notification;
         var name = params.name;
         var rollno = params.rollno;
@@ -655,7 +652,7 @@ app.post('/api/notifications', function(req, res){
              Notifmap.addNotifMap(notif._id, function(err, notifmap){
             if(err){throw err;}
             console.log("notifmap created : " + notifmap);
-                 Student.addNotifToStudent(name,rollno,className,section,city,schoolName,notifmap._id, function(err, student){ if(err){throw err;}
+                 Student.addNotifToStudent(name,rollno,classId,notifmap._id, function(err, student){ if(err){throw err;}
                         console.log("updated  : " + student);
                       res.json(createdNotif._id);                                                                                                       
                 });
@@ -721,7 +718,10 @@ app.post('/api/notifications', function(req, res){
                            }); 
                             }
                         });
-                    }
+                    } else if(counter == notifCount) {
+					result += "]}";
+					res.json(JSON.parse(result));
+					}
                 });
             });
         }
