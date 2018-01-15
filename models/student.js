@@ -48,8 +48,8 @@ module.exports.addNotifToClass = function(className, section, city, schoolName, 
  });
 }
 
-module.exports.addNotifToStudent = function(name, rollno, className, section, city, schoolName, notifId, callback){
- Student.findOneAndUpdate({className:className,section:section,city:city,schoolName:schoolName,name:name,rollno:rollno}, {$push: {notifications: mongoose.Types.ObjectId(notifId)}},{new: true}, callback);
+module.exports.addNotifToStudent = function(name, rollno, classId, notifId, callback){
+ Student.findOneAndUpdate({"classid":classId,"name":name,"rollno":rollno}, {$push: {notifications: mongoose.Types.ObjectId(notifId)}},{new: true}, callback);
 }
 
 module.exports.addAttendanceById = function(studentId, attendanceId, callback){
