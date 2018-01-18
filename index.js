@@ -14,6 +14,7 @@ Resource = require('./models/resource');
 Application = require('./models/application');
 Notifmap = require('./models/notifmap');
 Period = require('./models/period');
+Subject = require('./models/subject');
 
 //variables
 var mongoose = require('mongoose');
@@ -1186,6 +1187,66 @@ app.post('/api/periods', function(req, res){
     });
 	}
 });
+
+app.get('/api/subjects', function(req, res){
+    Subject.getSubjects(function(err, subjects){
+       if(err){
+           throw err;
+       } 
+        res.json(subjects);
+    });
+});
+
+//Add period
+// {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007"}}}
+// {"reciever":"adminT", "params" :{"tid":"5a25b37717bf790400ba78d5","tname":"Shiv","schoolId":"pihu007","dayOfW":"Saturday"}}
+// {"reciever":"adminCD", "params": {"schoolId":"pihu007", "class":"", "section":"", "dayOfW":""}}
+// {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
+app.post('/api/subjects', function(req, res){
+    var funcVal = req.body.reciever;
+	var params = req.body.params;
+	if(funcVal == "add"){
+		var subjectVal = params.subject;
+		console.log("period to add : " + subjectVal);
+    Subject.addSubject(subjectVal, function(err, subjectObj){
+       if(err){
+           throw err;
+       } 
+        
+		console.log("period added : " + subjectObj);
+		res.json(subjectObj);
+    });
+	}
+	else if(funcVal == "adminT"){
+    Period.getPeriodByTeacher(params.schoolId, params.tid, params.tname, params.dayOfW, function(err, periodObj){
+       if(err){
+           throw err;
+       } 
+		console.log("period ret : " + periodObj);
+		res.json(periodObj);
+    });
+	}
+	else if(funcVal == "adminEdit"){
+    Period.updatePeriodByAdmin(params.pid, params.newTid, params.tname, function(err, periodObj){
+       if(err){
+           throw err;
+       } 
+		console.log("period ret : " + periodObj);
+		res.json(periodObj);
+    });
+	}
+	else if(funcVal == "adminCD")
+	{
+		Period.getPeriodsByCD(params.schoolId, params.class, params.section, params.dayOfW,function(err, periodObj){
+       if(err){
+           throw err;
+       } 
+		console.log("period ret : " + periodObj);
+		res.json(periodObj);
+    });
+	}
+});
+
 
 /*
 //Add city manually

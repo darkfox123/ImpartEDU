@@ -8,6 +8,8 @@ var periodSchema = new mongoose.Schema({
 	tid: String,
 	tname: String,
 	subject: String,
+	subjectCode: String,
+	subjectId: {type: mongoose.Schema.Types.ObjectId, ref: 'Subject'}, 
 	dayOfW: String
 });
 
@@ -19,7 +21,7 @@ module.exports.getPeriods = function(callback, limit){
 }
 
 module.exports.addPeriod = function(period,callback){
-  Period.update({}, { subject: "" }, { multi: true }, function (err, raw) {
+  Period.update({}, { subjectCode: "", subjectId: null }, { multi: true }, function (err, raw) {
   if (err) return handleError(err);
   console.log('The raw response from Mongo was ', raw);
 });
