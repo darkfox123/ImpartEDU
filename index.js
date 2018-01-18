@@ -1139,7 +1139,7 @@ app.get('/api/periods', function(req, res){
 
 
 //Add period
-// {"reciever":"add", "params" : {"period":{"schoolId":"pihu007","class":"II","section":"B","serialNo":"4","tid":"5a25b37717bf790400ba78d5","tname":"Shiv","dayOfW":"Saturday","subject":"History"}}}
+// {"reciever":"add", "params" : {"period":{"schoolId":"pihu007","class":"II","section":"B","serialNo":"4","tid":"5a25b37717bf790400ba78d5","tname":"Shiv","dayOfW":"Saturday","subject":"History","subjectCode":"","subjectId":""}}}
 // {"reciever":"adminT", "params" :{"tid":"5a25b37717bf790400ba78d5","tname":"Shiv","schoolId":"pihu007","dayOfW":"Saturday"}}
 // {"reciever":"adminCD", "params": {"schoolId":"pihu007", "class":"", "section":"", "dayOfW":""}}
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
@@ -1223,8 +1223,15 @@ app.post('/api/subjects', function(req, res){
        if(err){
            throw err;
        } 
+		var retVal = "[";
 		console.log("subject ret : " + subjectObj);
-		res.json(subjectObj);
+		subjectObj.forEach(function(subject){
+                console.log("attendance  : " + subject);
+				retVal += subject + ",";
+		});
+		retVal = retVal.substr(0, retVal.length-1);
+		retval += "]";
+		res.json(retval);
     });
 	}
 	else if(funcVal == "adminRSch"){

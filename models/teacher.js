@@ -16,6 +16,7 @@ var TeacherSchema = new mongoose.Schema({
     schoolId:String,
     tId: String,
     role: String,
+	periods: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Period'}],
 	notifications: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Notifmap'}],
     classTeacher: {type: mongoose.Schema.Types.ObjectId, ref: 'Class'}
 });
@@ -29,6 +30,10 @@ module.exports.getTeachers = function(callback, limit){
 
 module.exports.addNotifToTeacher = function(tid,notifmapId, callback){
 	Teacher.findOneAndUpdate({"_id":tid}, {$push: {notifications: mongoose.Types.ObjectId(notifmapId)}},{new: true}, callback);
+}
+
+module.exports.addPeriodToTeacher = function(tid,periodId, callback){
+	Teacher.findOneAndUpdate({"_id":tid}, {$push: {periods: mongoose.Types.ObjectId(periodId)}},{new: true}, callback);
 }
 
 // Add Teacher

@@ -9,6 +9,7 @@ var classSchema = new mongoose.Schema({
     classTeacher: {type: mongoose.Schema.Types.ObjectId, ref: 'Teacher'},
 	classAttendance:[{date:String, attendance: {type: mongoose.Schema.Types.ObjectId, ref: 'Attendance'}}],
 	subjects: [{type: mongoose.Schema.Types.ObjectId, ref: 'Subject'}],
+	periods: [{type: mongoose.Schema.Types.ObjectId, ref: 'Period'}],
     schoolName: String,
     schoolId:String,
     city: String
@@ -29,7 +30,7 @@ module.exports.getClasseBySchool = function(schoolId, callback){
 
 //get classes by school
 module.exports.getSubjectByClass = function(classId, callback){
-	Class.find({"_id":classId},{subjects:1},callback);
+	Class.find({"_id":classId},{subjects:1, _id:0},callback);
 }
 
 //get classes by school
@@ -74,6 +75,10 @@ module.exports.addSubjectToClass = function(classId, subjectId, callback){
   console.log('The raw response from Mongo was ', raw);
 });
 	Class.findOneAndUpdate({"_id":classId}, {$push: {subjects: mongoose.Types.ObjectId(subjectId)}},{new: true}, callback);
+}
+
+module.exports.addPeriodToClass = function(id,periodId, callback){
+	Class.findOneAndUpdate({"_id":id}, {$push: {periods: mongoose.Types.ObjectId(periodId)}},{new: true}, callback);
 }
 
 module.exports.addResourceToClass = function(classId, resourceId, callback){
