@@ -1199,7 +1199,7 @@ app.get('/api/subjects', function(req, res){
 
 //Add period
 // Add subject : {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007"}}}
-// {"reciever":"adminT", "params" :{"tid":"5a25b37717bf790400ba78d5","tname":"Shiv","schoolId":"pihu007","dayOfW":"Saturday"}}
+// {"reciever":"adminRClass", "params" :{"classId":"5a5b92495bbc1e0400d49b9f"}}
 // Add subvject to class : {"reciever":"adminAddCD", "params": {"classId":"5a5b92495bbc1e0400d49b9f", "subjectId":"5a60f7286257cc0400c863d3"}}
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
 app.post('/api/subjects', function(req, res){
@@ -1217,13 +1217,13 @@ app.post('/api/subjects', function(req, res){
 		res.json(subjectObj);
     });
 	}
-	else if(funcVal == "adminT"){
-    Period.getPeriodByTeacher(params.schoolId, params.tid, params.tname, params.dayOfW, function(err, periodObj){
+	else if(funcVal == "adminRClass"){
+    Class.getSubjectByClass(params.classId,function(err, subjectObj){
        if(err){
            throw err;
        } 
-		console.log("period ret : " + periodObj);
-		res.json(periodObj);
+		console.log("subject ret : " + subjectObj);
+		res.json(subjectObj);
     });
 	}
 	else if(funcVal == "adminEdit"){
