@@ -1200,6 +1200,7 @@ app.get('/api/subjects', function(req, res){
 //Add period
 // Add subject : {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007"}}}
 // {"reciever":"adminRClass", "params" :{"classId":"5a5b92495bbc1e0400d49b9f"}}
+// {"reciever":"adminRSch", "params" :{"schoolId":"5a5b92495bbc1e0400d49b9f"}}
 // Add subvject to class : {"reciever":"adminAddCD", "params": {"classId":"5a5b92495bbc1e0400d49b9f", "subjectId":"5a60f7286257cc0400c863d3"}}
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
 app.post('/api/subjects', function(req, res){
@@ -1226,8 +1227,8 @@ app.post('/api/subjects', function(req, res){
 		res.json(subjectObj);
     });
 	}
-	else if(funcVal == "adminEdit"){
-    Period.updatePeriodByAdmin(params.pid, params.newTid, params.tname, function(err, periodObj){
+	else if(funcVal == "adminRSch"){
+    Subject.getSubjectBySchool(params.schoolId, function(err, periodObj){
        if(err){
            throw err;
        } 
