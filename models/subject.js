@@ -19,6 +19,6 @@ module.exports.addSubject = function(subject,callback){
 
 //get classes by school
 module.exports.getSubjectBySchool = function(schoolId, callback){
-	Class.find({"schoolId":schoolId},callback);
+	Subject.find({"schoolId":schoolId},callback);
 }
 
