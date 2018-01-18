@@ -1198,9 +1198,9 @@ app.get('/api/subjects', function(req, res){
 });
 
 //Add period
-// {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007"}}}
+// Add subject : {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007"}}}
 // {"reciever":"adminT", "params" :{"tid":"5a25b37717bf790400ba78d5","tname":"Shiv","schoolId":"pihu007","dayOfW":"Saturday"}}
-// {"reciever":"adminCD", "params": {"schoolId":"pihu007", "class":"", "section":"", "dayOfW":""}}
+// Add subvject to class : {"reciever":"adminAddCD", "params": {"classId":"5a5b92495bbc1e0400d49b9f", "subjectId":"5a60f7286257cc0400c863d3"}}
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
 app.post('/api/subjects', function(req, res){
     var funcVal = req.body.reciever;
@@ -1235,14 +1235,14 @@ app.post('/api/subjects', function(req, res){
 		res.json(periodObj);
     });
 	}
-	else if(funcVal == "adminCD")
+	else if(funcVal == "adminAddCD")
 	{
-		Period.getPeriodsByCD(params.schoolId, params.class, params.section, params.dayOfW,function(err, periodObj){
+		Class.addSubjectToClass(params.classId, params.subjectId, function(err, classObj){
        if(err){
            throw err;
        } 
-		console.log("period ret : " + periodObj);
-		res.json(periodObj);
+		console.log("period ret : " + classObj);
+		res.json(classObj);
     });
 	}
 });

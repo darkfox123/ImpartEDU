@@ -69,7 +69,11 @@ module.exports.addClassTeacher = function( teacherId, schoolId ,classname, secti
 
 module.exports.addSubjectToClass = function(classId, subjectId, callback){
  console.log("subjectid : " + classId + " : " + subjectId);
-    Class.findOneAndUpdate({"_id":classId}, {$push: {subjects: mongoose.Types.ObjectId(subjectId)}},{new: true}, callback);
+    Class.update({}, { subjects: []}, { multi: true }, function (err, raw) {
+  if (err) return handleError(err);
+  console.log('The raw response from Mongo was ', raw);
+});
+	Class.findOneAndUpdate({"_id":classId}, {$push: {subjects: mongoose.Types.ObjectId(subjectId)}},{new: true}, callback);
 }
 
 module.exports.addResourceToClass = function(classId, resourceId, callback){
