@@ -1219,7 +1219,7 @@ app.post('/api/subjects', function(req, res){
     });
 	}
 	else if(funcVal == "adminRClass"){
-    Subject.getSubjectByClass(params.schoolId, params.name, params.section ,function(err, subjectObj){
+    Subject.getSubjectByClass(params.schoolId, params.class, params.section ,function(err, subjectObj){
        if(err){
            throw err;
        } 
