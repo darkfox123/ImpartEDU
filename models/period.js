@@ -28,6 +28,11 @@ module.exports.addPeriod = function(period,callback){
   Period.create(period, callback);
 }
 
+module.exports.checkTeacherAvail = function(schid, serial, day, tid, callback){
+    console.log("to match : " + schid + " : " + id + " : " + name);
+	Period.find({"schoolId":schid, "tid":tid, "serialNo":serial, "dayOfW":day} ,callback);
+}
+
 module.exports.getPeriodByTeacher = function(schid, id, name, day, callback){
     console.log("to match : " + schid + " : " + id + " : " + name);
 	Period.find({"schoolId":schid, "tid":id, "tname":name, "dayOfW":day} ,callback);

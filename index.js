@@ -1145,18 +1145,26 @@ app.get('/api/periods', function(req, res){
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
 app.post('/api/periods', function(req, res){
     var funcVal = req.body.reciever;
-	var params = req.body.params;
 	if(funcVal == "add"){
 		var periodVal = params.period;
 		console.log("period to add : " + periodVal);
-    Period.addPeriod(periodVal, function(err, periodObj){
+		Period.checkTeacherAvail(periodVal.schoolId, periodVal.serialNo, periodVal.dayOfW, periodVal.tId, function(err, periodObj){
        if(err){
            throw err;
-       } 
-        
-		console.log("period added : " + periodObj);
-		res.json(periodObj);
-    });
+       }
+		if(periodObj.length == 0){
+			Period.addPeriod(periodVal, function(err, periodObj){
+					if(err){
+						throw err;
+						}        
+					console.log("period added : " + periodObj);
+					res.json(periodObj);
+				});
+			}
+else {
+	res.json(JSON.parse("false"));
+}			
+        });
 	}
 	else if(funcVal == "adminT"){
     Period.getPeriodByTeacher(params.schoolId, params.tid, params.tname, params.dayOfW, function(err, periodObj){
