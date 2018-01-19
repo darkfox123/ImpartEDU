@@ -1145,6 +1145,7 @@ app.get('/api/periods', function(req, res){
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
 app.post('/api/periods', function(req, res){
     var funcVal = req.body.reciever;
+	   var params = req.body.params;
 	if(funcVal == "add"){
 		var periodVal = params.period;
 		console.log("period to add : " + periodVal);
