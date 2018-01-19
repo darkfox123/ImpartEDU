@@ -1198,8 +1198,8 @@ app.get('/api/subjects', function(req, res){
 });
 
 //Add period
-// Add subject : {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007"}}}
-// {"reciever":"adminRClass", "params" :{"classId":"5a5b92495bbc1e0400d49b9f"}}
+// Add subject : {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007","class":"I","section":"A"}}}
+// {"reciever":"adminRClass", "params" :{"schoolId":"5a5b92495bbc1e0400d49b9f", "class":"", "section":""}}
 // {"reciever":"adminRSch", "params" :{"schoolId":"5a5b92495bbc1e0400d49b9f"}}
 // Add subvject to class : {"reciever":"adminAddCD", "params": {"classId":"5a5b92495bbc1e0400d49b9f", "subjectId":"5a60f7286257cc0400c863d3"}}
 // {"reciever":"adminEdit", "params": {"tname":"Fghuh", "newTid":"5a25b2b217bf790400ba78d4", "pid":"5a2d8297620abf04007f3420"}}
@@ -1219,19 +1219,11 @@ app.post('/api/subjects', function(req, res){
     });
 	}
 	else if(funcVal == "adminRClass"){
-    Class.getSubjectByClass(params.classId,function(err, subjectObj){
+    Subject.getSubjectByClass(params.schoolId, params.name, params.section ,function(err, subjectObj){
        if(err){
            throw err;
        } 
-		var retVal = "[";
-		console.log("subject ret : " + subjectObj);
-		subjectObj.forEach(function(subject){
-                console.log("attendance  : " + subject);
-				retVal += subject + ",";
-		});
-		retVal = retVal.substr(0, retVal.length-1);
-		retval += "]";
-		res.json(retval);
+		res.json(subjectObj);
     });
 	}
 	else if(funcVal == "adminRSch"){
