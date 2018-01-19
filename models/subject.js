@@ -4,6 +4,8 @@ var subjectSchema = new mongoose.Schema({
     schoolId: String,
     name: String,
 	code: String,
+	className:String,
+	section:String
 });
 
 var Subject = module.exports = mongoose.model('Subject', subjectSchema);
@@ -22,3 +24,6 @@ module.exports.getSubjectBySchool = function(schoolId, callback){
 	Subject.find({"schoolId":schoolId},callback);
 }
 
+module.exports.getSubjectBySchool = function(schoolId, callback){
+	Subject.find({"schoolId":schoolId},callback);
+}
