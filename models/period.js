@@ -29,7 +29,7 @@ module.exports.addPeriod = function(period,callback){
 }
 
 module.exports.checkTeacherAvail = function(schid, serial, day, tid, callback){
-    console.log("to match : " + schid + " : " + id + " : " + name);
+    console.log("to match : " + schid + " : " + tid + " : " + serial);
 	Period.find({"schoolId":schid, "tid":tid, "serialNo":serial, "dayOfW":day} ,callback);
 }
 
