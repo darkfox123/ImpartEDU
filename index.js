@@ -1149,7 +1149,7 @@ app.post('/api/periods', function(req, res){
 	if(funcVal == "add"){
 		var periodVal = params.period;
 		console.log("period to add : " + periodVal);
-		Period.checkTeacherAvail(periodVal.schoolId, periodVal.serialNo, periodVal.dayOfW, periodVal.tId, function(err, periodObj){
+		Period.checkTeacherAvail(periodVal.schoolId, periodVal.serialNo, periodVal.dayOfW, periodVal.tid, function(err, periodObj){
        if(err){
            throw err;
        }
