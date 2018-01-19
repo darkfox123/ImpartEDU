@@ -1198,7 +1198,7 @@ app.get('/api/subjects', function(req, res){
 });
 
 //Add period
-// Add subject : {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007","class":"I","section":"A"}}}
+// Add subject : {"reciever":"add", "params" : {"subject":{"name":"Hindi","code":"Hin001","schoolId":"pihu007","className":"I","section":"A"}}}
 // {"reciever":"adminRClass", "params" :{"schoolId":"5a5b92495bbc1e0400d49b9f", "class":"", "section":""}}
 // {"reciever":"adminRSch", "params" :{"schoolId":"5a5b92495bbc1e0400d49b9f"}}
 // Add subvject to class : {"reciever":"adminAddCD", "params": {"classId":"5a5b92495bbc1e0400d49b9f", "subjectId":"5a60f7286257cc0400c863d3"}}
