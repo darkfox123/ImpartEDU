@@ -1153,6 +1153,7 @@ app.post('/api/periods', function(req, res){
        if(err){
            throw err;
        }
+	   console.log("periodVal len : " + periodObj.length);
 		if(periodObj.length == 0){
 			Period.addPeriod(periodVal, function(err, periodObj){
 					if(err){
