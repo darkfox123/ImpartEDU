@@ -786,6 +786,7 @@ else if(reciever == "adminRead"){
 //1) input : {"reciever":"post", "params":{"classid":"9f4b7cf41618f04000a0a2f", "attendanceArr":[{"studentid":"5916b119aec2b708a0b960e1","date":"2017-12-17","attendance":"Present","classid":"9f4b7cf41618f04000a0a2f"},{"studentid":"5916b119aec2b708a0b960e3","date":"2017-12-17","attendance":"Present","classid":"9f4b7cf41618f04000a0a2f"},{"studentid":"5916b119aec2b708a0b960e2","date":"2017-12-17","attendance":"Absent","classid":"9f4b7cf41618f04000a0a2f"}]}}// 2) input : {"reciever":"get", "params":{"studentid":"5916b119aec2b708a0b960e3", "date":"12/05/2017"} }
 // 3) load: {"reciever":"load", "params":{"studentid":"59fe17650d7f850400b3e203"}}
 // Get admin read: {"reciever":"adminRead","params":{"classid":"59f4b7cf41618f04000a0a2f","date":"5/11/2017"}}
+// {"reciever":"adminEdit", "params":{"id":"","value":""}}
 app.post('/api/attendance', function(req, res){
     console.log("adding attendance");
 	var reciever = req.body.reciever;
@@ -866,6 +867,14 @@ res.json(JSON.parse(resultjson));
 		Attendance.getAttendanceByClassDate(classId, date, function(err, applications){
 			 if(err) throw err;
 			 res.json(applications);
+		});
+	}
+	else if(reciever == "adminEdit"){
+		var Id = params.id;
+		var value = params.value;
+		Attendance.updateAttendanceValue(Id, value, function(err, attendance){
+			 if(err) throw err;
+			 res.json(attendance);
 		});
 	}
 });

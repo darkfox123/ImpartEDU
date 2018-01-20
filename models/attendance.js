@@ -34,3 +34,8 @@ module.exports.getAttendanceByClassDate = function(classId,date,callback){
 	console.log("getting att by : " + date + " : " +classId);
     Attendance.find({"classid":classId,"date":date},{_id:1,studentid:1,attendance:1},callback);
 }
+
+module.exports.updateAttendanceValue = function(Id, value, callback){
+ console.log("appid : " + Id);
+    Application.findOneAndUpdate({"_id":Id}, {$set: {"attendance": value}},{new: true}, callback);
+}
