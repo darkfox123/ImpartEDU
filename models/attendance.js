@@ -37,5 +37,5 @@ module.exports.getAttendanceByClassDate = function(classId,date,callback){
 
 module.exports.updateAttendanceValue = function(Id, value, callback){
  console.log("appid : " + Id);
-    Application.findOneAndUpdate({"_id":Id}, {$set: {"attendance": value}},{new: true}, callback);
+    Attendance.findOneAndUpdate({"_id":Id}, {$set: {"attendance": value}},{new: true}, callback);
 }
