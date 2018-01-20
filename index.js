@@ -874,8 +874,9 @@ res.json(JSON.parse(resultjson));
 		resultjson +="]}";
 		console.log("resturnjson : " + resultjson);	
 res.json(JSON.parse(resultjson));	
+	});
 	}
-});
+	});
 
 
 
