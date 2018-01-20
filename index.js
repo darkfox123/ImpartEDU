@@ -854,7 +854,7 @@ res.json(JSON.parse(resultjson));
 				if(counter == len){
                         result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"}]}"
                         console.log("result : " + result);
-                        res.json(result);
+                        res.json(JSON.parse(result));
                     }else
                     {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
                     counter++;
@@ -1298,7 +1298,7 @@ Notification.remove({}, function(err) {
             }
         }
     );
-
+*/
 Attendance.remove({}, function(err) {
             if (err) {
                 console.log(err)
@@ -1307,7 +1307,7 @@ Attendance.remove({}, function(err) {
             }
         }
     );
-	
+/*	
 Resource.remove({}, function(err) {
             if (err) {
                 console.log(err)
