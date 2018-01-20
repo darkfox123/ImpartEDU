@@ -861,22 +861,14 @@ res.json(JSON.parse(resultjson));
 		});
     });}
 	else if(reciever == "adminRead"){
-		 var classid = params.classid;
-        var date = params.date;
-		var resultjson = "{\"attendance\":[";
-        Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
-            if(err){throw err;}
-			 attendanceList.forEach(function(attendanceId){
-			 console.log("attendanceid  : " + attendanceId.studentid + ":" + attendanceId.attendance);
-			 resultjson+="{\"studentid\":\"" + attendanceId.studentid + "\",\"value\":\"" + attendanceId.attendance + "\"},";
-			 })
-			 resultjson = resultjson.substr(0, resultjson.length - 1);
-		resultjson +="]}";
-		console.log("resturnjson : " + resultjson);	
-res.json(JSON.parse(resultjson));	
-	});
+		var classId = params.classid;
+		var date = params.date;
+		Attendance.getAttendanceByClassDate(classId, date, function(err, applications){
+			 if(err) throw err;
+			 res.json(applications);
+		});
 	}
-	});
+});
 
 
 
