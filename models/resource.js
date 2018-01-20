@@ -24,11 +24,13 @@ module.exports.addResource = function(resource,callback){
   Resource.create(resource, callback);
 }
 
-module.exports.getResourceByClass = function(classId,callback){
-    Resource.find({"classid":classId)},{time:1,title:1},callback);
+module.exports.getResourceByClass = function(classId,date,callback){
+    Resource.find({"classid":classId, "date":new Date(date)},{time:1,title:1},callback);
 }
 
-module.exports.updateTimeStamp = function(applicationId, date, callback){
-    Resource.findOneAndUpdate({"_id":applicationId},{$set: {"date": new Date(date)}},{new: true},callback);
+module.exports.updateTimeStamp = function(applicationId, time, callback){
+	Date timeVal = new Date(time);
+	console.log("new date : " + timeVal);
+    Resource.findOneAndUpdate({"_id":applicationId},{$set: {"date": timeVal}},{new: true},callback);
 }
 
