@@ -854,7 +854,7 @@ res.json(JSON.parse(resultjson));
 				if(counter == len){
                         result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"}]}"
                         console.log("result : " + result);
-                        res.json(JSON.parse(result));
+                        res.json(result);
                     }else
                     {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
                     counter++;
