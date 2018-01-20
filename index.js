@@ -840,32 +840,6 @@ app.post('/api/attendance', function(req, res){
 		console.log("resturnjson : " + resultjson);	
 res.json(JSON.parse(resultjson));		
 		});
-		/*
-		Student.getStudentById(studentId, function(err, studentInst){
-            if(err){throw err;}     
-			var StuStr = studentInst.toString();
-			var attendancePos = StuStr.indexOf("attendance");
-			var notifPos = StuStr.indexOf("notifications");
-			console.log("attendancePos : " + notifPos);
-var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
-			console.log("attendanceSub : " + attendanceSub.substr(0,3));
-			var attendancelist = JSON.parse(attendanceSub);
-			*/
-			
-//console.log("student found : " + studentInst);		
-           // var attendancelist = studentObj._id;
-			//console.log("attendancelist : " + attendancelist);
-/*           
-		   attendancelist.forEach(function(attendanceId){
-                console.log("attendanceid  : " + attendanceId);
-                Attendance.getAttendanceById(attendanceId, function(err, attendance){
-                    if(err){throw err;}
-                    if(attendance.date == date){
-                    var response = "{" + "\"attendance\":\"" + attendance.attendance + "\"}";
-                        res.json(JSON.parse(response));
-                    }
-                })
-            });*/
         }
     else if(reciever == "load"){
         var studentId = params.studentid;
@@ -885,35 +859,21 @@ var attendanceSub = StuStr.substr(attendancePos + 11, notifPos - 14);
                     {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
                     counter++;
 		});
-		/*
-		Student.getStudentById(studentId, function(err, studentInst){
-            if(err){throw err;}            
-            var attendancelist = studentInst.attendance;
-            var len = attendancelist.length;
-            var counter = 1;
-            attendancelist.forEach(function(attendanceId){
-                console.log("attendanceid  : " + attendanceId);
-                Attendance.getAttendanceById(attendanceId, function(err, attendance){
-                    if(err){throw err;}
-                    if(counter == len){
-                        result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"}]}"
-                        console.log("result : " + result);
-                        res.json(JSON.parse(result));
-                    }else
-                    {result += "{" + "\"date\":\"" + attendance.date + "\"," + "\"value\":\"" + attendance.attendance + "\"},";}
-                    counter++;
-                });
-            });
-        });
-		*/
     });}
 	else if(reciever == "adminRead"){
-		var classId = params.classid;
-		var date = params.date;
-		Attendance.getAttendanceByClassDate(classId, date, function(err, applications){
-			 if(err) throw err;
-			 res.json(applications);
-		})
+		 var classid = params.classid;
+        var date = params.date;
+		var resultjson = "{\"attendance\":[";
+        Attendance.getAttendanceByDay(classid,date,function(err, attendanceList){
+            if(err){throw err;}
+			 attendanceList.forEach(function(attendanceId){
+			 console.log("attendanceid  : " + attendanceId.studentid + ":" + attendanceId.attendance);
+			 resultjson+="{\"studentid\":\"" + attendanceId.studentid + "\",\"value\":\"" + attendanceId.attendance + "\"},";
+			 })
+			 resultjson = resultjson.substr(0, resultjson.length - 1);
+		resultjson +="]}";
+		console.log("resturnjson : " + resultjson);	
+res.json(JSON.parse(resultjson));	
 	}
 });
 
